@@ -1,0 +1,454 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mochi an dam//VI
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Mochi ăn dặm
+X-WR-TIMEZONE:Asia/Ho_Chi_Minh
+BEGIN:VEVENT
+UID:toi-2026-10-31-0@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261031T124900Z
+DTEND:20261031T130400Z
+SUMMARY:Mochi: còn 2 ngày nữa ăn dặm
+DESCRIPTION:Thứ Hai 02/11 Mochi bắt đầu ăn dặm. Chủ nhật 01/1
+ 1 đi chợ tuần 1.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: còn 2 ngày nữa ăn dặm
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-01-1@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261101T124900Z
+DTEND:20261101T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai Mochi bắt đầu ăn dặm! Bột HiPP gạo pha sữa Hi
+ PP\, ngày 1 chỉ 2–3 thìa cà phê. Chuẩn bị thìa silicone\, gh
+ ế ăn\, cốc có vạch ml.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-04-2@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261104T124900Z
+DTEND:20261104T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: bí đỏ (hấp sáng mai\, 10 g)
+ .
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-07-3@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261107T124900Z
+DTEND:20261107T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: khoai lang (hấp sáng mai\, 10 g
+ ).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-10-4@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261110T124900Z
+DTEND:20261110T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: lòng đỏ trứng\, chỉ ¼ lò
+ ng đỏ\, luộc chín kỹ 10 phút. Kiểm tra còn trứng.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-11-5@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261111T124900Z
+DTEND:20261111T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Mai đi chợ lần 2 (tuần 2): Rau ngót 1 bó nhỏ.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-13-6@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261113T124900Z
+DTEND:20261113T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: rau ngót.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-15-7@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261115T124900Z
+DTEND:20261115T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai chuyển từ bột sang cháo rây. Vo và ngâm gạo cho
+  cháo sáng mai. Kiểm tra còn trứng.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-16-8@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261116T124900Z
+DTEND:20261116T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: thịt lợn\, dùng nửa phần.
+  Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). Vo và ng
+ âm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-17-9@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261117T124900Z
+DTEND:20261117T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
+ Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-18-10@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261118T124900Z
+DTEND:20261118T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
+ Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-19-11@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261119T124900Z
+DTEND:20261119T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: thịt bò\, dùng nửa phần. R
+ ã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo và ngâm g
+ ạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-20-12@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261120T124900Z
+DTEND:20261120T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
+  và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-21-13@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261121T124900Z
+DTEND:20261121T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
+  và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-22-14@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261122T124900Z
+DTEND:20261122T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu 2 bữa/ngày và món mới đu đủ (chỉ 
+ 1 thìa cà phê sau cháo). Rã đông 1 phần thịt lợn (để ngăn
+  mát qua đêm). Vo và ngâm gạo cho cháo sáng mai. Kiểm tra còn 
+ trứng.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-23-15@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261123T124900Z
+DTEND:20261123T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
+ Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-24-16@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261124T124900Z
+DTEND:20261124T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
+ Vo và ngâm gạo cho cháo sáng mai. Mai đi chợ lần 2 (tuần 4): 
+ Đu đủ chín 150 g\; bí đỏ 100 g\; rau ngót 1 bó nhỏ\; khoai la
+ ng 1 củ nhỏ.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-25-17@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261125T124900Z
+DTEND:20261125T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu món mới: cá hồi\, dùng nửa miếng\, 
+ gỡ kỹ xương. Rã đông 1 miếng cá hồi + 1 phần thịt bò (
+ để ngăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-26-18@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261126T124900Z
+DTEND:20261126T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 miếng cá hồi + 1 phần thịt bò (để ng
+ ăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-27-19@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261127T124900Z
+DTEND:20261127T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 miếng cá hồi + 1 phần thịt bò (để ng
+ ăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-28-20@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261128T124900Z
+DTEND:20261128T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt bò + 1 phần thịt lợn (để n
+ găn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-29-21@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261129T124900Z
+DTEND:20261129T130400Z
+SUMMARY:Mochi: mai có món mới
+DESCRIPTION:Mai bắt đầu bột Bellamy's táo quế (yến mạch\, tá
+ o\, quế\, gluten): theo dõi kỹ 3 ngày. Rã đông 1 phần thịt b
+ ò (để ngăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: mai có món mới
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-11-30-22@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261130T124900Z
+DTEND:20261130T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
+  và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:toi-2026-12-01-23@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261201T124900Z
+DTEND:20261201T130400Z
+SUMMARY:Mochi: chuẩn bị cho mai
+DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
+  và ngâm gạo cho cháo sáng mai.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: chuẩn bị cho mai
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-01@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261101T004600Z
+DTEND:20261101T011600Z
+SUMMARY:Mochi: đi chợ tuần 1
+DESCRIPTION:Bột HiPP gạo nhũ nhi 1 hộp\; sữa HiPP số 2 nếu s
+ ắp hết\; bí đỏ 200 g\; khoai lang 250 g\; dầu ăn dặm 1 chai. 
+ Thịt cá chia phần\, trữ đông ngay khi về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ tuần 1
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-08@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261108T004600Z
+DTEND:20261108T011600Z
+SUMMARY:Mochi: đi chợ tuần 2
+DESCRIPTION:Trứng gà 6 quả\; bí đỏ 100 g. Thịt cá chia phần\,
+  trữ đông ngay khi về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ tuần 2
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-12@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261112T004600Z
+DTEND:20261112T011600Z
+SUMMARY:Mochi: đi chợ lần 2 (tuần 2)
+DESCRIPTION:Rau ngót 1 bó nhỏ. Thịt cá chia phần\, trữ đông ng
+ ay khi về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ lần 2 (tuần 2)
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-15@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261115T004600Z
+DTEND:20261115T011600Z
+SUMMARY:Mochi: đi chợ tuần 3
+DESCRIPTION:Gạo tẻ 1 kg\; thịt lợn nạc thăn 150 g (chia 7 phần
+ \, trữ đông)\; thịt bò thăn 150 g (chia 7 phần\, trữ đông)\;
+  bí đỏ 100 g\; khoai lang 150 g. Thịt cá chia phần\, trữ đông
+  ngay khi về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ tuần 3
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-22@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261122T004600Z
+DTEND:20261122T011600Z
+SUMMARY:Mochi: đi chợ tuần 4
+DESCRIPTION:Cá hồi phi lê 100 g (cắt 5 miếng\, trữ đông)\; tr
+ ứng gà 3 quả\; đu đủ chín 150 g\; bí đỏ 100 g\; rau ngót 1 
+ bó nhỏ. Thịt cá chia phần\, trữ đông ngay khi về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ tuần 4
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-25@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261125T004600Z
+DTEND:20261125T011600Z
+SUMMARY:Mochi: đi chợ lần 2 (tuần 4)
+DESCRIPTION:Đu đủ chín 150 g\; bí đỏ 100 g\; rau ngót 1 bó nhỏ
+ \; khoai lang 1 củ nhỏ. Thịt cá chia phần\, trữ đông ngay khi
+  về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ lần 2 (tuần 4)
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cho-2026-11-29@mochi-andam
+DTSTAMP:20261015T000000Z
+DTSTART:20261129T004600Z
+DTEND:20261129T011600Z
+SUMMARY:Mochi: đi chợ tuần 5
+DESCRIPTION:Thịt bò thăn 100 g (chia 5 phần\, trữ đông)\; bí đ
+ ỏ 100 g. Thịt cá chia phần\, trữ đông ngay khi về.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mochi: đi chợ tuần 5
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

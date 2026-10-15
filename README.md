@@ -25,9 +25,13 @@ App lịch ăn dặm cho bé Mochi (sinh 02/05/2026), bắt đầu ăn dặm ki�
 
 Ảnh thực đơn từng tuần và bảng nguyên liệu thay thế nằm trong thư mục [`anh/`](anh).
 
+## Cài lên iPhone
+
+Xem [hướng dẫn cài app](huong-dan.html) (bản ảnh: [`anh/huong-dan-cai-app.png`](anh/huong-dan-cai-app.png)). Nhắc việc dùng app Lịch của iPhone qua file [`reminders.ics`](reminders.ics): 19:49 mỗi tối và 7:46 sáng ngày đi chợ, cho lộ trình 02/11 – 02/12/2026. Tạo lại file bằng `python3 tools/make_ics.py`.
+
 ## Cách dùng
 
-**Trong Claude (đầy đủ tính năng).** Bản chính chạy dưới dạng artifact trên claude.ai: nhật ký đồng bộ giữa các máy, có hỏi nhanh, đính kèm ảnh và lưu báo cáo. Nhắc việc qua thông báo của app Claude (19:49 mỗi tối, 7:46 sáng Chủ nhật) do các scheduled task trong Claude đảm nhận.
+**Trong Claude (đầy đủ tính năng).** Bản chính chạy dưới dạng artifact trên claude.ai: nhật ký đồng bộ giữa các máy, có hỏi nhanh, đính kèm ảnh và lưu báo cáo. 
 
 **Mở trực tiếp file `index.html`** (hoặc qua GitHub Pages). App vẫn chạy phần lịch, thực đơn, đi chợ, nhật ký và cân nặng, nhưng dữ liệu chỉ lưu trên trình duyệt của máy đó; hỏi nhanh, ảnh và lưu báo cáo thành file chỉ có khi mở trong Claude. Khi bật GitHub Pages và "Thêm vào Màn hình chính" trên iPhone, app dùng logo Mochi làm icon.
 
@@ -40,7 +44,10 @@ index.html              app (HTML, CSS, JS trong một file)
 assets/logo.svg         logo vẽ minh họa
 assets/logo-512.png     logo PNG
 assets/apple-touch-icon.png  icon 180×180 cho iPhone
-anh/                    ảnh thực đơn tuần 1–4 và bảng thay thế
+anh/                    ảnh thực đơn tuần 1–4, bảng thay thế, hướng dẫn cài app
+huong-dan.html          hướng dẫn cài app trên iPhone
+reminders.ics           nhắc việc cho app Lịch iPhone
+tools/make_ics.py       tạo lại reminders.ics
 ```
 
 ## Lưu ý

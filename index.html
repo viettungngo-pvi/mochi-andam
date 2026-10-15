@@ -384,6 +384,8 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 const BIRTH = new Date(2026,4,2);   // 02/05/2026
 const START = new Date(2026,10,2);  // ngày 1 = tròn 6 tháng
 const PLAN_DAYS = 31;
+const ICS_URL = "https://viettungngo-pvi.github.io/mochi-andam/reminders.ics";
+const IN_CLAUDE = !!(window.claude&&window.claude.use);
 const WD = ["CN","T2","T3","T4","T5","T6","T7"];
 
 const FOODS = {
@@ -622,7 +624,7 @@ function renderToday(){
     const left=1-n; const a=age(d);
     h+=`<div class="card count"><div class="eyebrow">Còn</div><div class="big num">${left}</div><div style="font-family:var(--f-display);font-weight:700;font-size:20px">ngày nữa Mochi ăn dặm</div><div class="muted small">Ngày 1: thứ Hai 02/11/2026, Mochi tròn 6 tháng${iso(d)!==iso(new Date())?"":` · hôm nay bé ${a.m} tháng ${a.days} ngày`}</div><div style="margin-top:14px"><button class="btn pink" data-act="sel" data-v="${iso(START)}">Xem trước ngày 1</button></div></div>`;
     const chk=Store.data.shop.state?.checked||{};
-    h+=`<div class="card"><div class="eyebrow">Chuẩn bị trước ngày 1</div><ul class="checklist" style="margin-top:6px">${PRESTART.map((t,i)=>{const k="pre-"+i;return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(t)}</label></span></li>`}).join("")}</ul></div>`;
+    h+=`<div class="card"><div class="eyebrow">Chuẩn bị trước ngày 1</div><ul class="checklist" style="margin-top:6px">${PRESTART.map((t,i)=>{const k="pre-"+i;return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(t)}</label></span></li>`}).join("")}</ul></div>`+icsCard();
     return h;
   }
   const w=info.week, wk=WEEKS[w-1];
@@ -646,7 +648,7 @@ function renderToday(){
     </div>`;
   });
   const p=prepTomorrow(d);
-  if(p) h+=`<div class="prep"><span class="moon">${ICON_MOON}</span><div><b>Tối nay chuẩn bị cho ${wdm(p.d)}</b><ul>${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="small muted" style="margin-top:4px">App Claude sẽ nhắc lúc 19:49 tối.</div></div></div>`;
+  if(p) h+=`<div class="prep"><span class="moon">${ICON_MOON}</span><div><b>Tối nay chuẩn bị cho ${wdm(p.d)}</b><ul>${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="small muted" style="margin-top:4px">Lịch iPhone nhắc lúc 19:49 nếu anh chị đã thêm nhắc việc ở tab Đi chợ.</div></div></div>`;
   return h;
 }
 
@@ -684,17 +686,44 @@ function renderSuggest(){
    <p class="small muted" style="margin:10px 0 0;text-align:center">${tex}. Gợi ý dựng từ các món Mochi đã ăn ổn, ưu tiên đạm giàu sắt, cá tối đa 2 lần/tuần. Lượng tham khảo: mỗi bữa thành phẩm ~130 ml.</p></div>`;
   const view=saved||{days:sw.days.map(d=>({date:iso(d.d),nf:d.nf,meals:[{t:dishName(d.b1),r:dishRecipe(d.b1,"Cháo nền"),y:130,e:"100–130",f:d.b1.fruit?`${FAMT[d.b1.fruit]||FOODS[d.b1.fruit].n.toLowerCase()} nghiền 2–3 tcf sau cháo`:null},{t:dishName(d.b2),r:dishRecipe(d.b2,"Cháo nền"),y:110,e:"80–110"}]})),shop:weekShopping(sw)};
   h+=`<div class="card">${view.days.map((d,i)=>{const x=fromIso(d.date);return `<div class="sday"><div class="dl num">${WD[x.getDay()]}<small>${dm(x)}</small></div><div class="sm">${d.nf&&(i===0||i===3)?`<span class="pill new" style="margin-bottom:4px">Bắt đầu ${esc(FOODS[d.nf].n)}</span><br>`:""}<b>Sáng:</b> ${esc(d.meals[0].t)}${d.meals[0].f?` <span class="fr">+ ${esc(d.meals[0].f)}</span>`:""}<br><b>Chiều:</b> ${esc(d.meals[1].t)}</div></div>`}).join("")}</div>`;
-  h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${saved?`<button class="btn soft" data-act="unsave" data-v="${sw.start}">Bỏ tuần đã lưu</button><button class="btn" data-act="openwk" data-v="${sw.start}">Xem trong Hôm nay</button>`:`<button class="btn soft" data-act="reroll">Đổi gợi ý khác</button><button class="btn pink" data-act="savewk">Dùng tuần này</button>`}</div>`;
+  h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${saved?`<button class="btn soft" data-act="unsave" data-v="${sw.start}">Bỏ tuần đã lưu</button><button class="btn" data-act="openwk" data-v="${sw.start}">Xem trong Hôm nay</button>${IN_CLAUDE?"":`<button class="btn pink" style="grid-column:1/-1" data-act="weekics" data-v="${sw.start}">Thêm nhắc tuần này vào Lịch iPhone</button>`}`:`<button class="btn soft" data-act="reroll">Đổi gợi ý khác</button><button class="btn pink" data-act="savewk">Dùng tuần này</button>`}</div>`;
   h+=`<h2 class="sec">Đi chợ cho tuần này</h2><div class="card"><ul class="checklist">${view.shop.map(t=>`<li><span>${esc(t)}</span></li>`).join("")}</ul></div>`;
   const hist=Object.values(Store.data.weeks).sort((a,b)=>a.start<b.start?1:-1);
   if(hist.length) h+=`<h2 class="sec">Lịch sử thực đơn</h2><div class="card">${hist.map(w=>`<button class="logrow" style="width:100%;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer" data-act="pickwk" data-v="${w.start}"><span class="mood m-ok"></span><div style="flex:1;min-width:0"><b class="num">Tuần ${dm(fromIso(w.start))} – ${dm(addD(fromIso(w.start),6))}</b><div class="small muted">${w.days.slice(0,3).map(d=>esc(d.meals[0].t)).join(" · ")}…</div></div></button>`).join("")}</div>`;
   return h;
 }
 
+/* ---------- Nhắc việc qua Lịch iPhone ---------- */
+function icsCard(){
+  return `<div class="card" style="display:flex;flex-direction:column;gap:8px"><div><div class="eyebrow">Nhắc việc trên iPhone</div><div class="meal-name" style="margin-top:2px">Thêm nhắc vào Lịch</div><p class="small muted" style="margin:4px 0 0">19:49 mỗi tối: rã đông thịt, ngâm gạo, mai có món mới. 7:46 sáng ngày đi chợ: danh sách cần mua. Áp dụng cho lộ trình 02/11 – 02/12.</p></div><a class="btn pink block" href="${ICS_URL}" target="_blank" rel="noopener">Thêm nhắc việc vào Lịch iPhone</a><p class="small muted" style="margin:0">Mở bằng Safari trên iPhone rồi chọn <b>Thêm tất cả</b>. Chỉ cần làm một lần.</p></div>`;
+}
+function icsEsc(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n")}
+function icsTime(d,h,m){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m);return x.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")}
+function weekICS(w){
+  const ev=[]; const add=(d,h,m,title,desc,uid)=>ev.push(["BEGIN:VEVENT",`UID:${uid}@mochi-andam`,`DTSTAMP:${icsTime(new Date(),0,0)}`,`DTSTART:${icsTime(d,h,m)}`,`DTEND:${icsTime(d,h,m+15)}`,`SUMMARY:${icsEsc(title)}`,`DESCRIPTION:${icsEsc(desc)}`,"BEGIN:VALARM","ACTION:DISPLAY",`DESCRIPTION:${icsEsc(title)}`,"TRIGGER:PT0M","END:VALARM","END:VEVENT"].join("\r\n"));
+  const s=fromIso(w.start);
+  add(addD(s,-1),7,46,"Mochi: đi chợ tuần mới",(w.shop||[]).join("; ")+". Thịt cá chia phần, trữ đông ngay khi về.","cho-"+w.start);
+  w.days.forEach((d,i)=>{const txt=d.meals.map(m=>m.t+" "+m.r).join(" ").toLowerCase();const out=[];
+    if(d.nf&&(i===0||i===3))out.push("Mai bắt đầu món mới: "+FOODS[d.nf].n+", cho ít và theo dõi 3 ngày.");
+    [["thịt bò","1 phần thịt bò"],["thịt lợn","1 phần thịt lợn"],["thịt gà","1 phần thịt gà"],["cá","1 miếng cá"],["gan gà","1 phần gan gà"]].forEach(([k,v])=>{if(txt.includes(k))out.push("Rã đông "+v+".")});
+    out.push("Vo và ngâm gạo cho cháo sáng mai.");
+    out.push("Mai: "+d.meals.map(m=>m.t).join(" / ")+".");
+    add(addD(fromIso(d.date),-1),19,49,d.nf&&(i===0||i===3)?"Mochi: mai có món mới":"Mochi: chuẩn bị cho mai",out.join(" "),"toi-"+d.date)});
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Mochi an dam//VI","METHOD:PUBLISH",...ev,"END:VCALENDAR"].join("\r\n")+"\r\n";
+}
+function openWeekICS(start){
+  const w=Store.data.weeks[start]; if(!w){toast("Hãy bấm Dùng tuần này trước");return}
+  const blob=new Blob([weekICS(w)],{type:"text/calendar"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download=`mochi-nhac-tuan-${start}.ics`;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+  toast("Mở file vừa tải rồi chọn Thêm tất cả");
+}
+
 /* ---------- Đi chợ ---------- */
 function renderShop(){
   const chk=Store.data.shop.state?.checked||{}, today=atMid(new Date());
-  let nextFound=false, h=`<p class="muted small" style="margin:0 2px">Đi chợ 1–2 lần mỗi tuần. Thịt, cá chia phần trữ đông ngay khi về; rau củ để ngăn mát. App Claude nhắc danh sách lúc 7:46 sáng Chủ nhật.</p>`;
+  let nextFound=false, h=`<p class="muted small" style="margin:0 2px">Đi chợ 1–2 lần mỗi tuần. Thịt, cá chia phần trữ đông ngay khi về; rau củ để ngăn mát.</p>`+icsCard();
   SHOP.forEach(s=>{
     const wk=WEEKS[s.w-1];
     h+=`<h2 class="sec" style="color:${weekColor(s.w)}">Tuần ${s.w} · ${wk.label}</h2>`;
@@ -976,6 +1005,7 @@ $("#main").addEventListener("click",e=>{
   else if(a==="askstop"){state.ask.ctl&&state.ask.ctl.abort()}
   else if(a==="savereport"){saveReport(b)}
   else if(a==="saveq"){const q=($("#docQ")||{}).value||"";Store.set("notes","doctor",{q:q.trim(),ts:Date.now()});toast("Đã lưu câu hỏi")}
+  else if(a==="weekics"){openWeekICS(v)}
   else if(a==="addw"){openWeight()}
   else if(a==="delw"){Store.del("weights",v);toast("Đã xóa")}
 });
