@@ -33,7 +33,7 @@ Xem [hướng dẫn cài app](huong-dan.html) (bản ảnh: [`anh/huong-dan-cai-
 
 **Trong Claude (đầy đủ tính năng).** Bản chính chạy dưới dạng artifact trên claude.ai: nhật ký đồng bộ giữa các máy, có hỏi nhanh, đính kèm ảnh và lưu báo cáo. 
 
-**Mở trực tiếp file `index.html`** (hoặc qua GitHub Pages). App vẫn chạy phần lịch, thực đơn, đi chợ, nhật ký và cân nặng, nhưng dữ liệu chỉ lưu trên trình duyệt của máy đó; hỏi nhanh, ảnh và lưu báo cáo thành file chỉ có khi mở trong Claude. Khi bật GitHub Pages và "Thêm vào Màn hình chính" trên iPhone, app dùng logo Mochi làm icon.
+**Qua GitHub Pages.** App chạy đầy đủ lịch, thực đơn, đi chợ, nhật ký, cân nặng, ảnh và báo cáo (lưu ảnh bằng cách nhấn giữ). Bấm nút *Nhật ký chung* ở góc trên → *Tạo nhật ký chung* để dùng chung một nhật ký giữa nhiều máy qua Firebase Firestore, cập nhật trực tiếp; gửi link mời (`?fam=…`) cho người còn lại. Hỏi nhanh chỉ có trong bản Claude. Khi bật GitHub Pages và "Thêm vào Màn hình chính" trên iPhone, app dùng logo Mochi làm icon.
 
 Bật GitHub Pages: Settings → Pages → Source: *Deploy from a branch* → Branch: `main` / `(root)`.
 

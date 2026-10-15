@@ -248,6 +248,15 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .sync{font-size:11.5px;color:var(--muted);text-align:center;margin-top:4px}
 
+/* Đồng bộ gia đình */
+.syncbtn{position:relative;width:42px;height:42px;border-radius:14px}
+.syncbtn svg{width:22px;height:22px}
+.sdot{position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:9px;background:var(--muted);border:2px solid var(--surface)}
+.sdot[data-on="1"]{background:var(--matcha)}
+.invite{display:flex;gap:8px}
+.invite input{flex:1;min-width:0;border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:10px 12px;font-size:13px}
+.steps{margin:0;padding-left:20px;font-size:14px}.steps li{margin:5px 0}
+
 /* Tinh chỉnh v2 */
 .hero{background:linear-gradient(165deg,color-mix(in srgb,var(--wc,var(--mochi)) 16%,var(--surface)) 0%,var(--surface) 62%)}
 .hero h3 .of{font-size:15px;font-weight:700;color:var(--muted);letter-spacing:0;margin-left:6px}
@@ -355,10 +364,11 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
   <ellipse cx="256" cy="376" rx="22" ry="16" fill="#B9505E"/>
   <ellipse cx="256" cy="384" rx="13" ry="7" fill="#F08C9A"/>
 </svg></button>
-      <div style="min-width:0">
+      <div style="min-width:0;flex:1">
         <h1>Mochi <span>ăn dặm</span></h1>
         <div class="age" id="age"></div>
       </div>
+      <button class="iconbtn syncbtn" id="syncBtn" aria-label="Nhật ký chung của gia đình" hidden><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.7-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.4-2 1.6-3.2 3-3.2s2.6 1.2 3 3.2"/></svg><span class="sdot" id="syncDot" data-on="0"></span></button>
     </div>
   </header>
   <main id="main" class="view"></main>
@@ -386,6 +396,27 @@ const START = new Date(2026,10,2);  // ngày 1 = tròn 6 tháng
 const PLAN_DAYS = 31;
 const ICS_URL = "https://viettungngo-pvi.github.io/mochi-andam/reminders.ics";
 const IN_CLAUDE = !!(window.claude&&window.claude.use);
+// Đồng bộ gia đình cho bản GitHub Pages (Firebase Firestore). Điền cấu hình từ Firebase console.
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyA9KyGO4q5qzkl4R8ijx4J4a3Hd6Sc4eI8",
+  authDomain: "mochi-an-dam.firebaseapp.com",
+  projectId: "mochi-an-dam",
+  storageBucket: "mochi-an-dam.firebasestorage.app",
+  messagingSenderId: "1010543361820",
+  appId: "1:1010543361820:web:275d74ff5605971a3a84d9"
+};
+let FB_ERR = "";
+function fbErrText(e){const c=(e&&e.code)||"";
+  if(c.includes("operation-not-allowed")||c.includes("admin-restricted")) return "Firebase chưa bật đăng nhập Anonymous (Security → Authentication → Sign-in method).";
+  if(c.includes("permission-denied")) return "Luật bảo mật Firestore chưa đúng (Firestore → Rules).";
+  if(c.includes("not-found")||c.includes("failed-precondition")) return "Chưa tạo Firestore Database cho project.";
+  if(c.includes("network")||c.includes("unavailable")) return "Không có mạng, nhật ký vẫn lưu trên máy và sẽ đồng bộ khi có mạng.";
+  return "Lỗi đồng bộ: "+(c||String(e&&e.message||e));}
+const FB_SDK = "https://www.gstatic.com/firebasejs/10.14.1/";
+function famFromUrl(){try{const q=new URLSearchParams(location.search).get("fam");return q&&/^[A-Za-z0-9]{20,64}$/.test(q)?q:null}catch(e){return null}}
+function getFam(){const u=famFromUrl();if(u){try{localStorage.setItem("mochi-fam",u)}catch(e){}return u}try{return localStorage.getItem("mochi-fam")}catch(e){return null}}
+function newFamCode(){const a="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";const r=new Uint32Array(24);crypto.getRandomValues(r);return Array.from(r,x=>a[x%a.length]).join("")}
+function inviteLink(fam){return location.origin+location.pathname+"?fam="+fam}
 const WD = ["CN","T2","T3","T4","T5","T6","T7"];
 
 const FOODS = {
@@ -465,7 +496,7 @@ function blockFor(n){return PLAN.find(b=>n>=b.from&&n<=b.to)}
 const weekColor=w=>`var(--w${Math.min(w,6)})`;
 
 /* ===================== Lưu trữ ===================== */
-const COLS=["meals","weights","shop","weeks","foods","asks","notes"];
+const COLS=["meals","weights","shop","weeks","foods","asks","notes","photos"];
 const CAPS={sample:null,assets:null,downloads:null};
 async function connectCaps(){
   if(!window.claude||!window.claude.use) return;
@@ -474,10 +505,11 @@ async function connectCaps(){
   CAPS.sample=s;CAPS.assets=a;CAPS.downloads=d; render(false);
 }
 const Store={
-  mode:"local", db:null, data:{meals:{},weights:{},shop:{},weeks:{},foods:{},asks:{},notes:{}},
+  mode:"local", db:null, fs:null, fam:null, data:{meals:{},weights:{},shop:{},weeks:{},foods:{},asks:{},notes:{},photos:{}},
   load(){try{const s=localStorage.getItem("mochi-an-dam-v1");if(s){const o=JSON.parse(s);COLS.forEach(c=>{if(o[c])this.data[c]=o[c]})}}catch(e){}},
   cache(){try{localStorage.setItem("mochi-an-dam-v1",JSON.stringify(this.data))}catch(e){}},
   async connect(){
+    if(!IN_CLAUDE){ return this.connectFb(); }
     try{
       if(!window.claude||!window.claude.use) return;
       const db=await window.claude.use("db"); if(!db) return;
@@ -488,16 +520,46 @@ const Store={
       });
     }catch(e){}
   },
+  async connectFb(){
+    const fam=getFam(); if(!FIREBASE_CONFIG||!fam) return;
+    try{
+      for(const f of ["firebase-app-compat.js","firebase-auth-compat.js","firebase-firestore-compat.js"]){
+        if(f==="firebase-app-compat.js"&&window.firebase) continue;
+        await new Promise((res,rej)=>{const s=document.createElement("script");s.src=FB_SDK+f;s.onload=res;s.onerror=rej;document.head.appendChild(s)});
+      }
+      if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+      const fs=firebase.firestore();
+      try{await fs.enablePersistence({synchronizeTabs:true})}catch(e){}
+      await firebase.auth().signInAnonymously();
+      this.fs=fs; this.fam=fam; this.mode="fb"; setSync();
+      COLS.filter(c=>c!=="asks").forEach(c=>{
+        fs.collection(`families/${fam}/${c}`).onSnapshot(s=>{const m={};s.forEach(d=>{m[d.id]=d.data()});this.data[c]=m;if(c!=="photos")this.cache();render(false)},
+          e=>{console.warn("fs",c,e&&e.code);FB_ERR=fbErrText(e);setSync(FB_ERR)});
+      });
+    }catch(e){console.warn(e);this.mode="local";FB_ERR=fbErrText(e);setSync(FB_ERR)}
+  },
+  async uploadAll(){
+    if(!this.fs) return 0; let n=0;
+    for(const c of COLS){ if(c==="asks"||c==="photos") continue;
+      for(const [id,v] of Object.entries(this.data[c]||{})){ try{await this.fs.collection(`families/${this.fam}/${c}`).doc(id).set(v);n++}catch(e){} } }
+    return n;
+  },
   async set(c,id,obj){
-    this.data[c]={...this.data[c],[id]:obj}; this.cache(); render(false);
+    this.data[c]={...this.data[c],[id]:obj}; if(c!=="photos")this.cache(); render(false);
     if(this.db){try{await this.db.collection(c).doc(id).set(obj)}catch(e){toast("Chưa đồng bộ được, dữ liệu vẫn lưu trên máy này")}}
+    else if(this.fs){try{await this.fs.collection(`families/${this.fam}/${c}`).doc(id).set(obj)}catch(e){FB_ERR=fbErrText(e);toast(FB_ERR)}}
   },
   async del(c,id){
     const m={...this.data[c]}; delete m[id]; this.data[c]=m; this.cache(); render(false);
     if(this.db){try{await this.db.collection(c).doc(id).delete()}catch(e){}}
+    else if(this.fs){try{await this.fs.collection(`families/${this.fam}/${c}`).doc(id).delete()}catch(e){}}
   }
 };
-function setSync(){document.getElementById("sync").textContent=Store.mode==="db"?"Đã đồng bộ: mở trên máy khác vẫn thấy cùng nhật ký":"Đang lưu trên máy này"}
+function setSync(msg){
+  const el=document.getElementById("sync"); if(!el) return;
+  el.textContent=msg||(Store.mode==="db"?"Đã đồng bộ: mở trên máy khác vẫn thấy cùng nhật ký":Store.mode==="fb"?"Nhật ký chung của gia đình · cập nhật trực tiếp":"Đang lưu trên máy này");
+  const dot=document.getElementById("syncDot"); if(dot) dot.dataset.on=(Store.mode==="local"?"0":"1");
+}
 
 /* ===================== Trạng thái món ===================== */
 function foodStatus(id,ref){
@@ -568,10 +630,17 @@ function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show")
 const ICON_CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const ICON_MOON='<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
 const MOODS={love:"Thích lắm",ok:"Ăn được",refuse:"Từ chối",react:"Có phản ứng"};
-const blobUrl=id=>"/_blob/"+id;
+const blobUrl=id=>{if(String(id).startsWith("fb:")){const p=Store.data.photos[id.slice(3)];return p?p.data:""}return "/_blob/"+id};
 function thumbs(ids,sm){if(!ids||!ids.length)return "";return `<div class="thumbs">${ids.map(id=>`<img class="thumb ${sm?"sm":""}" src="${blobUrl(id)}" alt="Ảnh bữa ăn" data-act="zoom" data-v="${id}" loading="lazy" onerror="this.style.visibility='hidden'">`).join("")}</div>`}
 function zoom(id){const d=document.createElement("div");d.className="lightbox";d.innerHTML=`<img src="${blobUrl(id)}" alt="Ảnh phóng to">`;d.addEventListener("click",()=>d.remove());document.body.appendChild(d)}
 function burst(){const r=$("#logo").getBoundingClientRect();for(let i=0;i<7;i++){const s=document.createElement("span");s.className="burst";s.style.left=(r.left+r.width/2-11+(Math.random()*30-15))+"px";s.style.top=(r.top+r.height/2)+"px";s.style.setProperty("--dx",(Math.random()*120-60)+"px");s.style.animationDelay=(i*0.06)+"s";s.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3 1.7-1.9 3.2-3 5.2-3 3.5 0 5.6 3.6 4.3 6.8C19.5 16.4 12 21 12 21z"/></svg>';document.body.appendChild(s);setTimeout(()=>s.remove(),1500)}}
+async function compressToDataUrl(file){
+  const url=URL.createObjectURL(file);
+  try{const img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=url});
+    const max=900,k=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement("canvas");c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+    c.getContext("2d").drawImage(img,0,0,c.width,c.height);return c.toDataURL("image/jpeg",0.72);
+  }finally{URL.revokeObjectURL(url)}
+}
 async function compressImage(file){
   const url=URL.createObjectURL(file);
   try{const img=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=url});
@@ -912,6 +981,39 @@ function renderAsk(){
   return h;
 }
 
+/* ---------- Nhật ký chung (Firebase) ---------- */
+function openSync(){
+  sheetState={type:"sync"};
+  const fam=Store.fam||getFam();
+  let body;
+  if(!FIREBASE_CONFIG){
+    body=`<p class="muted" style="margin:0">Tính năng đang được cài đặt. Khi xong, nút này sẽ cho anh chị dùng chung một nhật ký.</p>`;
+  } else if(Store.mode==="fb"){
+    body=`<p style="margin:0"><b style="color:var(--matcha)">Đang dùng nhật ký chung.</b> Ai mở app bằng link mời dưới đây sẽ thấy và ghi cùng một nhật ký, cập nhật trực tiếp.</p>
+      <div class="field"><label for="invIn">Link mời (gửi cho vợ/chồng qua Zalo)</label><div class="invite"><input id="invIn" readonly value="${esc(inviteLink(Store.fam))}"><button class="btn" data-sh="copyinv">Sao chép</button></div></div>
+      <ol class="steps"><li>Mở link bằng <b>Safari</b> trên iPhone.</li><li>Bấm Chia sẻ → <b>Thêm vào MH chính</b> ngay trên trang đó, để app mở ra luôn vào nhật ký chung.</li></ol>
+      <p class="small muted" style="margin:0">Giữ kín link này: ai có link đều xem và sửa được nhật ký của Mochi.</p>
+      <button class="btn soft" data-sh="leave">Rời nhật ký chung trên máy này</button>`;
+  } else if(fam){
+    body=FB_ERR?`<div class="alert"><b>Chưa kết nối được.</b> ${esc(FB_ERR)}</div><button class="btn" data-sh="retry">Thử kết nối lại</button>`:`<p class="muted" style="margin:0">Đang kết nối nhật ký chung… Nếu lâu, kiểm tra mạng rồi mở lại app.</p>`;
+  } else {
+    body=`<p style="margin:0">Dùng chung một nhật ký giữa hai máy: một người ghi bữa, người kia thấy ngay.</p>
+      <ol class="steps"><li>Một người (thường là anh) bấm <b>Tạo nhật ký chung</b>. Dữ liệu đang có trên máy này được chuyển lên.</li><li>Gửi link mời cho người kia, họ mở link bằng Safari rồi thêm vào màn hình chính.</li></ol>
+      <button class="btn pink" data-sh="create">Tạo nhật ký chung</button>
+      <p class="small muted" style="margin:0">Đã có link mời? Mở link đó bằng Safari là xong, không cần bấm nút này.</p>`;
+  }
+  openSheet(`<h4>Nhật ký chung của gia đình</h4>${body}<button class="btn soft" data-sh="close">Đóng</button>`);
+}
+async function createFamily(){
+  const code=newFamCode(); try{localStorage.setItem("mochi-fam",code)}catch(e){}
+  try{history.replaceState(null,"",inviteLink(code))}catch(e){}
+  toast("Đang tạo nhật ký chung…");
+  await Store.connectFb();
+  if(Store.mode!=="fb"){toast(FB_ERR||"Chưa kết nối được, kiểm tra mạng rồi thử lại");openSync();return}
+  const n=await Store.uploadAll(); toast(n?`Đã chuyển ${n} mục lên nhật ký chung`:"Đã tạo nhật ký chung");
+  openSync();
+}
+
 /* ===================== Sheet ghi bữa / cân ===================== */
 let sheetState=null;
 function openSheet(html){$("#sheetIn").innerHTML='<div class="grab"></div>'+html;$("#scrim").hidden=false;$("#sheet").hidden=false;requestAnimationFrame(()=>{$("#scrim").classList.add("show");$("#sheet").classList.add("show")})}
@@ -924,7 +1026,7 @@ function openLog(id,i){
 }
 function photoBlock(){
   const s=sheetState;
-  if(!CAPS.assets) return `<div class="field"><label>Ảnh</label><p class="small muted" style="margin:0">Mở app trong Claude (tài khoản của anh) để đính kèm ảnh bữa ăn hoặc ảnh vết mẩn.</p></div>`;
+  if(!CAPS.assets&&Store.mode!=="fb") return `<div class="field"><label>Ảnh</label><p class="small muted" style="margin:0">Bật nhật ký chung (nút đồng bộ ở góc trên) để đính kèm ảnh bữa ăn hoặc ảnh vết mẩn.</p></div>`;
   return `<div class="field"><label>Ảnh bữa ăn hoặc vết mẩn</label><div class="thumbs" id="photoRow">${s.photos.map(id=>`<img class="thumb" src="${blobUrl(id)}" alt="Ảnh đã đính kèm" data-sh="rmphoto" data-v="${id}" title="Chạm để bỏ ảnh">`).join("")}${s.uploading?`<div class="addphoto">Đang tải…</div>`:""}<label class="addphoto" for="photoIn"><span><svg viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><br>Thêm</span></label></div><input type="file" id="photoIn" accept="image/*" hidden>${s.photos.length?`<span class="small muted">Chạm vào ảnh để bỏ ra khỏi bữa này.</span>`:""}</div>`;
 }
 function refreshPhotos(){const el=document.getElementById("photoWrap");if(el)el.innerHTML=photoBlock()}
@@ -949,13 +1051,20 @@ $("#scrim").addEventListener("click",closeSheet);
 $("#sheet").addEventListener("change",async e=>{
   if(e.target.id!=="photoIn"||!e.target.files||!e.target.files[0]||!sheetState) return;
   const s=sheetState, file=e.target.files[0]; s.uploading++; refreshPhotos();
-  try{const blob=await compressImage(file);const r=await CAPS.assets.upload(blob,{type:"image/jpeg"});if(sheetState===s)s.photos.push(r.id)}
+  try{
+    if(CAPS.assets){const blob=await compressImage(file);const r=await CAPS.assets.upload(blob,{type:"image/jpeg"});if(sheetState===s)s.photos.push(r.id)}
+    else{const data=await compressToDataUrl(file);if(data.length>900000)throw {code:"too_large"};const pid="p"+Date.now();await Store.set("photos",pid,{data,ts:Date.now()});if(sheetState===s)s.photos.push("fb:"+pid)}
+  }
   catch(err){toast(err&&err.code==="quota_or_state"?"Hết dung lượng lưu ảnh":"Chưa tải được ảnh, thử lại nhé")}
   finally{s.uploading--; if(sheetState===s) refreshPhotos()}
 });
 $("#sheet").addEventListener("click",e=>{
   const b=e.target.closest("[data-sh]"); if(!b) return; const a=b.dataset.sh, s=sheetState;
   if(a==="close"){closeSheet();return}
+  if(a==="create"){createFamily();return}
+  if(a==="retry"){FB_ERR="";closeSheet();location.reload();return}
+  if(a==="copyinv"){const v=$("#invIn").value;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast("Đã sao chép link mời")).catch(()=>{$("#invIn").select();toast("Nhấn giữ để sao chép")});return}
+  if(a==="leave"){try{localStorage.removeItem("mochi-fam")}catch(e){}try{history.replaceState(null,"",location.pathname)}catch(e){}closeSheet();toast("Đã rời nhật ký chung, mở lại app để dùng riêng");setTimeout(()=>location.reload(),900);return}
   if(a==="ml"||a==="mlset"){s.ml=Math.max(0,a==="ml"?s.ml+ +b.dataset.v:+b.dataset.v);$("#mlOut").textContent=s.ml+" ml";return}
   if(a==="mood"){s.mood=b.dataset.v;document.querySelectorAll('[data-sh="mood"]').forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===s.mood));$("#reactBox").hidden=s.mood!=="react";return}
   if(a==="rmphoto"){s.photos=s.photos.filter(x=>x!==b.dataset.v);refreshPhotos();return}
@@ -1019,6 +1128,7 @@ $("#main").addEventListener("keydown",e=>{if(e.target.id==="askIn"&&e.key==="Ent
 $("#logo").addEventListener("click",()=>{const l=$("#logo");l.classList.remove("wiggle");void l.offsetWidth;l.classList.add("wiggle")});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&sheetState)closeSheet()});
 
+if(!IN_CLAUDE){const sb=$("#syncBtn");sb.hidden=false;sb.addEventListener("click",openSync)}
 Store.load(); setSync(); render(true); Store.connect(); connectCaps();
 </script>
 
