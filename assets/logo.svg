@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#FFE3E8"/>
+      <stop offset="1" stop-color="#F6B9C6"/>
+    </radialGradient>
+    <radialGradient id="skin" cx="45%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#FFEBDD"/>
+      <stop offset="1" stop-color="#F6CDB6"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- áo hồng -->
+  <path d="M120 512 C 130 440, 190 420, 256 420 C 322 420, 382 440, 392 512 Z" fill="#FFFFFF"/>
+  <path d="M196 432 C 220 452, 292 452, 316 432 L 330 512 L 182 512 Z" fill="#F7A9B8"/>
+  <!-- tai -->
+  <ellipse cx="112" cy="300" rx="26" ry="32" fill="#F4C7AE"/>
+  <ellipse cx="400" cy="300" rx="26" ry="32" fill="#F4C7AE"/>
+  <!-- mặt -->
+  <ellipse cx="256" cy="292" rx="148" ry="140" fill="url(#skin)"/>
+  <!-- tóc -->
+  <path d="M110 272 C 104 178, 176 140, 256 140 C 336 140, 408 178, 402 272 C 380 214, 326 190, 256 192 C 186 190, 132 214, 110 272 Z" fill="#3A2A25"/>
+  <path class="tuft" d="M222 156 C 200 104, 214 54, 252 22 C 246 70, 262 104, 296 112 C 280 126, 276 142, 282 160 C 262 146, 240 146, 222 156 Z" fill="#3A2A25"/>
+  <path d="M262 150 C 272 112, 300 92, 330 92 C 312 108, 304 126, 304 150 Z" fill="#3A2A25"/>
+  <!-- lông mày -->
+  <path d="M178 250 Q 204 238 228 248" stroke="#5A433B" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M284 248 Q 308 238 334 250" stroke="#5A433B" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- mắt -->
+  <circle cx="204" cy="296" r="30" fill="#2A1E1C"/>
+  <circle cx="308" cy="296" r="30" fill="#2A1E1C"/>
+  <circle cx="214" cy="284" r="10" fill="#FFFFFF"/>
+  <circle cx="318" cy="284" r="10" fill="#FFFFFF"/>
+  <circle cx="195" cy="308" r="4.5" fill="#FFFFFF" opacity=".85"/>
+  <circle cx="299" cy="308" r="4.5" fill="#FFFFFF" opacity=".85"/>
+  <!-- má -->
+  <ellipse cx="166" cy="350" rx="30" ry="18" fill="#F49AA9" opacity=".55"/>
+  <ellipse cx="346" cy="350" rx="30" ry="18" fill="#F49AA9" opacity=".55"/>
+  <!-- mũi -->
+  <ellipse cx="256" cy="336" rx="10" ry="6" fill="#E8AE98"/>
+  <!-- miệng -->
+  <ellipse cx="256" cy="376" rx="22" ry="16" fill="#B9505E"/>
+  <ellipse cx="256" cy="384" rx="13" ry="7" fill="#F08C9A"/>
+</svg>
