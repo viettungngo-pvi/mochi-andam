@@ -7,6 +7,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Mochi">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FFF6F8">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -248,6 +250,70 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .sync{font-size:11.5px;color:var(--muted);text-align:center;margin-top:4px}
 
+/* v4: ghi nhanh, hôm nay của Mochi, chế độ nấu, thống kê, splash */
+.seg button{font-size:12.5px;padding:8px 2px}
+.quick3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.qbtn{border:1px solid var(--line);background:var(--surface-2);border-radius:14px;padding:11px 4px;font-weight:700;font-size:14px;cursor:pointer}
+.qbtn.all{background:var(--matcha-soft);border-color:transparent}
+.qbtn.refuse{color:var(--muted)}
+.qbtn:active{transform:scale(.97)}
+.cookbtn{border:0;background:var(--surface-2);color:var(--mochi-deep);font-weight:700;font-size:12.5px;border-radius:999px;padding:5px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.cookbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.meal-head{align-items:center}
+.daily{display:flex;flex-direction:column;gap:12px}
+.drow{display:flex;flex-direction:column;gap:8px}
+.dlabel{font-size:12.5px;font-weight:700;color:var(--muted)}
+.dbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dbtns button,.supps button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 4px;font-weight:600;font-size:13.5px;cursor:pointer}
+.supps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.supps button{display:flex;flex-direction:column;align-items:center;gap:1px;padding:8px 2px}
+.supps button small{font-size:10.5px;color:var(--muted);font-weight:600}
+.supps button[aria-pressed="true"]{background:var(--matcha-soft);border-color:transparent}
+.supps button[aria-pressed="true"]::before{content:"✓";font-weight:800;color:var(--matcha);font-size:12px;line-height:1}
+.pchips{display:flex;flex-wrap:wrap;gap:6px}
+.pchip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 6px 4px 10px;font-size:12.5px;font-weight:600;background:var(--surface-2)}
+.pchip.hard{background:var(--yolk-soft)}.pchip.loose{background:var(--danger-soft)}
+.pchip button{border:0;background:none;color:var(--muted);font-size:15px;line-height:1;cursor:pointer;padding:0 4px}
+.hint{font-size:13px;background:var(--yolk-soft);border-radius:12px;padding:8px 11px}
+.frow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line)}
+.frow:last-child{border-bottom:0}
+.fstep{display:flex;align-items:center;gap:6px}
+.fstep button{width:32px;height:32px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);font-weight:800;font-size:17px;cursor:pointer}
+.fstep output{min-width:26px;text-align:center;font-family:var(--f-display);font-weight:800;font-size:19px}
+.need{font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 8px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.need.low{background:var(--danger-soft);color:var(--danger)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpis .qbox .v{font-size:20px}
+.bars text{fill:var(--muted);font-size:10.5px;font-family:var(--f-body)}
+.who text{fill:var(--muted);font-size:10.5px;font-family:var(--f-body)}
+.whoband{font-size:13.5px;border-radius:12px;padding:9px 12px;background:var(--matcha-soft)}
+.whoband.warn{background:var(--yolk-soft)}
+.cook{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column;padding:calc(12px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));animation:rise .3s ease}
+.cook-top{display:flex;align-items:center;gap:10px}
+.cook-top .x{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:20px;cursor:pointer}
+.cook-prog{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:10px}
+.cook-prog i{display:block;height:100%;background:var(--mochi-deep);transition:width .3s}
+.cook-body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;max-width:560px;width:100%;margin:0 auto;min-height:0;overflow:auto}
+.cook-step{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cook-title{font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1.05;text-wrap:balance}
+.cook-text{font-size:20px;line-height:1.5}
+.timer{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.timer .tm{font-family:var(--f-display);font-weight:800;font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
+.timer.done{background:var(--matcha-soft);animation:pulse 1s 3}
+@keyframes pulse{50%{transform:scale(1.03)}}
+.timer .tb{display:flex;gap:8px}
+.cook-nav{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;max-width:560px;width:100%;margin:0 auto}
+.cook-nav .btn{padding:16px;font-size:17px}
+.minitimer{position:fixed;z-index:20;left:50%;transform:translateX(-50%);top:calc(8px + env(safe-area-inset-top,0px));background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;border:0;cursor:pointer;font-variant-numeric:tabular-nums}
+.splash{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .45s ease}
+.splash.hide{opacity:0;pointer-events:none}
+.splash .si{display:flex;flex-direction:column;align-items:center;gap:14px}
+.splash .sl{width:120px;height:120px;border-radius:32px;overflow:hidden;box-shadow:0 12px 30px rgba(150,70,100,.18);animation:bob 1.2s ease-in-out infinite}
+.splash .sl svg{width:100%;height:100%;display:block}
+.splash .st{font-family:var(--f-display);font-weight:800;font-size:28px}
+.splash .st span{color:var(--mochi-deep)}
+@keyframes bob{50%{transform:translateY(-6px)}}
+
 /* Đồng bộ gia đình */
 .syncbtn{position:relative;width:42px;height:42px;border-radius:14px}
 .syncbtn svg{width:22px;height:22px}
@@ -264,7 +330,7 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .chip-day.sel .logdot{background:var(--bg)}
 .meal{position:relative}
 .meal.isnew{border-color:color-mix(in srgb,var(--yolk) 55%,var(--line))}
-.newtag{position:absolute;top:14px;right:14px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--yolk-soft);border-radius:999px;padding:3px 9px}
+.newtag{display:inline-block;margin-left:6px;vertical-align:1px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--yolk-soft);border-radius:999px;padding:3px 9px}
 .thumbs{display:flex;gap:6px;flex-wrap:wrap}
 .thumb{width:56px;height:56px;border-radius:12px;object-fit:cover;background:var(--surface-2);border:1px solid var(--line);cursor:zoom-in;display:block}
 .thumb.sm{width:40px;height:40px;border-radius:9px}
@@ -318,6 +384,49 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+<div class="splash" id="splash"><div class="si"><div class="sl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="s-bg" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#FFE3E8"/>
+      <stop offset="1" stop-color="#F6B9C6"/>
+    </radialGradient>
+    <radialGradient id="s-skin" cx="45%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#FFEBDD"/>
+      <stop offset="1" stop-color="#F6CDB6"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#s-bg)"/>
+  <!-- áo hồng -->
+  <path d="M120 512 C 130 440, 190 420, 256 420 C 322 420, 382 440, 392 512 Z" fill="#FFFFFF"/>
+  <path d="M196 432 C 220 452, 292 452, 316 432 L 330 512 L 182 512 Z" fill="#F7A9B8"/>
+  <!-- tai -->
+  <ellipse cx="112" cy="300" rx="26" ry="32" fill="#F4C7AE"/>
+  <ellipse cx="400" cy="300" rx="26" ry="32" fill="#F4C7AE"/>
+  <!-- mặt -->
+  <ellipse cx="256" cy="292" rx="148" ry="140" fill="url(#s-skin)"/>
+  <!-- tóc -->
+  <path d="M110 272 C 104 178, 176 140, 256 140 C 336 140, 408 178, 402 272 C 380 214, 326 190, 256 192 C 186 190, 132 214, 110 272 Z" fill="#3A2A25"/>
+  <path class="tuft" d="M222 156 C 200 104, 214 54, 252 22 C 246 70, 262 104, 296 112 C 280 126, 276 142, 282 160 C 262 146, 240 146, 222 156 Z" fill="#3A2A25"/>
+  <path d="M262 150 C 272 112, 300 92, 330 92 C 312 108, 304 126, 304 150 Z" fill="#3A2A25"/>
+  <!-- lông mày -->
+  <path d="M178 250 Q 204 238 228 248" stroke="#5A433B" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M284 248 Q 308 238 334 250" stroke="#5A433B" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- mắt -->
+  <circle cx="204" cy="296" r="30" fill="#2A1E1C"/>
+  <circle cx="308" cy="296" r="30" fill="#2A1E1C"/>
+  <circle cx="214" cy="284" r="10" fill="#FFFFFF"/>
+  <circle cx="318" cy="284" r="10" fill="#FFFFFF"/>
+  <circle cx="195" cy="308" r="4.5" fill="#FFFFFF" opacity=".85"/>
+  <circle cx="299" cy="308" r="4.5" fill="#FFFFFF" opacity=".85"/>
+  <!-- má -->
+  <ellipse cx="166" cy="350" rx="30" ry="18" fill="#F49AA9" opacity=".55"/>
+  <ellipse cx="346" cy="350" rx="30" ry="18" fill="#F49AA9" opacity=".55"/>
+  <!-- mũi -->
+  <ellipse cx="256" cy="336" rx="10" ry="6" fill="#E8AE98"/>
+  <!-- miệng -->
+  <ellipse cx="256" cy="376" rx="22" ry="16" fill="#B9505E"/>
+  <ellipse cx="256" cy="384" rx="13" ry="7" fill="#F08C9A"/>
+</svg></div><div class="st">Mochi <span>ăn dặm</span></div></div></div>
 <div class="wrap">
   <header class="top">
     <div class="brand">
@@ -368,7 +477,7 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
         <h1>Mochi <span>ăn dặm</span></h1>
         <div class="age" id="age"></div>
       </div>
-      <button class="iconbtn syncbtn" id="syncBtn" aria-label="Nhật ký chung của gia đình" hidden><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3 19c.6-3 2.7-4.5 5-4.5s4.4 1.5 5 4.5M13.5 18.5c.4-2 1.6-3.2 3-3.2s2.6 1.2 3 3.2"/></svg><span class="sdot" id="syncDot" data-on="0"></span></button>
+      <button class="iconbtn syncbtn" id="syncBtn" aria-label="Cài đặt, nhật ký chung và sao lưu"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></svg><span class="sdot" id="syncDot" data-on="0"></span></button>
     </div>
   </header>
   <main id="main" class="view"></main>
@@ -388,6 +497,8 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 <div class="scrim" id="scrim" hidden></div>
 <section class="sheet" id="sheet" role="dialog" aria-modal="true" hidden><div class="sheet-in" id="sheetIn"></div></section>
 <div class="toast" id="toast" role="status"></div>
+<div class="cook" id="cook" hidden role="dialog" aria-modal="true" aria-label="Chế độ nấu"></div>
+<button class="minitimer" id="miniTimer" hidden></button>
 
 <script>
 /* ===================== Dữ liệu ===================== */
@@ -496,7 +607,7 @@ function blockFor(n){return PLAN.find(b=>n>=b.from&&n<=b.to)}
 const weekColor=w=>`var(--w${Math.min(w,6)})`;
 
 /* ===================== Lưu trữ ===================== */
-const COLS=["meals","weights","shop","weeks","foods","asks","notes","photos"];
+const COLS=["meals","weights","shop","weeks","foods","asks","notes","photos","daily","freezer"];
 const CAPS={sample:null,assets:null,downloads:null};
 async function connectCaps(){
   if(!window.claude||!window.claude.use) return;
@@ -505,7 +616,7 @@ async function connectCaps(){
   CAPS.sample=s;CAPS.assets=a;CAPS.downloads=d; render(false);
 }
 const Store={
-  mode:"local", db:null, fs:null, fam:null, data:{meals:{},weights:{},shop:{},weeks:{},foods:{},asks:{},notes:{},photos:{}},
+  mode:"local", db:null, fs:null, fam:null, data:{meals:{},weights:{},shop:{},weeks:{},foods:{},asks:{},notes:{},photos:{},daily:{},freezer:{}},
   load(){try{const s=localStorage.getItem("mochi-an-dam-v1");if(s){const o=JSON.parse(s);COLS.forEach(c=>{if(o[c])this.data[c]=o[c]})}}catch(e){}},
   cache(){try{localStorage.setItem("mochi-an-dam-v1",JSON.stringify(this.data))}catch(e){}},
   async connect(){
@@ -532,11 +643,17 @@ const Store={
       try{await fs.enablePersistence({synchronizeTabs:true})}catch(e){}
       await firebase.auth().signInAnonymously();
       this.fs=fs; this.fam=fam; this.mode="fb"; setSync();
-      COLS.filter(c=>c!=="asks").forEach(c=>{
+      COLS.filter(c=>c!=="asks"&&c!=="photos").forEach(c=>{
         fs.collection(`families/${fam}/${c}`).onSnapshot(s=>{const m={};s.forEach(d=>{m[d.id]=d.data()});this.data[c]=m;if(c!=="photos")this.cache();render(false)},
           e=>{console.warn("fs",c,e&&e.code);FB_ERR=fbErrText(e);setSync(FB_ERR)});
       });
     }catch(e){console.warn(e);this.mode="local";FB_ERR=fbErrText(e);setSync(FB_ERR)}
+  },
+  async setMany(c,docs){
+    this.data[c]={...this.data[c],...docs}; this.cache(); render(false);
+    for(const [id,obj] of Object.entries(docs)){
+      try{ if(this.db) await this.db.collection(c).doc(id).set(obj); else if(this.fs) await this.fs.collection(`families/${this.fam}/${c}`).doc(id).set(obj); }catch(e){}
+    }
   },
   async uploadAll(){
     if(!this.fs) return 0; let n=0;
@@ -602,14 +719,36 @@ function suggestWeek(startD,seed){
   return {start:iso(startD),days,news};
 }
 function dishName(b){const pn=PSHORT[b.p]||FOODS[b.p]?.n.toLowerCase();const vn=VSHORT[b.v]||FOODS[b.v]?.n.toLowerCase();return b.p==="longdo"?`Cháo ${vn} lòng đỏ`:`Cháo ${pn} ${vn}`}
-function dishRecipe(b,base){let s=`${base} + ${PAMT[b.p]||FOODS[b.p].n} + ${VAMT[b.v]||("10–20 g "+FOODS[b.v].n.toLowerCase())} + 1 tcf dầu`;if(b.extra==="bdp")s+=" + ¼ tcf bơ đậu phộng nguyên chất pha loãng (lần đầu)";return s}
-function weekShopping(sw){
+function ageParams(d){const m=age(d).m;
+  if(m>=12) return {m,meals:3,y:220,e:"180–220",g:30,cu:30,rau:15,tex:"Ăn cùng gia đình: cơm nát hoặc cháo đặc hạt nguyên, cắt nhỏ, nêm rất nhạt",base:"Cơm nát / cháo đặc"};
+  if(m>=9) return {m,meals:3,y:190,e:"150–180",g:25,cu:30,rau:15,tex:"Cháo hạt nguyên nấu nhừ, rau củ cắt hạt lựu mềm, tập đồ ăn cầm tay",base:"Cháo hạt nguyên"};
+  if(m>=7) return {m,meals:2,y:140,e:"110–125",g:20,cu:20,rau:10,tex:"Cháo nghiền còn hạt vỡ, thịt băm nhỏ, rau củ dầm bằng thìa",base:"Cháo hạt vỡ"};
+  return {m,meals:2,y:130,e:"90–120",g:20,cu:20,rau:10,tex:"Cháo rây mịn",base:"Cháo rây"};}
+function pamt(p,g){return ({lon:`1 phần thịt lợn (~${g} g)`,bo:`1 phần thịt bò (~${g} g)`,ca:`1 miếng cá (~${g} g), gỡ kỹ xương`,longdo:"1 lòng đỏ trứng chín kỹ",ga:`1 phần thịt gà (~${g} g), nấu chín kỹ`,dauphu:`${g} g đậu phụ non nghiền`,trung:"1 quả trứng chín kỹ, dầm nát",gan:"10–15 g gan gà luộc chín hẳn, nghiền"})[p]||FOODS[p].n}
+function vamt(v,ap){return FOODS[v].g==="rau"?`${ap.rau} g ${FOODS[v].n.toLowerCase()}`:`${ap.cu} g ${FOODS[v].n.toLowerCase()}`}
+function dishRecipe(b,base,ap){ap=ap||ageParams(new Date());let s=`${base} + ${pamt(b.p,ap.g)} + ${vamt(b.v,ap)} + 1 tcf dầu`;if(b.extra==="bdp")s+=" + ¼ tcf bơ đậu phộng nguyên chất pha loãng (lần đầu)";return s}
+function mealLabel(i,n){const L=n===3?[" · sáng"," · trưa"," · chiều"]:n===2?[" · sáng"," · chiều"]:[""];return L[i]||""}
+function buildWeekView(sw,startD){
+  const ap=ageParams(startD), okB=foodStatus("bellamy",startD)==="ok";
+  const F=["dudu","chuoi","boqua"].filter(id=>foodStatus(id,startD)==="ok");
+  const days=sw.days.map((d,i)=>{
+    const fr=d.b1.fruit?`${(FAMT[d.b1.fruit]||FOODS[d.b1.fruit].n.toLowerCase())} nghiền 2–3 tcf sau cháo`:null;
+    const meals=[{t:dishName(d.b1),r:dishRecipe(d.b1,ap.base,ap),y:ap.y,e:ap.e,f:fr},{t:dishName(d.b2),r:dishRecipe(d.b2,ap.base,ap),y:ap.y-20,e:ap.e}];
+    if(ap.meals===3){const f2=F.length?F[(i+1)%F.length]:null;const fn=f2?(FAMT[f2]||FOODS[f2].n.toLowerCase()):"";
+      meals.splice(1,0,okB?{t:`Bột Bellamy's${fn?" "+fn:""}`,r:`2 thìa canh bột Bellamy's (14 g) + 100 ml sữa HiPP${fn?` + 2–3 tcf ${fn} nghiền`:""}, pha ăn liền`,y:120,e:"90–120"}
+        :{t:`Cháo ${VSHORT[d.b2.v]||"bí đỏ"} lòng đỏ`,r:`${ap.base} + 1 lòng đỏ + ${vamt(d.b2.v,ap)} + 1 tcf dầu`,y:ap.y-30,e:ap.e});}
+    return {date:iso(d.d),nf:d.nf,meals};
+  });
+  const shop=weekShopping(sw,ap); if(ap.meals===3&&!okB) shop.push("Trứng gà · thêm 7 quả cho bữa trưa");
+  return {days,shop,ap};
+}
+function weekShopping(sw,ap){ap=ap||{g:20};
   const pc={},vc={},fc={};
   sw.days.forEach(d=>{[d.b1,d.b2].forEach(b=>{pc[b.p]=(pc[b.p]||0)+1;vc[b.v]=(vc[b.v]||0)+1});if(d.b1.fruit)fc[d.b1.fruit]=(fc[d.b1.fruit]||0)+1;if(d.b1.extra)pc[d.b1.extra]=(pc[d.b1.extra]||0)+1});
   const out=[];
   Object.entries(pc).forEach(([p,n])=>{
-    if(["lon","bo","ga"].includes(p))out.push(`${FOODS[p].n} · ${Math.max(100,Math.ceil(n*20/50)*50)} g → chia ${n} phần, trữ đông`);
-    else if(p==="ca")out.push(`Cá (hồi/quả/basa) · ${n*20} g → ${n} miếng, trữ đông`);
+    if(["lon","bo","ga"].includes(p))out.push(`${FOODS[p].n} · ${Math.max(100,Math.ceil(n*ap.g/50)*50)} g → chia ${n} phần, trữ đông`);
+    else if(p==="ca")out.push(`Cá (hồi/quả/basa) · ${n*ap.g} g → cắt ${n} miếng, trữ đông`);
     else if(p==="longdo")out.push(`Trứng gà · ${n} quả (lấy lòng đỏ)`);
     else if(p==="trung")out.push(`Trứng gà · ${n} quả`);
     else if(p==="dauphu")out.push(`Đậu phụ non · 1 bìa`);
@@ -630,9 +769,17 @@ function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show")
 const ICON_CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const ICON_MOON='<svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>';
 const MOODS={love:"Thích lắm",ok:"Ăn được",refuse:"Từ chối",react:"Có phản ứng"};
-const blobUrl=id=>{if(String(id).startsWith("fb:")){const p=Store.data.photos[id.slice(3)];return p?p.data:""}return "/_blob/"+id};
-function thumbs(ids,sm){if(!ids||!ids.length)return "";return `<div class="thumbs">${ids.map(id=>`<img class="thumb ${sm?"sm":""}" src="${blobUrl(id)}" alt="Ảnh bữa ăn" data-act="zoom" data-v="${id}" loading="lazy" onerror="this.style.visibility='hidden'">`).join("")}</div>`}
-function zoom(id){const d=document.createElement("div");d.className="lightbox";d.innerHTML=`<img src="${blobUrl(id)}" alt="Ảnh phóng to">`;d.addEventListener("click",()=>d.remove());document.body.appendChild(d)}
+const PHOTO_CACHE={};
+const TRANSPARENT="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+const blobUrl=id=>{id=String(id);if(id.startsWith("fb:")){const pid=id.slice(3);return PHOTO_CACHE[pid]||(Store.data.photos[pid]&&Store.data.photos[pid].data)||TRANSPARENT}return "/_blob/"+id};
+async function getPhoto(id){id=String(id);if(!id.startsWith("fb:"))return "/_blob/"+id;const pid=id.slice(3);
+  if(PHOTO_CACHE[pid])return PHOTO_CACHE[pid];const loc=Store.data.photos[pid];if(loc&&loc.data){PHOTO_CACHE[pid]=loc.data;return loc.data}
+  if(!Store.fs)return TRANSPARENT;
+  try{const s=await Store.fs.doc(`families/${Store.fam}/photos/${pid}`).get();const d=s.exists?s.data().data:"";if(d)PHOTO_CACHE[pid]=d;return d||TRANSPARENT}catch(e){return TRANSPARENT}}
+function hydratePhotos(root){const imgs=(root||document).querySelectorAll("img[data-photo]");
+  return Promise.all(Array.from(imgs).map(async im=>{const id=im.dataset.photo;if(!String(id).startsWith("fb:"))return;const src=await getPhoto(id);if(src&&im.getAttribute("src")!==src)im.src=src}))}
+function thumbs(ids,sm){if(!ids||!ids.length)return "";return `<div class="thumbs">${ids.map(id=>`<img class="thumb ${sm?"sm":""}" src="${blobUrl(id)}" data-photo="${id}" alt="Ảnh bữa ăn" data-act="zoom" data-v="${id}" loading="lazy" onerror="this.style.visibility='hidden'">`).join("")}</div>`}
+function zoom(id){const d=document.createElement("div");d.className="lightbox";d.innerHTML=`<img src="${blobUrl(id)}" data-photo="${id}" alt="Ảnh phóng to">`;d.addEventListener("click",()=>d.remove());document.body.appendChild(d);hydratePhotos(d)}
 function burst(){const r=$("#logo").getBoundingClientRect();for(let i=0;i<7;i++){const s=document.createElement("span");s.className="burst";s.style.left=(r.left+r.width/2-11+(Math.random()*30-15))+"px";s.style.top=(r.top+r.height/2)+"px";s.style.setProperty("--dx",(Math.random()*120-60)+"px");s.style.animationDelay=(i*0.06)+"s";s.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.3 5 6.8 5c2 0 3.5 1.1 5.2 3 1.7-1.9 3.2-3 5.2-3 3.5 0 5.6 3.6 4.3 6.8C19.5 16.4 12 21 12 21z"/></svg>';document.body.appendChild(s);setTimeout(()=>s.remove(),1500)}}
 async function compressToDataUrl(file){
   const url=URL.createObjectURL(file);
@@ -693,7 +840,7 @@ function renderToday(){
     const left=1-n; const a=age(d);
     h+=`<div class="card count"><div class="eyebrow">Còn</div><div class="big num">${left}</div><div style="font-family:var(--f-display);font-weight:700;font-size:20px">ngày nữa Mochi ăn dặm</div><div class="muted small">Ngày 1: thứ Hai 02/11/2026, Mochi tròn 6 tháng${iso(d)!==iso(new Date())?"":` · hôm nay bé ${a.m} tháng ${a.days} ngày`}</div><div style="margin-top:14px"><button class="btn pink" data-act="sel" data-v="${iso(START)}">Xem trước ngày 1</button></div></div>`;
     const chk=Store.data.shop.state?.checked||{};
-    h+=`<div class="card"><div class="eyebrow">Chuẩn bị trước ngày 1</div><ul class="checklist" style="margin-top:6px">${PRESTART.map((t,i)=>{const k="pre-"+i;return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(t)}</label></span></li>`}).join("")}</ul></div>`+icsCard();
+    h+=`<div class="card"><div class="eyebrow">Chuẩn bị trước ngày 1</div><ul class="checklist" style="margin-top:6px">${PRESTART.map((t,i)=>{const k="pre-"+i;return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(t)}</label></span></li>`}).join("")}</ul></div>`+dailyCard(d)+icsCard();
     return h;
   }
   const w=info.week, wk=WEEKS[w-1];
@@ -708,14 +855,15 @@ function renderToday(){
   info.meals.forEach((m,i)=>{
     const id=`d${String(n).padStart(3,"0")}-${i+1}`, lg=Store.data.meals[id];
     const isNew=info.nf&&i===0;
-    h+=`<div class="card meal ${isNew?"isnew":""}">${isNew?`<span class="newtag">Món mới</span>`:""}<div class="meal-head"><div class="eyebrow">Bữa ${i+1}${info.meals.length>1?(i?" · chiều":" · sáng"):""}</div></div>
+    h+=`<div class="card meal ${isNew?"isnew":""}"><div class="meal-head"><div class="eyebrow">Bữa ${i+1}${mealLabel(i,info.meals.length)}${isNew?` <span class="newtag">Món mới</span>`:""}</div><button class="cookbtn" data-act="cook" data-v="${n}" data-i="${i}"><svg viewBox="0 0 24 24"><path d="M4 11h16v2a8 8 0 0 1-16 0z"/><path d="M9 7c0-2 2-2 2-4M14 7c0-2 2-2 2-4"/></svg>Nấu</button></div>
       <div class="meal-name">${esc(m.t)}</div>
       <div class="recipe">${esc(m.r)}${m.f?`<br><span class="muted">+ ${esc(m.f)}</span>`:""}${m.n?`<span class="note">${esc(m.n)}</span>`:""}</div>
       <div class="qty"><div class="qbox"><div class="k">Thành phẩm</div><div class="v num">~${m.y} ml</div></div><div class="qbox eat"><div class="k">Bé ăn (tham khảo)</div><div class="v num">${esc(m.e)} ml</div></div></div>
       ${lg?`<div class="logged ${lg.mood==="react"?"react":""}"><span class="check">${ICON_CHECK}</span><div style="min-width:0"><b class="num">${lg.ml} ml</b> · ${MOODS[lg.mood]||""}${lg.note?`<div class="small muted">${esc(lg.note)}</div>`:""}</div><button class="edit" data-act="log" data-v="${id}" data-i="${i}">Sửa</button></div>${thumbs(lg.photos)}`
-          :`<button class="btn block" data-act="log" data-v="${id}" data-i="${i}">Ghi lại bữa này</button>`}
+          :`<div class="quick3"><button class="qbtn all" data-act="qlog" data-v="${id}" data-i="${i}" data-k="all">Ăn hết</button><button class="qbtn" data-act="qlog" data-v="${id}" data-i="${i}" data-k="half">Một nửa</button><button class="qbtn refuse" data-act="qlog" data-v="${id}" data-i="${i}" data-k="refuse">Từ chối</button></div><button class="btn soft block" data-act="log" data-v="${id}" data-i="${i}">Ghi chi tiết: ml, phản ứng, ảnh</button>`}
     </div>`;
   });
+  h+=dailyCard(d);
   const p=prepTomorrow(d);
   if(p) h+=`<div class="prep"><span class="moon">${ICON_MOON}</span><div><b>Tối nay chuẩn bị cho ${wdm(p.d)}</b><ul>${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="small muted" style="margin-top:4px">Lịch iPhone nhắc lúc 19:49 nếu anh chị đã thêm nhắc việc ở tab Đi chợ.</div></div></div>`;
   return h;
@@ -747,14 +895,13 @@ function renderSuggest(){
   const minStart=dateOf(36); // thứ Hai 07/12
   if(!state.sugStart){const nm=nextMonday(new Date());state.sugStart=nm<minStart?minStart:nm}
   const s=state.sugStart, sw=suggestWeek(s,state.sugSeed), a=age(s);
-  const tex=a.m>=9?"Cháo hạt nguyên nấu nhừ, rau củ cắt hạt lựu mềm":a.m>=7?"Cháo nghiền còn hạt vỡ, thịt băm nhỏ, rau củ dầm bằng thìa":"Cháo rây mịn";
-  const meals=a.m>=9?"3 bữa/ngày":"2 bữa/ngày";
+  const ap=ageParams(s), tex=ap.tex, meals=ap.meals+" bữa/ngày";
   const saved=Store.data.weeks[sw.start];
   let h=`<div class="card"><div style="display:flex;align-items:center;gap:8px"><button class="iconbtn" data-act="sugwk" data-v="-7" aria-label="Tuần trước"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><div style="flex:1;text-align:center"><div class="eyebrow">Tuần bắt đầu</div><div style="font-family:var(--f-display);font-weight:800;font-size:20px" class="num">${wdm(s)} – ${dm(addD(s,6))}</div></div><button class="iconbtn" data-act="sugwk" data-v="7" aria-label="Tuần sau"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
    <div class="pillrow" style="justify-content:center"><span class="pill">Mochi ${a.m} tháng</span><span class="pill">${meals}</span>${sw.news.map(x=>`<span class="pill new">Món mới: ${esc(FOODS[x].n)}</span>`).join("")}</div>
-   <p class="small muted" style="margin:10px 0 0;text-align:center">${tex}. Gợi ý dựng từ các món Mochi đã ăn ổn, ưu tiên đạm giàu sắt, cá tối đa 2 lần/tuần. Lượng tham khảo: mỗi bữa thành phẩm ~130 ml.</p></div>`;
-  const view=saved||{days:sw.days.map(d=>({date:iso(d.d),nf:d.nf,meals:[{t:dishName(d.b1),r:dishRecipe(d.b1,"Cháo nền"),y:130,e:"100–130",f:d.b1.fruit?`${FAMT[d.b1.fruit]||FOODS[d.b1.fruit].n.toLowerCase()} nghiền 2–3 tcf sau cháo`:null},{t:dishName(d.b2),r:dishRecipe(d.b2,"Cháo nền"),y:110,e:"80–110"}]})),shop:weekShopping(sw)};
-  h+=`<div class="card">${view.days.map((d,i)=>{const x=fromIso(d.date);return `<div class="sday"><div class="dl num">${WD[x.getDay()]}<small>${dm(x)}</small></div><div class="sm">${d.nf&&(i===0||i===3)?`<span class="pill new" style="margin-bottom:4px">Bắt đầu ${esc(FOODS[d.nf].n)}</span><br>`:""}<b>Sáng:</b> ${esc(d.meals[0].t)}${d.meals[0].f?` <span class="fr">+ ${esc(d.meals[0].f)}</span>`:""}<br><b>Chiều:</b> ${esc(d.meals[1].t)}</div></div>`}).join("")}</div>`;
+   <p class="small muted" style="margin:10px 0 0;text-align:center">${tex}. Gợi ý dựng từ các món Mochi đã ăn ổn, ưu tiên đạm giàu sắt, cá tối đa 2 lần/tuần. Lượng tham khảo: mỗi bữa chính thành phẩm ~${ap.y} ml, bé ăn ${ap.e} ml.</p></div>`;
+  const view=saved||buildWeekView(sw,s);
+  h+=`<div class="card">${view.days.map((d,i)=>{const x=fromIso(d.date);return `<div class="sday"><div class="dl num">${WD[x.getDay()]}<small>${dm(x)}</small></div><div class="sm">${d.nf&&(i===0||i===3)?`<span class="pill new" style="margin-bottom:4px">Bắt đầu ${esc(FOODS[d.nf].n)}</span><br>`:""}${d.meals.map((m,j)=>`<b>${(d.meals.length===3?["Sáng","Trưa","Chiều"]:["Sáng","Chiều"])[j]}:</b> ${esc(m.t)}${m.f?` <span class="fr">+ ${esc(m.f)}</span>`:""}`).join("<br>")}</div></div>`}).join("")}</div>`;
   h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${saved?`<button class="btn soft" data-act="unsave" data-v="${sw.start}">Bỏ tuần đã lưu</button><button class="btn" data-act="openwk" data-v="${sw.start}">Xem trong Hôm nay</button>${IN_CLAUDE?"":`<button class="btn pink" style="grid-column:1/-1" data-act="weekics" data-v="${sw.start}">Thêm nhắc tuần này vào Lịch iPhone</button>`}`:`<button class="btn soft" data-act="reroll">Đổi gợi ý khác</button><button class="btn pink" data-act="savewk">Dùng tuần này</button>`}</div>`;
   h+=`<h2 class="sec">Đi chợ cho tuần này</h2><div class="card"><ul class="checklist">${view.shop.map(t=>`<li><span>${esc(t)}</span></li>`).join("")}</ul></div>`;
   const hist=Object.values(Store.data.weeks).sort((a,b)=>a.start<b.start?1:-1);
@@ -792,7 +939,7 @@ function openWeekICS(start){
 /* ---------- Đi chợ ---------- */
 function renderShop(){
   const chk=Store.data.shop.state?.checked||{}, today=atMid(new Date());
-  let nextFound=false, h=`<p class="muted small" style="margin:0 2px">Đi chợ 1–2 lần mỗi tuần. Thịt, cá chia phần trữ đông ngay khi về; rau củ để ngăn mát.</p>`+icsCard();
+  let nextFound=false, h=`<p class="muted small" style="margin:0 2px">Đi chợ 1–2 lần mỗi tuần. Thịt, cá chia phần trữ đông ngay khi về; rau củ để ngăn mát.</p>`+freezerCard()+icsCard();
   SHOP.forEach(s=>{
     const wk=WEEKS[s.w-1];
     h+=`<h2 class="sec" style="color:${weekColor(s.w)}">Tuần ${s.w} · ${wk.label}</h2>`;
@@ -808,8 +955,9 @@ function renderShop(){
 
 /* ---------- Nhật ký ---------- */
 function renderLog(){
-  let h=`<div class="seg"><button data-act="logseg" data-v="meals" aria-selected="${state.logSeg==="meals"}">Bữa ăn</button><button data-act="logseg" data-v="foods" aria-selected="${state.logSeg==="foods"}">Món</button><button data-act="logseg" data-v="weight" aria-selected="${state.logSeg==="weight"}">Cân nặng</button><button data-act="logseg" data-v="report" aria-selected="${state.logSeg==="report"}">Báo cáo</button></div>`;
+  let h=`<div class="seg"><button data-act="logseg" data-v="meals" aria-selected="${state.logSeg==="meals"}">Bữa ăn</button><button data-act="logseg" data-v="foods" aria-selected="${state.logSeg==="foods"}">Món</button><button data-act="logseg" data-v="weight" aria-selected="${state.logSeg==="weight"}">Cân nặng</button><button data-act="logseg" data-v="stats" aria-selected="${state.logSeg==="stats"}">Thống kê</button><button data-act="logseg" data-v="report" aria-selected="${state.logSeg==="report"}">Báo cáo</button></div>`;
   if(state.logSeg==="report") return h+renderReport();
+  if(state.logSeg==="stats") return h+renderStats();
   if(state.logSeg==="foods"){
     h+=`<p class="small muted" style="margin:0 2px">Chạm vào một món để đổi trạng thái. Món trong lộ trình tự chuyển sang "Đã ăn ổn" sau 3 ngày thử, trừ khi anh đánh dấu có phản ứng.</p>`;
     Object.keys(GROUP_NAME).forEach(g=>{const ids=Object.keys(FOODS).filter(k=>FOODS[k].g===g); if(!ids.length)return;
@@ -835,14 +983,7 @@ function renderWeight(){
   const last=ws[ws.length-1], first=ws[0];
   let gain="—"; if(ws.length>1){const prev=ws[ws.length-2];const dd=(fromIso(last.date)-fromIso(prev.date))/DAY;if(dd>0)gain=Math.round((last.kg-prev.kg)*1000/dd*7)+" g/tuần"}
   h+=`<div class="qty"><div class="qbox"><div class="k">Lần cân gần nhất · ${dm(fromIso(last.date))}</div><div class="v num">${(+last.kg).toFixed(2)} kg</div></div><div class="qbox eat"><div class="k">Tăng so với lần trước</div><div class="v num">${gain}</div></div></div>`;
-  if(ws.length>1){
-    const W=520,H=150,pl=34,pr=12,pt=12,pb=24, t0=fromIso(first.date),t1=fromIso(last.date), span=Math.max(1,(t1-t0)/DAY);
-    const kmin=Math.floor(Math.min(...ws.map(w=>+w.kg))*2)/2, kmax=Math.ceil(Math.max(...ws.map(w=>+w.kg))*2)/2||kmin+.5;
-    const X=d=>pl+((fromIso(d)-t0)/DAY)/span*(W-pl-pr), Y=k=>pt+(1-(k-kmin)/Math.max(.5,kmax-kmin))*(H-pt-pb);
-    const pts=ws.map(w=>`${X(w.date).toFixed(1)},${Y(+w.kg).toFixed(1)}`).join(" ");
-    let grid="";for(let k=kmin;k<=kmax+1e-6;k+=.5)grid+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(k)}" y2="${Y(k)}" stroke="var(--line)"/><text x="${pl-6}" y="${Y(k)+4}" text-anchor="end">${k.toFixed(1)}</text>`;
-    h+=`<div class="card"><div class="eyebrow">Cân nặng (kg)</div><svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${grid}<polygon points="${X(first.date)},${H-pb} ${pts} ${X(last.date)},${H-pb}" fill="var(--mochi)" opacity=".18"/><polyline points="${pts}" fill="none" stroke="var(--mochi-deep)" stroke-width="2.5" stroke-linejoin="round"/>${ws.map((w,i)=>`<circle cx="${X(w.date)}" cy="${Y(+w.kg)}" r="${i===ws.length-1?5:3}" fill="var(--mochi-deep)"/>`).join("")}<text x="${pl}" y="${H-6}">${dm(t0)}</text><text x="${W-pr}" y="${H-6}" text-anchor="end">${dm(t1)}</text></svg><p class="small muted" style="margin:6px 0 0">Đối chiếu với biểu đồ tăng trưởng trong sổ tiêm chủng khi đi khám.</p></div>`;
-  }
+  h+=whoChart(ws);
   h+=`<div class="card">${ws.slice().reverse().map(w=>{const a=age(fromIso(w.date));return `<div class="logrow"><span class="mood m-love"></span><div style="flex:1"><b class="num">${(+w.kg).toFixed(2)} kg${w.cm?` · ${w.cm} cm`:""}</b><div class="small muted num">${wdm(fromIso(w.date))} · ${a.m} tháng ${a.days} ngày</div></div><button class="edit" style="background:none;border:0;color:var(--mochi-deep);font-weight:700;cursor:pointer" data-act="delw" data-v="${w.date}">Xóa</button></div>`}).join("")}</div>`;
   return h;
 }
@@ -897,9 +1038,12 @@ function renderReport(){
    <div class="rk"><div><b>${R.logs.length}</b><span>bữa đã ghi</span></div><div><b>${R.avg||"—"}${R.avg?" ml":""}</b><span>TB/ngày (${R.days||0} ngày gần nhất)</span></div><div><b>${R.reacts.length}</b><span>lần có phản ứng</span></div></div>
    <p style="margin:8px 0 0">Sữa: bú mẹ theo nhu cầu + 1 cữ sữa HiPP/ngày. Đang dùng: sắt, vitamin D3K2, DHA, men vi sinh.</p>
    <h5>Cân nặng</h5>${R.ws.length?`<table><thead><tr><th>Ngày</th><th>Tuổi</th><th>kg</th><th>cm</th><th>Tăng</th></tr></thead><tbody>${wrows}</tbody></table>`:`<p style="margin:0;color:#7A6370">Chưa ghi lần cân nào.</p>`}
+   ${R.ws.length?`<p style="margin:6px 0 0">${esc(whoBandText(R.ws[R.ws.length-1]).t)} <span style="color:#7A6370">(chuẩn WHO, bé gái)</span></p>`:""}
+   <h5>7 ngày gần nhất</h5>
+   <p style="margin:0">${esc(weekSummaryText())}</p>
    <h5>Thực phẩm đã thử</h5>
    <div class="chips">${R.st.ok.map(x=>`<span class="rc">${esc(x)}</span>`).join("")}${R.st.trying.map(x=>`<span class="rc t">${esc(x)} (đang thử)</span>`).join("")}${R.st.react.map(x=>`<span class="rc r">${esc(x)} (phản ứng)</span>`).join("")}${!R.st.ok.length&&!R.st.trying.length&&!R.st.react.length?`<span style="color:#7A6370">Chưa có.</span>`:""}</div>
-   <h5>Các lần có phản ứng</h5>${R.reacts.length?`<table><tbody>${R.reacts.map(l=>`<tr><td style="white-space:nowrap">${dm(fromIso(l.date))}</td><td><b>${esc(l.dish)}</b>${l.note?`<br>${esc(l.note)}`:""}${l.photos&&l.photos.length?`<div style="display:flex;gap:5px;margin-top:5px">${l.photos.map(id=>`<img src="${blobUrl(id)}" alt="Ảnh phản ứng" crossorigin="anonymous">`).join("")}</div>`:""}</td></tr>`).join("")}</tbody></table>`:`<p style="margin:0;color:#7A6370">Chưa ghi nhận phản ứng nào.</p>`}
+   <h5>Các lần có phản ứng</h5>${R.reacts.length?`<table><tbody>${R.reacts.map(l=>`<tr><td style="white-space:nowrap">${dm(fromIso(l.date))}</td><td><b>${esc(l.dish)}</b>${l.note?`<br>${esc(l.note)}`:""}${l.photos&&l.photos.length?`<div style="display:flex;gap:5px;margin-top:5px">${l.photos.map(id=>`<img src="${blobUrl(id)}" data-photo="${id}" alt="Ảnh phản ứng">`).join("")}</div>`:""}</td></tr>`).join("")}</tbody></table>`:`<p style="margin:0;color:#7A6370">Chưa ghi nhận phản ứng nào.</p>`}
    <h5>Câu hỏi cho bác sĩ</h5><p style="margin:0;white-space:pre-wrap">${esc(q)}</p>
    <div class="foot">Lập từ nhật ký trong app Mochi ăn dặm do bố mẹ ghi. Lượng ăn và phản ứng là quan sát tại nhà.</div>
   </div>
@@ -912,6 +1056,7 @@ async function saveReport(btn){
   if(!window.html2canvas){toast("Chưa tải được công cụ chụp ảnh, hãy chụp màn hình báo cáo");return}
   btn.disabled=true;btn.textContent="Đang tạo ảnh…";
   try{
+    await hydratePhotos($("#report"));
     const canvas=await html2canvas($("#report"),{scale:2,backgroundColor:"#FFFFFF",useCORS:true,logging:false});
     const blob=await new Promise(r=>canvas.toBlob(r,"image/png"));
     const name=`bao-cao-an-dam-Mochi-${iso(new Date())}.png`;
@@ -941,7 +1086,8 @@ function contextText(){
 - Có phản ứng: ${st.react.join(", ")||"không"}
 - Chưa thử: ${st.new.join(", ")}
 - Thực đơn hôm nay: ${today}
-- Cân nặng gần đây: ${ws}
+- Cân nặng gần đây: ${ws}${R.ws.length?" ("+whoBandText(R.ws[R.ws.length-1]).t+")":""}
+- 7 ngày gần nhất: ${weekSummaryText()}
 NHẬT KÝ GẦN ĐÂY
 ${recent}`;
 }
@@ -1002,7 +1148,8 @@ function openSync(){
       <button class="btn pink" data-sh="create">Tạo nhật ký chung</button>
       <p class="small muted" style="margin:0">Đã có link mời? Mở link đó bằng Safari là xong, không cần bấm nút này.</p>`;
   }
-  openSheet(`<h4>Nhật ký chung của gia đình</h4>${body}<button class="btn soft" data-sh="close">Đóng</button>`);
+  if(IN_CLAUDE) body=`<p class="muted small" style="margin:0">Bản trong Claude tự đồng bộ giữa các máy đăng nhập cùng tài khoản hoặc được chia sẻ.</p>`;
+  openSheet(`<h4>Cài đặt</h4><div class="field"><label>Nhật ký chung của gia đình</label>${body}</div>${backupBlock()}<button class="btn soft" data-sh="close">Đóng</button>`);
 }
 async function createFamily(){
   const code=newFamCode(); try{localStorage.setItem("mochi-fam",code)}catch(e){}
@@ -1014,9 +1161,216 @@ async function createFamily(){
   openSync();
 }
 
+/* ---------- Ghi nhanh ---------- */
+function topMl(e){const n=String(e||"").match(/\d+/g);return n?+n[n.length-1]:30}
+function quickLog(id,i,k){
+  const n=+id.slice(1,4), m=mealsFor(dateOf(n)).meals[i]; if(!m) return;
+  const top=topMl(m.e), ml=k==="all"?top:k==="half"?Math.max(5,Math.round(top/2/5)*5):0, mood=k==="all"?"love":k==="half"?"ok":"refuse";
+  if(!Store.data.meals[id]&&ml>0) freezerConsume(m.t+" "+m.r);
+  Store.set("meals",id,{day:n,meal:i+1,date:iso(dateOf(n)),dish:m.t,ml,mood,note:"",photos:[],ts:Date.now()});
+  if(k==="all") burst();
+  toast(k==="refuse"?"Đã ghi: bé từ chối. Thử lại món này sau 2–3 ngày":`Đã ghi ${ml} ml. Bấm Sửa để thêm chi tiết`);
+}
+
+/* ---------- Hôm nay của Mochi: đi ngoài + bổ sung ---------- */
+const SUPPS=[["sat","Sắt"],["d3k2","D3K2"],["dha","DHA"],["probio","Men vi sinh"]];
+const POOP={normal:"Bình thường",hard:"Táo",loose:"Lỏng"};
+const hhmm=ts=>{const d=new Date(ts);return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")};
+function dayDoc(k){const d=Store.data.daily[k];return {poop:(d&&d.poop)?d.poop.slice():[],supp:{...((d&&d.supp)||{})}}}
+function addPoop(k,type){const d=dayDoc(k);d.poop.push({t:type,ts:Date.now()});Store.set("daily",k,d);toast("Đã ghi đi ngoài: "+POOP[type].toLowerCase())}
+function rmPoop(k,idx){const d=dayDoc(k);d.poop.splice(idx,1);Store.set("daily",k,d)}
+function toggleSupp(k,s){const d=dayDoc(k);if(d.supp[s])delete d.supp[s];else d.supp[s]={ts:Date.now()};Store.set("daily",k,d)}
+function poopGap(){const ks=Object.keys(Store.data.daily).filter(k=>(Store.data.daily[k].poop||[]).length).sort();if(!ks.length)return null;return Math.round((atMid(new Date())-fromIso(ks[ks.length-1]))/DAY)}
+function dailyCard(d){
+  const k=iso(d), doc=dayDoc(k), isToday=k===iso(new Date());
+  const hard=doc.poop.filter(p=>p.t==="hard").length, loose=doc.poop.filter(p=>p.t==="loose").length, gap=isToday?poopGap():null;
+  let hint="";
+  if(loose>=3) hint="Đi lỏng nhiều lần: cho bú thêm để bù nước. Có sốt, nôn, phân có máu hoặc bé lừ đừ thì đi khám ngay.";
+  else if(hard) hint="Táo: cho bé thêm vài ngụm nước, tăng khoai lang, rau xanh, đu đủ. Táo kéo dài hoặc đau khi đi thì hỏi bác sĩ.";
+  else if(gap!==null&&gap>=3) hint=`Đã ${gap} ngày chưa ghi đi ngoài. Nếu bé chưa đi thật, thêm nước và rau củ; quá 4–5 ngày hoặc bụng chướng thì hỏi bác sĩ.`;
+  return `<div class="card daily"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="eyebrow">Hôm nay của Mochi · ${dm(d)}</div></div>
+   <div class="drow"><div class="dlabel">Đi ngoài</div><div class="dbtns">${Object.entries(POOP).map(([t,l])=>`<button data-act="poop" data-d="${k}" data-v="${t}">${l}</button>`).join("")}</div>
+   ${doc.poop.length?`<div class="pchips">${doc.poop.map((p,i)=>`<span class="pchip ${p.t}"><span class="num">${hhmm(p.ts)}</span> ${POOP[p.t]}<button data-act="rmpoop" data-d="${k}" data-v="${i}" aria-label="Xóa">×</button></span>`).join("")}</div>`:""}
+   ${hint?`<div class="hint">${esc(hint)}</div>`:""}</div>
+   <div class="drow"><div class="dlabel">Bổ sung đã uống</div><div class="supps">${SUPPS.map(([s,l])=>{const v=doc.supp[s];return `<button data-act="supp" data-d="${k}" data-v="${s}" aria-pressed="${!!v}">${l}<small class="num">${v?hhmm(v.ts):"chưa"}</small></button>`}).join("")}</div></div>
+  </div>`;
+}
+function weekSummaryText(){
+  const days=[...Array(7)].map((_,i)=>iso(addD(new Date(),-i)));
+  let n=0,h=0,l=0;const sup={};SUPPS.forEach(([s])=>sup[s]=0);
+  days.forEach(k=>{const d=Store.data.daily[k];if(!d)return;(d.poop||[]).forEach(p=>{if(p.t==="normal")n++;else if(p.t==="hard")h++;else l++});SUPPS.forEach(([s])=>{if(d.supp&&d.supp[s])sup[s]++})});
+  return `Đi ngoài: ${n} bình thường, ${h} táo, ${l} lỏng. Bổ sung đã uống: ${SUPPS.map(([s,lb])=>`${lb} ${sup[s]}/7`).join(", ")}. Ngày có đạm giàu sắt: ${ironDays()}/7.`;
+}
+function ironDays(){let c=0;for(let i=0;i<7;i++){const k=iso(addD(new Date(),-i));const ms=Object.values(Store.data.meals).filter(m=>m.date===k&&m.ml>0);if(ms.some(m=>/bò|lợn|lòng đỏ|trứng|cá|gan|gà|bellamy|đậu phụ/i.test(m.dish)))c++}return c}
+
+/* ---------- Kho ngăn đá ---------- */
+const FRZ=[["lon","Thịt lợn","phần"],["bo","Thịt bò","phần"],["ga","Thịt gà","phần"],["ca","Cá","miếng"],["gan","Gan gà","phần"]];
+function proteinsIn(text){
+  let x=" "+String(text||"").toLowerCase().replace(/trứng gà/g,"trứng")+" "; const out=[];
+  if(/gan gà/.test(x)){out.push("gan");x=x.replace(/gan gà/g,"")}
+  if(/thịt lợn|phần lợn|cháo lợn|\slợn\s/.test(x))out.push("lon");
+  if(/thịt bò|phần bò|cháo bò|\sbò\s/.test(x))out.push("bo");
+  if(/thịt gà|phần gà|cháo gà|\sgà\s/.test(x))out.push("ga");
+  if(/(^|[\s,(])cá([\s,)]|$)/.test(x))out.push("ca");
+  return [...new Set(out)];
+}
+function frzStock(){return {...(Store.data.freezer.state||{})}}
+function freezerAdj(k,dn){const s=frzStock();s[k]=Math.max(0,(+s[k]||0)+dn);Store.set("freezer","state",s)}
+function freezerConsume(text){const ps=proteinsIn(text);if(!ps.length)return;const s=frzStock();let ch=false;ps.forEach(p=>{if((+s[p]||0)>0){s[p]=+s[p]-1;ch=true}});if(ch)Store.set("freezer","state",s)}
+function freezerFromShop(text,sign){const m=String(text).match(/(?:chia|cắt)\s+(\d+)\s+(?:phần|miếng)/i);if(!m)return;const ps=proteinsIn(text.replace(/^Cá[^·]*/i," cá "));if(!ps.length)return;const s=frzStock();s[ps[0]]=Math.max(0,(+s[ps[0]]||0)+sign*(+m[1]));Store.set("freezer","state",s);toast(sign>0?`Ngăn đá +${m[1]} ${FRZ.find(f=>f[0]===ps[0])[1].toLowerCase()}`:"Đã trừ khỏi ngăn đá")}
+function shopItemText(key){const m=key.match(/^w(\d+)-(\d+)-(\d+)$/);if(!m)return null;const w=SHOP.find(x=>x.w===+m[1]);return w&&w.trips[+m[2]]?w.trips[+m[2]].items[+m[3]]:null}
+function freezerNeed(){const need={};for(let i=0;i<7;i++){mealsFor(addD(new Date(),i)).meals.forEach(m=>proteinsIn(m.t+" "+m.r).forEach(p=>need[p]=(need[p]||0)+1))}return need}
+function freezerCard(){
+  const s=frzStock(), need=freezerNeed();
+  return `<div class="card"><div class="eyebrow">Ngăn đá</div><div class="meal-name" style="margin-top:2px">Còn bao nhiêu phần</div>
+   <p class="small muted" style="margin:4px 0 6px">Tự cộng khi tick món thịt cá ở danh sách đi chợ, tự trừ khi ghi bữa có món đó.</p>
+   ${FRZ.map(([k,l,u])=>{const v=+s[k]||0,nd=need[k]||0,low=nd>v;return `<div class="frow"><div><b>${l}</b><div class="small muted">${u}</div></div><span class="need ${low?"low":""}">${nd?(low?`Thiếu ${nd-v} cho 7 ngày`:`Đủ 7 ngày (${nd})`):"Chưa cần"}</span><div class="fstep"><button data-act="frz" data-v="${k}" data-n="-1" aria-label="Bớt ${l}">−</button><output class="num">${v}</output><button data-act="frz" data-v="${k}" data-n="1" aria-label="Thêm ${l}">+</button></div></div>`}).join("")}
+  </div>`;
+}
+
+/* ---------- Biểu đồ tăng trưởng WHO (cân nặng theo tuổi, bé gái, 0–24 tháng) ---------- */
+// Nguồn: WHO Child Growth Standards, Simplified field tables, weight-for-age girls 0–5 years (percentiles)
+const WHO_WFA_G={p3:[2.4,3.2,4.0,4.6,5.1,5.5,5.8,6.1,6.3,6.6,6.8,7.0,7.1,7.3,7.5,7.7,7.8,8.0,8.2,8.3,8.5,8.7,8.8,9.0,9.2],
+ p15:[2.8,3.6,4.5,5.1,5.6,6.1,6.4,6.7,7.0,7.3,7.5,7.7,7.9,8.1,8.3,8.5,8.7,8.8,9.0,9.2,9.4,9.6,9.8,9.9,10.1],
+ p50:[3.2,4.2,5.1,5.8,6.4,6.9,7.3,7.6,7.9,8.2,8.5,8.7,8.9,9.2,9.4,9.6,9.8,10.0,10.2,10.4,10.6,10.9,11.1,11.3,11.5],
+ p85:[3.7,4.8,5.9,6.7,7.3,7.8,8.3,8.7,9.0,9.3,9.6,9.9,10.2,10.4,10.7,10.9,11.2,11.4,11.6,11.9,12.1,12.4,12.6,12.8,13.1],
+ p97:[4.2,5.4,6.5,7.4,8.1,8.7,9.2,9.6,10.0,10.4,10.7,11.0,11.3,11.6,11.9,12.2,12.5,12.7,13.0,13.3,13.5,13.8,14.1,14.3,14.6]};
+const ageMo=d=>(atMid(d)-BIRTH)/DAY/30.4375;
+function whoAt(p,mo){const a=WHO_WFA_G[p];if(mo<=0)return a[0];if(mo>=24)return a[24];const i=Math.floor(mo),f=mo-i;return a[i]+(a[i+1]-a[i])*f}
+function whoBandText(w){const mo=ageMo(fromIso(w.date)),kg=+w.kg;
+  const P=["p3","p15","p50","p85","p97"].map(p=>whoAt(p,mo));
+  if(kg<P[0])return {t:"Cân nặng dưới đường P3 của chuẩn WHO: nên hỏi bác sĩ nhi",warn:true};
+  if(kg<P[1])return {t:"Cân nặng giữa P3 và P15 của chuẩn WHO: hơi thấp, theo dõi đều",warn:true};
+  if(kg<P[2])return {t:"Cân nặng giữa P15 và P50 của chuẩn WHO: trong khoảng bình thường",warn:false};
+  if(kg<P[3])return {t:"Cân nặng giữa P50 và P85 của chuẩn WHO: trong khoảng bình thường",warn:false};
+  if(kg<=P[4])return {t:"Cân nặng giữa P85 và P97 của chuẩn WHO: trong khoảng bình thường, hơi cao",warn:false};
+  return {t:"Cân nặng trên đường P97 của chuẩn WHO: hỏi bác sĩ khi đi khám",warn:true};}
+function whoChart(ws){
+  const lastMo=ageMo(fromIso(ws[ws.length-1].date)), x0=Math.max(0,Math.floor(ageMo(fromIso(ws[0].date)))-2), x1=Math.min(24,Math.max(x0+6,Math.ceil(lastMo)+3));
+  const W=520,H=240,pl=32,pr=40,pt=10,pb=26;
+  let ymin=Math.floor(Math.min(whoAt("p3",x0),...ws.map(w=>+w.kg))), ymax=Math.ceil(Math.max(whoAt("p97",x1),...ws.map(w=>+w.kg)));
+  const X=m=>pl+(m-x0)/(x1-x0)*(W-pl-pr), Y=k=>pt+(1-(k-ymin)/(ymax-ymin))*(H-pt-pb);
+  const line=p=>{const pts=[];for(let m=x0;m<=x1+1e-6;m+=0.5)pts.push(`${X(m).toFixed(1)},${Y(whoAt(p,m)).toFixed(1)}`);return pts};
+  const band=(a,b)=>`${line(a).join(" ")} ${line(b).reverse().join(" ")}`;
+  let g="";for(let k=ymin;k<=ymax;k++)g+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(k)}" y2="${Y(k)}" stroke="var(--line)"/><text x="${pl-6}" y="${Y(k)+4}" text-anchor="end">${k}</text>`;
+  for(let m=Math.ceil(x0);m<=x1;m+=(x1-x0>10?2:1))g+=`<text x="${X(m)}" y="${H-8}" text-anchor="middle">${m}</text>`;
+  const lbl=["p97","p85","p50","p15","p3"].map(p=>`<text x="${W-pr+4}" y="${Y(whoAt(p,x1))+4}">${p.toUpperCase()}</text>`).join("");
+  const pts=ws.map(w=>[X(ageMo(fromIso(w.date))),Y(+w.kg)]);
+  const b=whoBandText(ws[ws.length-1]);
+  return `<div class="card"><div class="eyebrow">Cân nặng theo tuổi · chuẩn WHO bé gái</div>
+   <svg class="who" viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;margin-top:6px" role="img" aria-label="Biểu đồ cân nặng của Mochi so với chuẩn WHO">${g}
+    <polygon points="${band("p97","p3")}" fill="var(--mochi)" opacity=".14"/><polygon points="${band("p85","p15")}" fill="var(--mochi)" opacity=".22"/>
+    <polyline points="${line("p50").join(" ")}" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/>${lbl}
+    ${pts.length>1?`<polyline points="${pts.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="var(--mochi-deep)" stroke-width="2.5" stroke-linejoin="round"/>`:""}
+    ${pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i===pts.length-1?5.5:3.5}" fill="var(--mochi-deep)" stroke="var(--surface)" stroke-width="1.5"/>`).join("")}</svg>
+   <div class="whoband ${b.warn?"warn":""}" style="margin-top:8px">${esc(b.t)}.</div>
+   <p class="small muted" style="margin:6px 0 0">Vùng đậm: P15–P85, vùng nhạt: P3–P97, nét đứt: P50. Trục ngang: tháng tuổi, trục dọc: kg. Nguồn: WHO Child Growth Standards.</p></div>`;
+}
+
+/* ---------- Thống kê ---------- */
+function renderStats(){
+  const days=[...Array(14)].map((_,i)=>addD(new Date(),i-13));
+  const vals=days.map(d=>Object.values(Store.data.meals).filter(m=>m.date===iso(d)).reduce((s,m)=>s+(+m.ml||0),0));
+  const logged=vals.filter(v=>v>0), avg=logged.length?Math.round(logged.reduce((a,b)=>a+b,0)/logged.length):0;
+  const W=520,H=190,pl=34,pr=8,pt=10,pb=26, vmax=Math.max(60,Math.ceil(Math.max(...vals)/50)*50), bw=(W-pl-pr)/14;
+  const Y=v=>pt+(1-v/vmax)*(H-pt-pb);
+  let g="";for(let v=0;v<=vmax;v+=vmax/ (vmax>200?5:Math.max(2,vmax/50)))g+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${Y(v)+4}" text-anchor="end">${Math.round(v)}</text>`;
+  const bars=vals.map((v,i)=>`<rect x="${(pl+i*bw+bw*.18).toFixed(1)}" y="${Y(v).toFixed(1)}" width="${(bw*.64).toFixed(1)}" height="${(H-pb-Y(v)).toFixed(1)}" rx="4" fill="${i===13?"var(--mochi-deep)":"var(--mochi)"}"/>`+(i%2===1||i===13?`<text x="${(pl+i*bw+bw/2).toFixed(1)}" y="${H-8}" text-anchor="middle">${dm(days[i])}</text>`:"")).join("");
+  const okCount=Object.keys(FOODS).filter(id=>foodStatus(id)==="ok").length, tried=Object.keys(FOODS).filter(id=>["ok","trying","react"].includes(foodStatus(id))).length;
+  const days7=[...Array(7)].map((_,i)=>iso(addD(new Date(),-i)));
+  const sup={};SUPPS.forEach(([s])=>sup[s]=days7.filter(k=>Store.data.daily[k]&&Store.data.daily[k].supp&&Store.data.daily[k].supp[s]).length);
+  const poop={normal:0,hard:0,loose:0};days7.forEach(k=>((Store.data.daily[k]||{}).poop||[]).forEach(p=>poop[p.t]++));
+  let h=`<div class="kpis"><div class="qbox"><div class="k">TB ml/ngày</div><div class="v num">${avg||"—"}</div></div><div class="qbox eat"><div class="k">Món đã ăn ổn</div><div class="v num">${okCount}</div></div><div class="qbox"><div class="k">Ngày đạm giàu sắt (7)</div><div class="v num">${ironDays()}/7</div></div></div>`;
+  h+=`<div class="card"><div class="eyebrow">Lượng ăn dặm mỗi ngày · 14 ngày (ml)</div><svg class="bars" viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;margin-top:6px" role="img" aria-label="Biểu đồ lượng ăn 14 ngày">${g}${bars}${avg?`<line x1="${pl}" x2="${W-pr}" y1="${Y(avg)}" y2="${Y(avg)}" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="5 4"/>`:""}</svg><p class="small muted" style="margin:6px 0 0">Nét đứt xanh: trung bình các ngày có ghi. Cột đậm: hôm nay.</p></div>`;
+  h+=`<div class="card"><div class="eyebrow">Đa dạng món</div><div style="display:flex;align-items:baseline;gap:8px;margin-top:4px"><b style="font-family:var(--f-display);font-size:26px" class="num">${tried}</b><span class="muted">món đã thử trên ${Object.keys(FOODS).length} món trong danh sách</span></div><div class="cook-prog" style="margin-top:8px"><i style="width:${Math.round(tried/Object.keys(FOODS).length*100)}%;background:var(--matcha)"></i></div></div>`;
+  h+=`<div class="card"><div class="eyebrow">7 ngày gần nhất</div><div class="frow" style="grid-template-columns:1fr auto"><b>Đi ngoài</b><span class="num">${poop.normal} bình thường · ${poop.hard} táo · ${poop.loose} lỏng</span></div>${SUPPS.map(([s,l])=>`<div class="frow" style="grid-template-columns:1fr 90px auto"><b>${l}</b><div class="cook-prog" style="margin:0"><i style="width:${Math.round(sup[s]/7*100)}%;background:var(--matcha)"></i></div><span class="num small">${sup[s]}/7 ngày</span></div>`).join("")}</div>`;
+  return h;
+}
+
+/* ---------- Chế độ nấu ---------- */
+let COOK=null, TIMER=null, AC=null, WL=null;
+function cookSteps(m){
+  const t=(m.t+" "+m.r+" "+(m.f||"")).toLowerCase(), S=[];
+  const hasCu=/bí đỏ|khoai lang|cà rốt|khoai tây/.test(t), hasRau=/rau ngót|cải ngọt|mồng tơi|rau dền/.test(t), hasEgg=/lòng đỏ|trứng/.test(t);
+  const ps=proteinsIn(t), isBot=/bột/.test(t)&&!/cháo|cơm/.test(t), fruit=m.f||/đu đủ|chuối|quả bơ|xoài/.test(t);
+  S.push({h:"Chuẩn bị",x:m.r+(m.f?". Sau bữa: "+m.f:"")+(m.n?". Lưu ý: "+m.n:"")});
+  if(hasEgg)S.push({h:"Luộc trứng",x:"Thả trứng vào nồi nước đang sôi, luộc 10 phút cho chín hẳn, ngâm nước lạnh rồi lấy lòng đỏ.",min:10});
+  if(hasCu)S.push({h:"Hấp củ",x:"Gọt vỏ, cắt miếng nhỏ, hấp đến khi xiên que thấy mềm.",min:12});
+  if(ps.includes("ca"))S.push({h:"Hấp cá",x:"Hấp miếng cá đến khi chín đều. Gỡ nhỏ, bóp kỹ bằng tay để tìm xương.",min:8});
+  if(isBot){
+    S.push({h:"Pha bột",x:"Pha sữa HiPP ấm theo hộp. Cho bột vào bát, đổ sữa, khuấy mịn rồi chờ bột nở.",min:2});
+  } else {
+    S.push({h:"Nấu cháo nền",x:"Gạo đã ngâm cho vào nồi với nước theo công thức, đun lửa nhỏ, thỉnh thoảng khuấy cho khỏi dính.",min:30});
+    const meat=ps.filter(p=>p!=="ca");
+    if(meat.length)S.push({h:"Cho thịt",x:"Dầm tơi phần thịt với 1–2 thìa nước lạnh, thả vào cháo đang sôi, khuấy đều cho thịt không vón.",min:meat.includes("ga")||meat.includes("gan")?10:7});
+    if(hasRau)S.push({h:"Cho rau",x:"Thả lá rau vào cháo những phút cuối.",min:3});
+    S.push({h:"Xay cháo",x:"Xay hoặc rây theo độ thô của tuổi: dưới 7 tháng xay mịn, 7–8 tháng để còn hạt vỡ, từ 9 tháng để hạt nguyên nấu nhừ."});
+  }
+  if(hasCu||hasEgg||ps.includes("ca"))S.push({h:"Trộn",x:"Nghiền mịn củ, lòng đỏ hoặc cá rồi trộn đều vào bát."});
+  if(/dầu/.test(t))S.push({h:"Thêm dầu",x:"Tắt bếp, cho dầu ăn dặm vào bát, trộn đều."});
+  if(fruit)S.push({h:"Trái cây",x:"Nghiền trái cây để cho Mochi ăn ngay sau bữa."});
+  S.push({h:"Thử nhiệt độ",x:"Để nguội vừa, nhỏ một chút lên cổ tay thấy ấm là được. Chúc Mochi ăn ngon!"});
+  return S;
+}
+function openCook(n,i){
+  const m=mealsFor(dateOf(n)).meals[i]; if(!m) return;
+  COOK={m,steps:cookSteps(m),k:0};
+  try{if(navigator.wakeLock)navigator.wakeLock.request("screen").then(l=>WL=l).catch(()=>{})}catch(e){}
+  $("#cook").hidden=false; drawCook();
+}
+function closeCook(){$("#cook").hidden=true;COOK=null;try{WL&&WL.release()}catch(e){}WL=null;updateMini()}
+function fmt(s){s=Math.max(0,Math.ceil(s));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function drawCook(){
+  if(!COOK) return; const st=COOK.steps[COOK.k], N=COOK.steps.length, mine=TIMER&&TIMER.key===COOK.k+"|"+COOK.m.t;
+  const rem=mine?(TIMER.running?(TIMER.end-Date.now())/1000:TIMER.left):(st.min||0)*60;
+  $("#cook").innerHTML=`<div class="cook-top"><button class="x" data-ck="close" aria-label="Thoát chế độ nấu">×</button><div style="flex:1;min-width:0"><div class="cook-step">Bước ${COOK.k+1}/${N}</div><div style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(COOK.m.t)}</div></div></div>
+   <div class="cook-prog"><i style="width:${Math.round((COOK.k+1)/N*100)}%"></i></div>
+   <div class="cook-body"><div class="cook-title">${esc(st.h)}</div><div class="cook-text">${esc(st.x)}</div>
+   ${st.min?`<div class="timer ${mine&&TIMER.done?"done":""}" id="tbox"><div class="tm" id="tm">${mine&&TIMER.done?"Xong!":fmt(rem)}</div><div class="tb">${mine&&TIMER.running?`<button class="btn soft" data-ck="pause">Tạm dừng</button>`:`<button class="btn pink" data-ck="start">${mine&&!TIMER.done&&TIMER.left<st.min*60?"Chạy tiếp":"Hẹn giờ "+st.min+" phút"}</button>`}${mine?`<button class="btn soft" data-ck="reset">Đặt lại</button>`:""}</div></div>`:""}</div>
+   <div class="cook-nav"><button class="btn soft" data-ck="prev" ${COOK.k?"":"disabled style='opacity:.4'"}>Quay lại</button><button class="btn" data-ck="next">${COOK.k<N-1?"Bước tiếp":"Xong"}</button></div>`;
+}
+function beep(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(o=>{const os=AC.createOscillator(),g=AC.createGain();os.frequency.value=880;os.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(.0001,AC.currentTime+o);g.gain.exponentialRampToValueAtTime(.3,AC.currentTime+o+.02);g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+o+.28);os.start(AC.currentTime+o);os.stop(AC.currentTime+o+.3)})}catch(e){}try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}}
+function tick(){
+  if(!TIMER||!TIMER.running) return; const left=(TIMER.end-Date.now())/1000;
+  if(left<=0){TIMER.running=false;TIMER.done=true;TIMER.left=0;beep();toast("Hết giờ: "+TIMER.label);drawCook();updateMini();return}
+  const el=document.getElementById("tm"); if(el&&COOK&&TIMER.key===COOK.k+"|"+COOK.m.t) el.textContent=fmt(left);
+  updateMini();
+}
+setInterval(tick,250);
+function updateMini(){const b=$("#miniTimer");if(TIMER&&(TIMER.running||TIMER.done)&&$("#cook").hidden){b.hidden=false;b.textContent=TIMER.done?`Hết giờ: ${TIMER.label}`:`${TIMER.label} · ${fmt((TIMER.end-Date.now())/1000)}`}else b.hidden=true}
+$("#miniTimer").addEventListener("click",()=>{if(TIMER&&TIMER.done){TIMER=null;updateMini();return}if(TIMER&&TIMER.meal){COOK={m:TIMER.meal,steps:cookSteps(TIMER.meal),k:TIMER.k};$("#cook").hidden=false;drawCook();updateMini()}});
+$("#cook").addEventListener("click",e=>{
+  const b=e.target.closest("[data-ck]"); if(!b||!COOK) return; const a=b.dataset.ck, st=COOK.steps[COOK.k], key=COOK.k+"|"+COOK.m.t;
+  try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch(err){}
+  if(a==="close"){closeCook();return}
+  if(a==="prev"){COOK.k=Math.max(0,COOK.k-1);drawCook();return}
+  if(a==="next"){if(COOK.k<COOK.steps.length-1){COOK.k++;drawCook()}else{closeCook();toast("Xong món! Nhớ ghi lại bữa ăn nhé")}return}
+  if(a==="start"){const left=(TIMER&&TIMER.key===key&&!TIMER.done)?TIMER.left:st.min*60;TIMER={key,label:st.h,end:Date.now()+left*1000,left,running:true,done:false,meal:COOK.m,k:COOK.k};drawCook();return}
+  if(a==="pause"&&TIMER){TIMER.left=(TIMER.end-Date.now())/1000;TIMER.running=false;drawCook();return}
+  if(a==="reset"){TIMER=null;drawCook();return}
+});
+
+/* ---------- Sao lưu & khôi phục ---------- */
+const BK_COLS=["meals","weights","shop","weeks","foods","notes","daily","freezer","asks"];
+function backupBlock(){return `<div class="field"><label>Sao lưu &amp; khôi phục</label><p class="small muted" style="margin:0 0 6px">Lưu toàn bộ nhật ký (trừ ảnh) thành một file. Khi đổi máy hay lỡ xóa app, nhập lại file này.</p><div class="row2"><button class="btn soft" data-sh="export">Xuất file sao lưu</button><label class="btn soft" for="importIn" style="cursor:pointer">Nhập file</label></div><input type="file" id="importIn" accept="application/json,.json" hidden><div id="importBox"></div></div>`}
+async function exportBackup(){
+  const data={};BK_COLS.forEach(c=>data[c]=Store.data[c]||{});
+  const json=JSON.stringify({app:"mochi-an-dam",v:1,exported:new Date().toISOString(),data},null,1);
+  const name=`mochi-an-dam-sao-luu-${iso(new Date())}.json`;
+  if(CAPS.downloads){try{await CAPS.downloads.save({filename:name,data:json});toast("Đã lưu file sao lưu");return}catch(e){if(e&&e.code==="declined")return}}
+  const url=URL.createObjectURL(new Blob([json],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);toast("Đã tải file sao lưu (xem trong Tệp/Files)");
+}
+function readImport(file){
+  const fr=new FileReader();fr.onload=()=>{try{const o=JSON.parse(fr.result);if(!o||o.app!=="mochi-an-dam"||!o.data)throw 0;
+    const n=BK_COLS.reduce((s,c)=>s+Object.keys(o.data[c]||{}).length,0);sheetState.imp=o;
+    $("#importBox").innerHTML=`<div class="alert" style="background:var(--surface-2);margin-top:8px">File xuất ngày ${esc(String(o.exported).slice(0,10))}, có <b style="color:var(--ink)">${n}</b> mục. Mục trùng sẽ được thay bằng bản trong file.</div><button class="btn pink block" style="margin-top:8px" data-sh="doimport">Nhập ${n} mục</button>`;
+  }catch(e){$("#importBox").innerHTML=`<div class="alert" style="margin-top:8px">File không đúng định dạng sao lưu của app Mochi.</div>`}};fr.readAsText(file);
+}
+async function doImport(){const o=sheetState&&sheetState.imp;if(!o)return;closeSheet();toast("Đang nhập dữ liệu…");for(const c of BK_COLS){const d=o.data[c];if(d&&Object.keys(d).length)await Store.setMany(c,d)}toast("Đã nhập xong")}
+
 /* ===================== Sheet ghi bữa / cân ===================== */
 let sheetState=null;
-function openSheet(html){$("#sheetIn").innerHTML='<div class="grab"></div>'+html;$("#scrim").hidden=false;$("#sheet").hidden=false;requestAnimationFrame(()=>{$("#scrim").classList.add("show");$("#sheet").classList.add("show")})}
+function openSheet(html){$("#sheetIn").innerHTML='<div class="grab"></div>'+html;hydratePhotos($("#sheetIn"));$("#scrim").hidden=false;$("#sheet").hidden=false;requestAnimationFrame(()=>{$("#scrim").classList.add("show");$("#sheet").classList.add("show")})}
 function closeSheet(){$("#scrim").classList.remove("show");$("#sheet").classList.remove("show");setTimeout(()=>{$("#scrim").hidden=true;$("#sheet").hidden=true},300);sheetState=null}
 function openLog(id,i){
   const n=+id.slice(1,4), info=mealsFor(dateOf(n)), m=info.meals[i], ex=Store.data.meals[id];
@@ -1027,9 +1381,9 @@ function openLog(id,i){
 function photoBlock(){
   const s=sheetState;
   if(!CAPS.assets&&Store.mode!=="fb") return `<div class="field"><label>Ảnh</label><p class="small muted" style="margin:0">Bật nhật ký chung (nút đồng bộ ở góc trên) để đính kèm ảnh bữa ăn hoặc ảnh vết mẩn.</p></div>`;
-  return `<div class="field"><label>Ảnh bữa ăn hoặc vết mẩn</label><div class="thumbs" id="photoRow">${s.photos.map(id=>`<img class="thumb" src="${blobUrl(id)}" alt="Ảnh đã đính kèm" data-sh="rmphoto" data-v="${id}" title="Chạm để bỏ ảnh">`).join("")}${s.uploading?`<div class="addphoto">Đang tải…</div>`:""}<label class="addphoto" for="photoIn"><span><svg viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><br>Thêm</span></label></div><input type="file" id="photoIn" accept="image/*" hidden>${s.photos.length?`<span class="small muted">Chạm vào ảnh để bỏ ra khỏi bữa này.</span>`:""}</div>`;
+  return `<div class="field"><label>Ảnh bữa ăn hoặc vết mẩn</label><div class="thumbs" id="photoRow">${s.photos.map(id=>`<img class="thumb" src="${blobUrl(id)}" data-photo="${id}" alt="Ảnh đã đính kèm" data-sh="rmphoto" data-v="${id}" title="Chạm để bỏ ảnh">`).join("")}${s.uploading?`<div class="addphoto">Đang tải…</div>`:""}<label class="addphoto" for="photoIn"><span><svg viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><br>Thêm</span></label></div><input type="file" id="photoIn" accept="image/*" hidden>${s.photos.length?`<span class="small muted">Chạm vào ảnh để bỏ ra khỏi bữa này.</span>`:""}</div>`;
 }
-function refreshPhotos(){const el=document.getElementById("photoWrap");if(el)el.innerHTML=photoBlock()}
+function refreshPhotos(){const el=document.getElementById("photoWrap");if(el){el.innerHTML=photoBlock();hydratePhotos(el)}}
 function drawLog(){
   const s=sheetState;
   openSheet(`<div><div class="eyebrow">Ngày ${s.n} · Bữa ${s.i+1}</div><h4>${esc(s.dish)}</h4></div>
@@ -1048,12 +1402,13 @@ function openWeight(){
   <div class="row2"><button class="btn soft" data-sh="close">Hủy</button><button class="btn pink" data-sh="savew">Lưu</button></div>`);
 }
 $("#scrim").addEventListener("click",closeSheet);
+$("#sheet").addEventListener("change",e=>{if(e.target.id==="importIn"&&e.target.files&&e.target.files[0])readImport(e.target.files[0])});
 $("#sheet").addEventListener("change",async e=>{
   if(e.target.id!=="photoIn"||!e.target.files||!e.target.files[0]||!sheetState) return;
   const s=sheetState, file=e.target.files[0]; s.uploading++; refreshPhotos();
   try{
     if(CAPS.assets){const blob=await compressImage(file);const r=await CAPS.assets.upload(blob,{type:"image/jpeg"});if(sheetState===s)s.photos.push(r.id)}
-    else{const data=await compressToDataUrl(file);if(data.length>900000)throw {code:"too_large"};const pid="p"+Date.now();await Store.set("photos",pid,{data,ts:Date.now()});if(sheetState===s)s.photos.push("fb:"+pid)}
+    else{const data=await compressToDataUrl(file);if(data.length>900000)throw {code:"too_large"};const pid="p"+Date.now();PHOTO_CACHE[pid]=data;await Store.set("photos",pid,{data,ts:Date.now()});if(sheetState===s)s.photos.push("fb:"+pid)}
   }
   catch(err){toast(err&&err.code==="quota_or_state"?"Hết dung lượng lưu ảnh":"Chưa tải được ảnh, thử lại nhé")}
   finally{s.uploading--; if(sheetState===s) refreshPhotos()}
@@ -1062,13 +1417,15 @@ $("#sheet").addEventListener("click",e=>{
   const b=e.target.closest("[data-sh]"); if(!b) return; const a=b.dataset.sh, s=sheetState;
   if(a==="close"){closeSheet();return}
   if(a==="create"){createFamily();return}
+  if(a==="export"){exportBackup();return}
+  if(a==="doimport"){doImport();return}
   if(a==="retry"){FB_ERR="";closeSheet();location.reload();return}
   if(a==="copyinv"){const v=$("#invIn").value;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast("Đã sao chép link mời")).catch(()=>{$("#invIn").select();toast("Nhấn giữ để sao chép")});return}
   if(a==="leave"){try{localStorage.removeItem("mochi-fam")}catch(e){}try{history.replaceState(null,"",location.pathname)}catch(e){}closeSheet();toast("Đã rời nhật ký chung, mở lại app để dùng riêng");setTimeout(()=>location.reload(),900);return}
   if(a==="ml"||a==="mlset"){s.ml=Math.max(0,a==="ml"?s.ml+ +b.dataset.v:+b.dataset.v);$("#mlOut").textContent=s.ml+" ml";return}
   if(a==="mood"){s.mood=b.dataset.v;document.querySelectorAll('[data-sh="mood"]').forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===s.mood));$("#reactBox").hidden=s.mood!=="react";return}
   if(a==="rmphoto"){s.photos=s.photos.filter(x=>x!==b.dataset.v);refreshPhotos();return}
-  if(a==="save"){if(s.uploading){toast("Đợi ảnh tải xong rồi lưu");return}s.note=$("#noteIn").value.trim();const mood=s.mood;Store.set("meals",s.id,{day:s.n,meal:s.i+1,date:iso(dateOf(s.n)),dish:s.dish,ml:s.ml,mood:s.mood,note:s.note,photos:s.photos,ts:Date.now()});closeSheet();if(mood==="love")burst();toast(mood==="react"?"Đã ghi. Theo dõi bé thật kỹ nhé":"Đã ghi bữa ăn");return}
+  if(a==="save"){if(s.uploading){toast("Đợi ảnh tải xong rồi lưu");return}s.note=$("#noteIn").value.trim();const mood=s.mood;if(!Store.data.meals[s.id]&&s.ml>0)freezerConsume(s.dish+" "+(mealsFor(dateOf(s.n)).meals[s.i]||{}).r);Store.set("meals",s.id,{day:s.n,meal:s.i+1,date:iso(dateOf(s.n)),dish:s.dish,ml:s.ml,mood:s.mood,note:s.note,photos:s.photos,ts:Date.now()});closeSheet();if(mood==="love")burst();toast(mood==="react"?"Đã ghi. Theo dõi bé thật kỹ nhé":"Đã ghi bữa ăn");return}
   if(a==="del"){Store.del("meals",s.id);closeSheet();toast("Đã xóa ghi");return}
   if(a==="savew"){const kg=parseFloat(($("#wKg").value||"").replace(",","."));const cm=parseFloat(($("#wCm").value||"").replace(",","."));const dt=$("#wDate").value;
     if(!dt||!(kg>2&&kg<20)){toast("Nhập cân nặng từ 2 đến 20 kg");return}
@@ -1087,6 +1444,7 @@ function render(animate){
   document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.tab===state.tab));
   if(state.tab==="today"){const sel=main.querySelector(".chip-day.sel");if(sel)sel.scrollIntoView({block:"nearest",inline:"center"})}
   if(animate===false) window.scrollTo(0,y);
+  hydratePhotos(main);
   if(fa&&(fa==="askIn"||fa==="docQ")){const el=document.getElementById(fa);if(el){el.focus();try{el.setSelectionRange(caret,caret)}catch(e){}}}
 }
 function goTab(t){state.tab=t;saveUI();window.scrollTo(0,0);render(true)}
@@ -1100,15 +1458,20 @@ $("#main").addEventListener("click",e=>{
   else if(a==="calseg"){state.calSeg=v;saveUI();render(true)}
   else if(a==="logseg"){state.logSeg=v;saveUI();render(true)}
   else if(a==="tosug"){state.calSeg="sug";goTab("cal")}
-  else if(a==="sugwk"){const n=addD(state.sugStart,+v);if(n>=dateOf(36)){state.sugStart=n;state.sugSeed=1;render(true)}else toast("Gợi ý bắt đầu sau lộ trình 5 tuần (từ 07/12)")}
+  else if(a==="sugwk"){const n=addD(state.sugStart,+v);if(n<dateOf(36))toast("Gợi ý bắt đầu sau lộ trình 5 tuần (từ 07/12)");else if(n>new Date(2027,4,31))toast("Gợi ý dừng ở tháng thứ 12 của Mochi");else{state.sugStart=n;state.sugSeed=1;render(true)}}
   else if(a==="reroll"){state.sugSeed++;render(true)}
-  else if(a==="savewk"){const sw=suggestWeek(state.sugStart,state.sugSeed);
-    const days=sw.days.map(d=>({date:iso(d.d),nf:d.nf,meals:[{t:dishName(d.b1),r:dishRecipe(d.b1,"Cháo nền"),y:130,e:"100–130",f:d.b1.fruit?`${(FAMT[d.b1.fruit]||FOODS[d.b1.fruit].n.toLowerCase())} nghiền 2–3 tcf sau cháo`:null},{t:dishName(d.b2),r:dishRecipe(d.b2,"Cháo nền"),y:110,e:"80–110"}]}));
-    Store.set("weeks",sw.start,{start:sw.start,days,shop:weekShopping(sw),savedAt:Date.now()});toast("Đã lưu thực đơn tuần")}
+  else if(a==="savewk"){const sw=suggestWeek(state.sugStart,state.sugSeed);const vw=buildWeekView(sw,state.sugStart);
+    Store.set("weeks",sw.start,{start:sw.start,days:vw.days,shop:vw.shop,savedAt:Date.now()});toast("Đã lưu thực đơn tuần")}
   else if(a==="unsave"){Store.del("weeks",v);toast("Đã bỏ tuần đã lưu")}
   else if(a==="openwk"||a==="pickwk"){state.sugStart=fromIso(v);if(a==="openwk"){state.sel=fromIso(v);goTab("today")}else render(true)}
   else if(a==="food"){const order=["trying","ok","react","new"];const cur=foodStatus(v);const nx=order[(order.indexOf(cur)+1)%order.length]||"ok";Store.set("foods",v,{s:nx,ts:Date.now()})}
   else if(a==="zoom"){e.stopPropagation();zoom(v)}
+  else if(a==="qlog"){quickLog(v,+b.dataset.i,b.dataset.k)}
+  else if(a==="cook"){openCook(+v,+b.dataset.i)}
+  else if(a==="poop"){addPoop(b.dataset.d,v)}
+  else if(a==="rmpoop"){rmPoop(b.dataset.d,+v)}
+  else if(a==="supp"){toggleSupp(b.dataset.d,v)}
+  else if(a==="frz"){freezerAdj(v,+b.dataset.n)}
   else if(a==="asksend"){ask(($("#askIn")||{}).value)}
   else if(a==="askchip"){ask(v)}
   else if(a==="askstop"){state.ask.ctl&&state.ask.ctl.abort()}
@@ -1122,13 +1485,18 @@ $("#main").addEventListener("change",e=>{
   const b=e.target.closest('[data-act="chk"]'); if(!b) return;
   const cur=Store.data.shop.state?.checked||{}; const checked={...cur,[b.dataset.v]:b.checked}; if(!b.checked) delete checked[b.dataset.v];
   Store.set("shop","state",{checked});
+  const it=shopItemText(b.dataset.v); if(it) freezerFromShop(it,b.checked?1:-1);
 });
 $("#main").addEventListener("input",e=>{if(e.target.id==="askIn")state.ask.q=e.target.value});
 $("#main").addEventListener("keydown",e=>{if(e.target.id==="askIn"&&e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();ask(e.target.value)}});
 $("#logo").addEventListener("click",()=>{const l=$("#logo");l.classList.remove("wiggle");void l.offsetWidth;l.classList.add("wiggle")});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&sheetState)closeSheet()});
 
-if(!IN_CLAUDE){const sb=$("#syncBtn");sb.hidden=false;sb.addEventListener("click",openSync)}
+$("#syncBtn").addEventListener("click",openSync);
+(function(){const sp=$("#splash");const standalone=window.navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
+  if(IN_CLAUDE||!standalone||matchMedia("(prefers-reduced-motion: reduce)").matches){sp.remove();return}
+  setTimeout(()=>{sp.classList.add("hide");setTimeout(()=>sp.remove(),500)},650)})();
+if(!IN_CLAUDE&&"serviceWorker" in navigator&&location.protocol==="https:"){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 Store.load(); setSync(); render(true); Store.connect(); connectCaps();
 </script>
 

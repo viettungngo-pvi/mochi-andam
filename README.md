@@ -6,12 +6,14 @@ App lịch ăn dặm cho bé Mochi (sinh 02/05/2026), bắt đầu ăn dặm ki�
 
 ## Tính năng
 
-- **Hôm nay** — thực đơn từng ngày: công thức, lượng thành phẩm (ml), lượng bé ăn tham khảo; ghi lại từng bữa (ml, bé thích hay từ chối, có phản ứng không, ảnh); nhắc việc cần chuẩn bị tối hôm trước.
-- **Lịch** — lộ trình 5 tuần (31 ngày) dạng lịch tháng; **Gợi ý tuần mới** tự lên thực đơn 7 ngày từ các món bé đã ăn ổn, kèm danh sách đi chợ; lịch sử các tuần đã lưu.
-- **Đi chợ** — danh sách có ô tick cho từng lần đi chợ (1–2 lần/tuần).
-- **Nhật ký** — lịch sử bữa ăn, bảng món đã thử, cân nặng kèm biểu đồ, **báo cáo 1 trang cho bác sĩ** (lưu thành ảnh).
-- **Hỏi đáp** — hỏi nhanh về bữa ăn của bé, trả lời dựa trên tuổi, các món đã ăn và nhật ký; cẩm nang nấu nền, nguyên liệu thay thế, dấu hiệu dị ứng, bảo quản, mốc ăn dặm.
-- Tuổi bé (tháng, ngày, tuần tuổi) luôn hiện ở đầu app. Hỗ trợ nền sáng và tối.
+- **Hôm nay** — thực đơn từng ngày: công thức, lượng thành phẩm (ml), lượng bé ăn tham khảo. Ghi nhanh một chạm (*Ăn hết / Một nửa / Từ chối*) hoặc ghi chi tiết (ml, phản ứng, ảnh). Thẻ **Hôm nay của Mochi**: ghi đi ngoài (bình thường, táo, lỏng, kèm gợi ý xử lý) và tick sắt, D3K2, DHA, men vi sinh. Nhắc việc chuẩn bị tối hôm trước.
+- **Chế độ nấu** — nút *Nấu* trên mỗi bữa mở từng bước toàn màn hình, chữ to, hẹn giờ có chuông, giữ màn hình sáng.
+- **Lịch** — lộ trình 5 tuần (31 ngày); **Gợi ý tuần mới** đến tháng thứ 12, tự đổi số bữa (2 → 3 bữa từ 9 tháng), lượng đạm, độ thô theo tuổi, kèm danh sách đi chợ; lịch sử các tuần đã lưu.
+- **Đi chợ** — danh sách tick theo lần đi chợ; **kho ngăn đá** tự cộng khi tick thịt cá, tự trừ khi ghi bữa, cảnh báo thiếu cho 7 ngày tới.
+- **Nhật ký** — lịch sử bữa ăn, bảng món đã thử, cân nặng trên **biểu đồ chuẩn WHO bé gái** (P3–P97), **Thống kê** (ml/ngày 14 ngày, đa dạng món, ngày có đạm giàu sắt, đi ngoài, bổ sung), **báo cáo 1 trang cho bác sĩ** (lưu thành ảnh).
+- **Hỏi đáp** — hỏi nhanh (bản Claude) và cẩm nang.
+- **Cài đặt** — nhật ký chung của gia đình (Firebase), **sao lưu/khôi phục** ra file JSON.
+- Dùng được khi mất mạng (service worker), có màn hình chào khi mở từ màn hình chính. Tuổi bé luôn hiện ở đầu app; nền sáng và tối.
 
 ## Lộ trình 5 tuần
 
@@ -33,7 +35,7 @@ Xem [hướng dẫn cài app](huong-dan.html) (bản ảnh: [`anh/huong-dan-cai-
 
 **Trong Claude (đầy đủ tính năng).** Bản chính chạy dưới dạng artifact trên claude.ai: nhật ký đồng bộ giữa các máy, có hỏi nhanh, đính kèm ảnh và lưu báo cáo. 
 
-**Qua GitHub Pages.** App chạy đầy đủ lịch, thực đơn, đi chợ, nhật ký, cân nặng, ảnh và báo cáo (lưu ảnh bằng cách nhấn giữ). Bấm nút *Nhật ký chung* ở góc trên → *Tạo nhật ký chung* để dùng chung một nhật ký giữa nhiều máy qua Firebase Firestore, cập nhật trực tiếp; gửi link mời (`?fam=…`) cho người còn lại. Hỏi nhanh chỉ có trong bản Claude. Khi bật GitHub Pages và "Thêm vào Màn hình chính" trên iPhone, app dùng logo Mochi làm icon.
+**Qua GitHub Pages.** App chạy đầy đủ lịch, thực đơn, đi chợ, nhật ký, cân nặng, ảnh và báo cáo (lưu ảnh bằng cách nhấn giữ). Bấm nút *Cài đặt* ở góc trên → *Tạo nhật ký chung* để dùng chung một nhật ký giữa nhiều máy qua Firebase Firestore, cập nhật trực tiếp; gửi link mời (`?fam=…`) cho người còn lại. Hỏi nhanh chỉ có trong bản Claude. Khi bật GitHub Pages và "Thêm vào Màn hình chính" trên iPhone, app dùng logo Mochi làm icon.
 
 Bật GitHub Pages: Settings → Pages → Source: *Deploy from a branch* → Branch: `main` / `(root)`.
 
@@ -47,6 +49,8 @@ assets/apple-touch-icon.png  icon 180×180 cho iPhone
 anh/                    ảnh thực đơn tuần 1–4, bảng thay thế, hướng dẫn cài app
 huong-dan.html          hướng dẫn cài app trên iPhone
 reminders.ics           nhắc việc cho app Lịch iPhone
+manifest.webmanifest    thông tin app khi thêm vào màn hình chính
+sw.js                   service worker: mở app khi mất mạng
 tools/make_ics.py       tạo lại reminders.ics
 ```
 
