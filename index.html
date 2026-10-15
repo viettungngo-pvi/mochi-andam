@@ -251,7 +251,27 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .sync{font-size:11.5px;color:var(--muted);text-align:center;margin-top:4px}
 
 /* v4: ghi nhanh, hôm nay của Mochi, chế độ nấu, thống kê, splash */
-.seg button{font-size:12.5px;padding:8px 2px}
+.seg button{font-size:13.5px}
+.quick4{display:grid;grid-template-columns:1fr 1fr 1fr 46px;gap:6px}
+.qbtn.more{display:grid;place-items:center;padding:0;color:var(--muted)}
+.qbtn.more svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.meal.done{padding-block:14px}
+.meal.done .meal-name{font-size:19px;margin:2px 0 8px}
+.mini{display:flex;flex-direction:column;gap:10px}
+.mini-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mini-row .lb{font-size:12.5px;font-weight:700;color:var(--muted);width:100%;flex:none;margin-bottom:-2px}
+.tg{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 11px;font-weight:600;font-size:13px;cursor:pointer;color:var(--muted)}
+.tg[aria-pressed="true"]{background:var(--matcha-soft);border-color:transparent;color:var(--ink)}
+.tg[aria-pressed="true"]::before{content:"✓ ";color:var(--matcha);font-weight:800}
+.tg.add{color:var(--mochi-deep);border-style:dashed}
+.summary-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.summary-btn .grow{flex:1;min-width:0}
+.summary-btn .chev{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;flex:none}
+.fz-line{font-size:14px;color:var(--muted);margin-top:2px}
+.fz-line b{color:var(--ink)}
+.back{border:0;background:none;color:var(--mochi-deep);font-weight:700;font-size:14px;cursor:pointer;padding:4px 2px;display:inline-flex;align-items:center;gap:4px;align-self:flex-start}
+.back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2}
+.more-trips{border:1px dashed var(--line);background:none;border-radius:16px;padding:12px;font-weight:700;color:var(--muted);cursor:pointer;font-size:14px}
 .quick3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .qbtn{border:1px solid var(--line);background:var(--surface-2);border-radius:14px;padding:11px 4px;font-weight:700;font-size:14px;cursor:pointer}
 .qbtn.all{background:var(--matcha-soft);border-color:transparent}
@@ -304,7 +324,7 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .timer .tb{display:flex;gap:8px}
 .cook-nav{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;max-width:560px;width:100%;margin:0 auto}
 .cook-nav .btn{padding:16px;font-size:17px}
-.minitimer{position:fixed;z-index:20;left:50%;transform:translateX(-50%);top:calc(8px + env(safe-area-inset-top,0px));background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;border:0;cursor:pointer;font-variant-numeric:tabular-nums}
+.minitimer{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));box-shadow:0 6px 18px rgba(0,0,0,.18);background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;border:0;cursor:pointer;font-variant-numeric:tabular-nums}
 .splash{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .45s ease}
 .splash.hide{opacity:0;pointer-events:none}
 .splash .si{display:flex;flex-direction:column;align-items:center;gap:14px}
@@ -840,14 +860,14 @@ function renderToday(){
     const left=1-n; const a=age(d);
     h+=`<div class="card count"><div class="eyebrow">Còn</div><div class="big num">${left}</div><div style="font-family:var(--f-display);font-weight:700;font-size:20px">ngày nữa Mochi ăn dặm</div><div class="muted small">Ngày 1: thứ Hai 02/11/2026, Mochi tròn 6 tháng${iso(d)!==iso(new Date())?"":` · hôm nay bé ${a.m} tháng ${a.days} ngày`}</div><div style="margin-top:14px"><button class="btn pink" data-act="sel" data-v="${iso(START)}">Xem trước ngày 1</button></div></div>`;
     const chk=Store.data.shop.state?.checked||{};
-    h+=`<div class="card"><div class="eyebrow">Chuẩn bị trước ngày 1</div><ul class="checklist" style="margin-top:6px">${PRESTART.map((t,i)=>{const k="pre-"+i;return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(t)}</label></span></li>`}).join("")}</ul></div>`+dailyCard(d)+icsCard();
+    h+=`<div class="card"><div class="eyebrow">Chuẩn bị trước ngày 1</div><ul class="checklist" style="margin-top:6px">${PRESTART.map((t,i)=>{const k="pre-"+i;return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(t)}</label></span></li>`}).join("")}</ul></div>`+dailyCard(d);
     return h;
   }
   const w=info.week, wk=WEEKS[w-1];
   const pct=Math.min(1,n/PLAN_DAYS);
   h+=`<div class="hero" style="--wc:${weekColor(w)}"><div class="hero-top"><div style="min-width:0"><div class="eyebrow">${wdm(d)} · Tuần ${w}${wk?` · ${wk.label}`:""}</div><h3>Ngày ${n}</h3></div>
     <svg class="ring" viewBox="0 0 62 62" aria-label="Tiến độ lộ trình"><circle cx="31" cy="31" r="26" fill="none" stroke="var(--line)" stroke-width="6"/><circle cx="31" cy="31" r="26" fill="none" stroke="${weekColor(Math.min(w,5))}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(163.4*pct).toFixed(1)} 200" transform="rotate(-90 31 31)"/><text x="31" y="36" text-anchor="middle" font-size="14">${n<=PLAN_DAYS?n+"/"+PLAN_DAYS:"✓"}</text></svg></div>
-    <div class="pillrow">${info.nf?`<span class="pill new">Món mới: ${esc(FOODS[info.nf].n)}</span>`:info.nfAny?`<span class="pill">Đang thử: ${esc(FOODS[info.nfAny].n)}</span>`:""}${info.meals.length?`<span class="pill">${info.meals.length} bữa</span>`:""}${n===todayN?`<span class="pill ok">Hôm nay</span>`:""}</div>
+    <div class="pillrow">${info.nf?`<span class="pill new">Món mới: ${esc(FOODS[info.nf].n)}</span>`:info.nfAny?`<span class="pill">Đang thử: ${esc(FOODS[info.nfAny].n)}</span>`:""}</div>
     ${wk&&info.src==="plan"?`<p class="small muted" style="margin:10px 0 0">${esc(wk.base)}</p>`:""}</div>`;
   if(info.src==="none"){
     h+=`<div class="card"><div class="meal-name">Chưa có thực đơn cho ngày này</div><p class="muted">Lộ trình 31 ngày đã xong. Tạo thực đơn tuần mới từ các món Mochi đã ăn ổn.</p><button class="btn pink" data-act="tosug">Tạo gợi ý tuần</button></div>`;
@@ -855,17 +875,23 @@ function renderToday(){
   info.meals.forEach((m,i)=>{
     const id=`d${String(n).padStart(3,"0")}-${i+1}`, lg=Store.data.meals[id];
     const isNew=info.nf&&i===0;
-    h+=`<div class="card meal ${isNew?"isnew":""}"><div class="meal-head"><div class="eyebrow">Bữa ${i+1}${mealLabel(i,info.meals.length)}${isNew?` <span class="newtag">Món mới</span>`:""}</div><button class="cookbtn" data-act="cook" data-v="${n}" data-i="${i}"><svg viewBox="0 0 24 24"><path d="M4 11h16v2a8 8 0 0 1-16 0z"/><path d="M9 7c0-2 2-2 2-4M14 7c0-2 2-2 2-4"/></svg>Nấu</button></div>
+    const cook=`<button class="cookbtn" data-act="cook" data-v="${n}" data-i="${i}"><svg viewBox="0 0 24 24"><path d="M4 11h16v2a8 8 0 0 1-16 0z"/><path d="M9 7c0-2 2-2 2-4M14 7c0-2 2-2 2-4"/></svg>Nấu</button>`;
+    const head=`<div class="meal-head"><div class="eyebrow">Bữa ${i+1}${mealLabel(i,info.meals.length)}${isNew?` <span class="newtag">Món mới</span>`:""}</div>${lg?"":cook}</div>`;
+    if(lg){
+      h+=`<div class="card meal done">${head}<div class="meal-name">${esc(m.t)}</div>
+        <div class="logged ${lg.mood==="react"?"react":""}"><span class="check">${ICON_CHECK}</span><div style="min-width:0"><b class="num">${lg.ml} ml</b> · ${MOODS[lg.mood]||""}${lg.note?`<div class="small muted">${esc(lg.note)}</div>`:""}</div><button class="edit" data-act="log" data-v="${id}" data-i="${i}">Sửa</button></div>${thumbs(lg.photos)}`;
+    } else {
+      h+=`<div class="card meal ${isNew?"isnew":""}">${head}
       <div class="meal-name">${esc(m.t)}</div>
       <div class="recipe">${esc(m.r)}${m.f?`<br><span class="muted">+ ${esc(m.f)}</span>`:""}${m.n?`<span class="note">${esc(m.n)}</span>`:""}</div>
-      <div class="qty"><div class="qbox"><div class="k">Thành phẩm</div><div class="v num">~${m.y} ml</div></div><div class="qbox eat"><div class="k">Bé ăn (tham khảo)</div><div class="v num">${esc(m.e)} ml</div></div></div>
-      ${lg?`<div class="logged ${lg.mood==="react"?"react":""}"><span class="check">${ICON_CHECK}</span><div style="min-width:0"><b class="num">${lg.ml} ml</b> · ${MOODS[lg.mood]||""}${lg.note?`<div class="small muted">${esc(lg.note)}</div>`:""}</div><button class="edit" data-act="log" data-v="${id}" data-i="${i}">Sửa</button></div>${thumbs(lg.photos)}`
-          :`<div class="quick3"><button class="qbtn all" data-act="qlog" data-v="${id}" data-i="${i}" data-k="all">Ăn hết</button><button class="qbtn" data-act="qlog" data-v="${id}" data-i="${i}" data-k="half">Một nửa</button><button class="qbtn refuse" data-act="qlog" data-v="${id}" data-i="${i}" data-k="refuse">Từ chối</button></div><button class="btn soft block" data-act="log" data-v="${id}" data-i="${i}">Ghi chi tiết: ml, phản ứng, ảnh</button>`}
-    </div>`;
+      <div class="qty"><div class="qbox"><div class="k">Thành phẩm</div><div class="v num">~${m.y} ml</div></div><div class="qbox eat"><div class="k">Bé ăn</div><div class="v num">${esc(m.e)} ml</div></div></div>
+      <div class="quick4"><button class="qbtn all" data-act="qlog" data-v="${id}" data-i="${i}" data-k="all">Ăn hết</button><button class="qbtn" data-act="qlog" data-v="${id}" data-i="${i}" data-k="half">Một nửa</button><button class="qbtn refuse" data-act="qlog" data-v="${id}" data-i="${i}" data-k="refuse">Từ chối</button><button class="qbtn more" data-act="log" data-v="${id}" data-i="${i}" aria-label="Ghi chi tiết: ml, phản ứng, ảnh"><svg viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3.2"/></svg></button></div>`;
+    }
+    h+=`</div>`;
   });
   h+=dailyCard(d);
   const p=prepTomorrow(d);
-  if(p) h+=`<div class="prep"><span class="moon">${ICON_MOON}</span><div><b>Tối nay chuẩn bị cho ${wdm(p.d)}</b><ul>${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="small muted" style="margin-top:4px">Lịch iPhone nhắc lúc 19:49 nếu anh chị đã thêm nhắc việc ở tab Đi chợ.</div></div></div>`;
+  if(p) h+=`<div class="prep"><span class="moon">${ICON_MOON}</span><div><b>Tối nay chuẩn bị cho ${wdm(p.d)}</b><ul>${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`;
   return h;
 }
 
@@ -939,41 +965,46 @@ function openWeekICS(start){
 /* ---------- Đi chợ ---------- */
 function renderShop(){
   const chk=Store.data.shop.state?.checked||{}, today=atMid(new Date());
-  let nextFound=false, h=`<p class="muted small" style="margin:0 2px">Đi chợ 1–2 lần mỗi tuần. Thịt, cá chia phần trữ đông ngay khi về; rau củ để ngăn mát.</p>`+freezerCard()+icsCard();
+  let nextFound=false, h=freezerCard(), hidden=0;
   SHOP.forEach(s=>{
-    const wk=WEEKS[s.w-1];
-    h+=`<h2 class="sec" style="color:${weekColor(s.w)}">Tuần ${s.w} · ${wk.label}</h2>`;
+    const wk=WEEKS[s.w-1]; let head=false;
     s.trips.forEach((t,ti)=>{
       const d=dateOf(1+t.d), keys=t.items.map((_,i)=>`w${s.w}-${ti}-${i}`), done=keys.every(k=>chk[k]);
+      const past=done||addD(d,3)<today;
+      if(past&&!state.showPast){hidden++;return}
+      if(!head){h+=`<h2 class="sec" style="color:${weekColor(s.w)}">Tuần ${s.w} · ${wk.label}</h2>`;head=true}
       let badge=""; if(done) badge=`<span class="badge done">Đã mua xong</span>`; else if(!nextFound&&d>=addD(today,-1)){badge=`<span class="badge next">Lần tới</span>`;nextFound=true}
       h+=`<div class="card trip"><div class="trip-head"><div><div class="when num">${wdm(d)}</div><div class="small muted">${t.label}${t.d<0?" · trước ngày 1":""}</div></div>${badge}</div><ul class="checklist">${t.items.map((it,i)=>{const k=keys[i];return `<li class="${chk[k]?"done":""}"><input type="checkbox" class="cb" id="c-${k}" data-act="chk" data-v="${k}" ${chk[k]?"checked":""}><span><label for="c-${k}">${esc(it)}</label></span></li>`}).join("")}</ul></div>`;
     });
   });
+  if(hidden||state.showPast) h+=`<button class="more-trips" data-act="showpast">${state.showPast?"Ẩn các lần đã mua":`Xem ${hidden} lần đi chợ đã qua`}</button>`;
+  if(!hidden&&!state.showPast&&!h.includes("card trip")) h+=`<div class="card"><div class="meal-name">Đã đi chợ xong lộ trình 5 tuần</div><p class="muted" style="margin:6px 0 0">Danh sách đi chợ cho tuần mới nằm trong tab Lịch → Gợi ý tuần mới.</p></div>`;
   h+=`<div class="card" style="background:var(--ink);color:var(--bg);border:0"><b>Luôn có sẵn trong nhà</b><div class="small" style="opacity:.85;margin-top:4px">Gạo · 1–2 củ khoai lang · vài quả trứng · 2–3 phần thịt trữ đông. Hôm không đi chợ vẫn nấu được cháo thịt khoai lang.</div></div>`;
   return h;
 }
 
 /* ---------- Nhật ký ---------- */
 function renderLog(){
-  let h=`<div class="seg"><button data-act="logseg" data-v="meals" aria-selected="${state.logSeg==="meals"}">Bữa ăn</button><button data-act="logseg" data-v="foods" aria-selected="${state.logSeg==="foods"}">Món</button><button data-act="logseg" data-v="weight" aria-selected="${state.logSeg==="weight"}">Cân nặng</button><button data-act="logseg" data-v="stats" aria-selected="${state.logSeg==="stats"}">Thống kê</button><button data-act="logseg" data-v="report" aria-selected="${state.logSeg==="report"}">Báo cáo</button></div>`;
-  if(state.logSeg==="report") return h+renderReport();
-  if(state.logSeg==="stats") return h+renderStats();
-  if(state.logSeg==="foods"){
-    h+=`<p class="small muted" style="margin:0 2px">Chạm vào một món để đổi trạng thái. Món trong lộ trình tự chuyển sang "Đã ăn ổn" sau 3 ngày thử, trừ khi anh đánh dấu có phản ứng.</p>`;
-    Object.keys(GROUP_NAME).forEach(g=>{const ids=Object.keys(FOODS).filter(k=>FOODS[k].g===g); if(!ids.length)return;
-      h+=`<div><div class="eyebrow" style="margin:4px 2px 8px">${GROUP_NAME[g]}</div><div class="foods">${ids.map(id=>{const s=foodStatus(id);return `<button class="food s-${s}" data-act="food" data-v="${id}"><span class="fn">${esc(FOODS[id].n)}</span><span class="fs">${STATUS_TXT[s]}${FOODS[id].day?` · N${FOODS[id].day}`:""}</span></button>`}).join("")}</div></div>`});
-    return h;
-  }
+  if(state.logSeg==="report") return `<button class="back" data-act="logseg" data-v="stats"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Tổng quan</button>`+renderReport();
+  const seg=state.logSeg==="foods"?"stats":state.logSeg;
+  let h=`<div class="seg"><button data-act="logseg" data-v="meals" aria-selected="${seg==="meals"}">Bữa ăn</button><button data-act="logseg" data-v="weight" aria-selected="${seg==="weight"}">Cân nặng</button><button data-act="logseg" data-v="stats" aria-selected="${seg==="stats"}">Tổng quan</button></div>`;
+  if(seg==="stats") return h+renderStats()+renderFoods();
   if(state.logSeg==="weight") return h+renderWeight();
   const logs=Object.entries(Store.data.meals).map(([id,v])=>({id,...v})).sort((a,b)=>a.id<b.id?1:-1);
   const total=logs.reduce((s,l)=>s+(+l.ml||0),0), reacts=logs.filter(l=>l.mood==="react").length;
   h+=`<div class="qty"><div class="qbox"><div class="k">Bữa đã ghi</div><div class="v num">${logs.length}</div></div><div class="qbox ${reacts?"":"eat"}" style="${reacts?"background:var(--danger-soft)":""}"><div class="k">Lần có phản ứng</div><div class="v num">${reacts}</div></div></div>`;
-  if(!logs.length){h+=`<div class="card"><div class="meal-name">Chưa có bữa nào</div><p class="muted" style="margin:6px 0 0">Ở tab Hôm nay, bấm "Ghi lại bữa này" sau mỗi bữa: lượng ml bé ăn, bé thích hay không, có phản ứng gì. Lịch sử sẽ hiện ở đây.</p></div>`;return h}
+  if(!logs.length){h+=`<div class="card"><div class="meal-name">Chưa có bữa nào</div><p class="muted" style="margin:6px 0 0">Ở tab Hôm nay, bấm Ăn hết, Một nửa hoặc Từ chối sau mỗi bữa: lượng ml bé ăn, bé thích hay không, có phản ứng gì. Lịch sử sẽ hiện ở đây.</p></div>`;return h}
   let cur="";h+=`<div class="card">`;
   logs.forEach(l=>{const dd=l.date?fromIso(l.date):dateOf(l.day);const k=iso(dd);
     if(k!==cur){h+=`<div class="eyebrow" style="margin-top:${cur?10:0}px">${wdm(dd)} · Ngày ${l.day}</div>`;cur=k}
     h+=`<button class="logrow" style="width:100%;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer" data-act="open" data-v="${k}"><span class="mood m-${l.mood||"ok"}"></span><div style="flex:1;min-width:0"><b>${esc(l.dish)}</b><div class="small muted"><span class="num">${l.ml} ml</span> · ${MOODS[l.mood]||""}${l.note?" · "+esc(l.note):""}</div>${thumbs(l.photos,true)}</div></button>`});
   h+=`</div>`;
+  return h;
+}
+function renderFoods(){
+  let h=`<h2 class="sec">Các món của Mochi</h2><p class="small muted" style="margin:-4px 2px 0">Chạm một món để đổi trạng thái. Món trong lộ trình tự thành "Đã ăn ổn" sau 3 ngày thử, trừ khi đánh dấu có phản ứng.</p>`;
+  Object.keys(GROUP_NAME).forEach(g=>{const ids=Object.keys(FOODS).filter(k=>FOODS[k].g===g); if(!ids.length)return;
+    h+=`<div><div class="eyebrow" style="margin:4px 2px 8px">${GROUP_NAME[g]}</div><div class="foods">${ids.map(id=>{const s=foodStatus(id);return `<button class="food s-${s}" data-act="food" data-v="${id}"><span class="fn">${esc(FOODS[id].n)}</span><span class="fs">${STATUS_TXT[s]}${FOODS[id].day?` · N${FOODS[id].day}`:""}</span></button>`}).join("")}</div></div>`});
   return h;
 }
 function renderWeight(){
@@ -1149,7 +1180,7 @@ function openSync(){
       <p class="small muted" style="margin:0">Đã có link mời? Mở link đó bằng Safari là xong, không cần bấm nút này.</p>`;
   }
   if(IN_CLAUDE) body=`<p class="muted small" style="margin:0">Bản trong Claude tự đồng bộ giữa các máy đăng nhập cùng tài khoản hoặc được chia sẻ.</p>`;
-  openSheet(`<h4>Cài đặt</h4><div class="field"><label>Nhật ký chung của gia đình</label>${body}</div>${backupBlock()}<button class="btn soft" data-sh="close">Đóng</button>`);
+  openSheet(`<h4>Cài đặt</h4><div class="field"><label>Nhật ký chung của gia đình</label>${body}</div><div class="field"><label>Nhắc việc trên iPhone</label><p class="small muted" style="margin:0 0 6px">19:49 mỗi tối (rã đông, ngâm gạo, món mới) và 7:46 sáng ngày đi chợ, cho lộ trình 02/11 – 02/12. Mở bằng Safari rồi chọn Thêm tất cả, mỗi máy làm một lần.</p><a class="btn soft block" href="${ICS_URL}" target="_blank" rel="noopener">Thêm nhắc việc vào Lịch iPhone</a></div>${backupBlock()}<button class="btn soft" data-sh="close">Đóng</button>`);
 }
 async function createFamily(){
   const code=newFamCode(); try{localStorage.setItem("mochi-fam",code)}catch(e){}
@@ -1186,14 +1217,18 @@ function dailyCard(d){
   const hard=doc.poop.filter(p=>p.t==="hard").length, loose=doc.poop.filter(p=>p.t==="loose").length, gap=isToday?poopGap():null;
   let hint="";
   if(loose>=3) hint="Đi lỏng nhiều lần: cho bú thêm để bù nước. Có sốt, nôn, phân có máu hoặc bé lừ đừ thì đi khám ngay.";
-  else if(hard) hint="Táo: cho bé thêm vài ngụm nước, tăng khoai lang, rau xanh, đu đủ. Táo kéo dài hoặc đau khi đi thì hỏi bác sĩ.";
+  else if(hard) hint="Táo: cho bé thêm vài ngụm nước, tăng khoai lang, rau xanh, đu đủ. Kéo dài hoặc đau khi đi thì hỏi bác sĩ.";
   else if(gap!==null&&gap>=3) hint=`Đã ${gap} ngày chưa ghi đi ngoài. Nếu bé chưa đi thật, thêm nước và rau củ; quá 4–5 ngày hoặc bụng chướng thì hỏi bác sĩ.`;
-  return `<div class="card daily"><div style="display:flex;justify-content:space-between;align-items:baseline"><div class="eyebrow">Hôm nay của Mochi · ${dm(d)}</div></div>
-   <div class="drow"><div class="dlabel">Đi ngoài</div><div class="dbtns">${Object.entries(POOP).map(([t,l])=>`<button data-act="poop" data-d="${k}" data-v="${t}">${l}</button>`).join("")}</div>
-   ${doc.poop.length?`<div class="pchips">${doc.poop.map((p,i)=>`<span class="pchip ${p.t}"><span class="num">${hhmm(p.ts)}</span> ${POOP[p.t]}<button data-act="rmpoop" data-d="${k}" data-v="${i}" aria-label="Xóa">×</button></span>`).join("")}</div>`:""}
-   ${hint?`<div class="hint">${esc(hint)}</div>`:""}</div>
-   <div class="drow"><div class="dlabel">Bổ sung đã uống</div><div class="supps">${SUPPS.map(([s,l])=>{const v=doc.supp[s];return `<button data-act="supp" data-d="${k}" data-v="${s}" aria-pressed="${!!v}">${l}<small class="num">${v?hhmm(v.ts):"chưa"}</small></button>`}).join("")}</div></div>
-  </div>`;
+  return `<div class="card mini"><div class="eyebrow">Mochi ${isToday?"hôm nay":dm(d)}</div>
+   <div class="mini-row"><span class="lb">Đã uống</span>${SUPPS.map(([s,l])=>`<button class="tg" data-act="supp" data-d="${k}" data-v="${s}" aria-pressed="${!!doc.supp[s]}">${l}</button>`).join("")}</div>
+   <div class="mini-row"><span class="lb">Đi ngoài</span>${doc.poop.map((p,i)=>`<button class="tg" data-act="poopsheet" data-d="${k}" aria-pressed="true">${POOP[p.t]} <span class="num">${hhmm(p.ts)}</span></button>`).join("")}<button class="tg add" data-act="poopsheet" data-d="${k}">+ Ghi</button></div>
+   ${hint?`<div class="hint">${esc(hint)}</div>`:""}</div>`;
+}
+function openPoop(k){
+  const doc=dayDoc(k);
+  openSheet(`<h4>Đi ngoài · ${dm(fromIso(k))}</h4><div class="dbtns">${Object.entries(POOP).map(([t,l])=>`<button data-sh="poop" data-d="${k}" data-v="${t}">${l}</button>`).join("")}</div>
+   ${doc.poop.length?`<div class="field"><label>Đã ghi</label><div class="pchips">${doc.poop.map((p,i)=>`<span class="pchip ${p.t}"><span class="num">${hhmm(p.ts)}</span> ${POOP[p.t]}<button data-sh="rmpoop" data-d="${k}" data-v="${i}" aria-label="Xóa">×</button></span>`).join("")}</div></div>`:""}
+   <button class="btn soft" data-sh="close">Đóng</button>`);
 }
 function weekSummaryText(){
   const days=[...Array(7)].map((_,i)=>iso(addD(new Date(),-i)));
@@ -1220,14 +1255,22 @@ function freezerConsume(text){const ps=proteinsIn(text);if(!ps.length)return;con
 function freezerFromShop(text,sign){const m=String(text).match(/(?:chia|cắt)\s+(\d+)\s+(?:phần|miếng)/i);if(!m)return;const ps=proteinsIn(text.replace(/^Cá[^·]*/i," cá "));if(!ps.length)return;const s=frzStock();s[ps[0]]=Math.max(0,(+s[ps[0]]||0)+sign*(+m[1]));Store.set("freezer","state",s);toast(sign>0?`Ngăn đá +${m[1]} ${FRZ.find(f=>f[0]===ps[0])[1].toLowerCase()}`:"Đã trừ khỏi ngăn đá")}
 function shopItemText(key){const m=key.match(/^w(\d+)-(\d+)-(\d+)$/);if(!m)return null;const w=SHOP.find(x=>x.w===+m[1]);return w&&w.trips[+m[2]]?w.trips[+m[2]].items[+m[3]]:null}
 function freezerNeed(){const need={};for(let i=0;i<7;i++){mealsFor(addD(new Date(),i)).meals.forEach(m=>proteinsIn(m.t+" "+m.r).forEach(p=>need[p]=(need[p]||0)+1))}return need}
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 function freezerCard(){
-  const s=frzStock(), need=freezerNeed();
-  return `<div class="card"><div class="eyebrow">Ngăn đá</div><div class="meal-name" style="margin-top:2px">Còn bao nhiêu phần</div>
-   <p class="small muted" style="margin:4px 0 6px">Tự cộng khi tick món thịt cá ở danh sách đi chợ, tự trừ khi ghi bữa có món đó.</p>
-   ${FRZ.map(([k,l,u])=>{const v=+s[k]||0,nd=need[k]||0,low=nd>v;return `<div class="frow"><div><b>${l}</b><div class="small muted">${u}</div></div><span class="need ${low?"low":""}">${nd?(low?`Thiếu ${nd-v} cho 7 ngày`:`Đủ 7 ngày (${nd})`):"Chưa cần"}</span><div class="fstep"><button data-act="frz" data-v="${k}" data-n="-1" aria-label="Bớt ${l}">−</button><output class="num">${v}</output><button data-act="frz" data-v="${k}" data-n="1" aria-label="Thêm ${l}">+</button></div></div>`}).join("")}
-  </div>`;
+  const s=frzStock(), need=freezerNeed(), short=FRZ.filter(([k])=>(need[k]||0)>(+s[k]||0));
+  const have=FRZ.filter(([k])=>(+s[k]||0)>0||(need[k]||0)>0);
+  return `<button class="card summary-btn" data-act="freezer"><div class="grow"><div class="eyebrow">Ngăn đá</div>
+   <div class="fz-line">${have.length?have.map(([k,l])=>`${cap(l.replace("Thịt ",""))} <b class="num">${+s[k]||0}</b>`).join(" · "):"Chưa ghi gì. Chạm để nhập số phần thịt cá đang có."}</div>
+   ${short.length?`<div class="need low" style="display:inline-block;margin-top:6px">Thiếu ${short.map(([k,l])=>l.replace("Thịt ","").toLowerCase()).join(", ")} cho 7 ngày tới</div>`:""}</div>
+   <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>`;
 }
-
+function freezerSheetBody(){
+  const s=frzStock(), need=freezerNeed();
+  return `<h4>Ngăn đá</h4><p class="small muted" style="margin:0">Tự cộng khi tick thịt cá ở danh sách đi chợ, tự trừ khi ghi bữa có món đó. Chỉnh tay nếu lệch.</p>
+   <div>${FRZ.map(([k,l,u])=>{const v=+s[k]||0,nd=need[k]||0,low=nd>v;return `<div class="frow"><div><b>${l}</b><div class="small muted">${u}</div></div><span class="need ${low?"low":""}">${nd?(low?`Thiếu ${nd-v}`:`Đủ 7 ngày`):"Chưa cần"}</span><div class="fstep"><button data-sh="frz" data-v="${k}" data-n="-1" aria-label="Bớt ${l}">−</button><output class="num">${v}</output><button data-sh="frz" data-v="${k}" data-n="1" aria-label="Thêm ${l}">+</button></div></div>`}).join("")}</div>
+   <button class="btn soft" data-sh="close">Xong</button>`;
+}
+function openFreezer(){openSheet(freezerSheetBody());sheetState={kind:"freezer"}}
 /* ---------- Biểu đồ tăng trưởng WHO (cân nặng theo tuổi, bé gái, 0–24 tháng) ---------- */
 // Nguồn: WHO Child Growth Standards, Simplified field tables, weight-for-age girls 0–5 years (percentiles)
 const WHO_WFA_G={p3:[2.4,3.2,4.0,4.6,5.1,5.5,5.8,6.1,6.3,6.6,6.8,7.0,7.1,7.3,7.5,7.7,7.8,8.0,8.2,8.3,8.5,8.7,8.8,9.0,9.2],
@@ -1280,7 +1323,7 @@ function renderStats(){
   const days7=[...Array(7)].map((_,i)=>iso(addD(new Date(),-i)));
   const sup={};SUPPS.forEach(([s])=>sup[s]=days7.filter(k=>Store.data.daily[k]&&Store.data.daily[k].supp&&Store.data.daily[k].supp[s]).length);
   const poop={normal:0,hard:0,loose:0};days7.forEach(k=>((Store.data.daily[k]||{}).poop||[]).forEach(p=>poop[p.t]++));
-  let h=`<div class="kpis"><div class="qbox"><div class="k">TB ml/ngày</div><div class="v num">${avg||"—"}</div></div><div class="qbox eat"><div class="k">Món đã ăn ổn</div><div class="v num">${okCount}</div></div><div class="qbox"><div class="k">Ngày đạm giàu sắt (7)</div><div class="v num">${ironDays()}/7</div></div></div>`;
+  let h=`<button class="btn pink block" data-act="logseg" data-v="report">Báo cáo 1 trang cho bác sĩ</button><div class="kpis"><div class="qbox"><div class="k">TB ml/ngày</div><div class="v num">${avg||"—"}</div></div><div class="qbox eat"><div class="k">Món đã ăn ổn</div><div class="v num">${okCount}</div></div><div class="qbox"><div class="k">Ngày đạm giàu sắt (7)</div><div class="v num">${ironDays()}/7</div></div></div>`;
   h+=`<div class="card"><div class="eyebrow">Lượng ăn dặm mỗi ngày · 14 ngày (ml)</div><svg class="bars" viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;margin-top:6px" role="img" aria-label="Biểu đồ lượng ăn 14 ngày">${g}${bars}${avg?`<line x1="${pl}" x2="${W-pr}" y1="${Y(avg)}" y2="${Y(avg)}" stroke="var(--matcha)" stroke-width="1.5" stroke-dasharray="5 4"/>`:""}</svg><p class="small muted" style="margin:6px 0 0">Nét đứt xanh: trung bình các ngày có ghi. Cột đậm: hôm nay.</p></div>`;
   h+=`<div class="card"><div class="eyebrow">Đa dạng món</div><div style="display:flex;align-items:baseline;gap:8px;margin-top:4px"><b style="font-family:var(--f-display);font-size:26px" class="num">${tried}</b><span class="muted">món đã thử trên ${Object.keys(FOODS).length} món trong danh sách</span></div><div class="cook-prog" style="margin-top:8px"><i style="width:${Math.round(tried/Object.keys(FOODS).length*100)}%;background:var(--matcha)"></i></div></div>`;
   h+=`<div class="card"><div class="eyebrow">7 ngày gần nhất</div><div class="frow" style="grid-template-columns:1fr auto"><b>Đi ngoài</b><span class="num">${poop.normal} bình thường · ${poop.hard} táo · ${poop.loose} lỏng</span></div>${SUPPS.map(([s,l])=>`<div class="frow" style="grid-template-columns:1fr 90px auto"><b>${l}</b><div class="cook-prog" style="margin:0"><i style="width:${Math.round(sup[s]/7*100)}%;background:var(--matcha)"></i></div><span class="num small">${sup[s]}/7 ngày</span></div>`).join("")}</div>`;
@@ -1418,6 +1461,9 @@ $("#sheet").addEventListener("click",e=>{
   if(a==="close"){closeSheet();return}
   if(a==="create"){createFamily();return}
   if(a==="export"){exportBackup();return}
+  if(a==="poop"){addPoop(b.dataset.d,b.dataset.v);closeSheet();return}
+  if(a==="rmpoop"){rmPoop(b.dataset.d,+b.dataset.v);openPoop(b.dataset.d);return}
+  if(a==="frz"){freezerAdj(b.dataset.v,+b.dataset.n);$("#sheetIn").innerHTML='<div class="grab"></div>'+freezerSheetBody();return}
   if(a==="doimport"){doImport();return}
   if(a==="retry"){FB_ERR="";closeSheet();location.reload();return}
   if(a==="copyinv"){const v=$("#invIn").value;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast("Đã sao chép link mời")).catch(()=>{$("#invIn").select();toast("Nhấn giữ để sao chép")});return}
@@ -1468,10 +1514,11 @@ $("#main").addEventListener("click",e=>{
   else if(a==="zoom"){e.stopPropagation();zoom(v)}
   else if(a==="qlog"){quickLog(v,+b.dataset.i,b.dataset.k)}
   else if(a==="cook"){openCook(+v,+b.dataset.i)}
-  else if(a==="poop"){addPoop(b.dataset.d,v)}
-  else if(a==="rmpoop"){rmPoop(b.dataset.d,+v)}
+  else if(a==="poopsheet"){openPoop(b.dataset.d)}
+  else if(a==="freezer"){openFreezer()}
+  else if(a==="showpast"){state.showPast=!state.showPast;render(false)}
   else if(a==="supp"){toggleSupp(b.dataset.d,v)}
-  else if(a==="frz"){freezerAdj(v,+b.dataset.n)}
+
   else if(a==="asksend"){ask(($("#askIn")||{}).value)}
   else if(a==="askchip"){ask(v)}
   else if(a==="askstop"){state.ask.ctl&&state.ask.ctl.abort()}

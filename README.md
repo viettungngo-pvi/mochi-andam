@@ -6,13 +6,13 @@ App lịch ăn dặm cho bé Mochi (sinh 02/05/2026), bắt đầu ăn dặm ki�
 
 ## Tính năng
 
-- **Hôm nay** — thực đơn từng ngày: công thức, lượng thành phẩm (ml), lượng bé ăn tham khảo. Ghi nhanh một chạm (*Ăn hết / Một nửa / Từ chối*) hoặc ghi chi tiết (ml, phản ứng, ảnh). Thẻ **Hôm nay của Mochi**: ghi đi ngoài (bình thường, táo, lỏng, kèm gợi ý xử lý) và tick sắt, D3K2, DHA, men vi sinh. Nhắc việc chuẩn bị tối hôm trước.
+- **Hôm nay** — thực đơn từng ngày: công thức, lượng thành phẩm (ml), lượng bé ăn tham khảo. Ghi nhanh một chạm (*Ăn hết / Một nửa / Từ chối*), nút *⋯* để ghi chi tiết (ml, phản ứng, ảnh); bữa đã ghi tự thu gọn. Thẻ **Mochi hôm nay**: tick sắt, D3K2, DHA, men vi sinh và ghi đi ngoài (kèm gợi ý xử lý). Nhắc việc chuẩn bị tối hôm trước.
 - **Chế độ nấu** — nút *Nấu* trên mỗi bữa mở từng bước toàn màn hình, chữ to, hẹn giờ có chuông, giữ màn hình sáng.
 - **Lịch** — lộ trình 5 tuần (31 ngày); **Gợi ý tuần mới** đến tháng thứ 12, tự đổi số bữa (2 → 3 bữa từ 9 tháng), lượng đạm, độ thô theo tuổi, kèm danh sách đi chợ; lịch sử các tuần đã lưu.
-- **Đi chợ** — danh sách tick theo lần đi chợ; **kho ngăn đá** tự cộng khi tick thịt cá, tự trừ khi ghi bữa, cảnh báo thiếu cho 7 ngày tới.
-- **Nhật ký** — lịch sử bữa ăn, bảng món đã thử, cân nặng trên **biểu đồ chuẩn WHO bé gái** (P3–P97), **Thống kê** (ml/ngày 14 ngày, đa dạng món, ngày có đạm giàu sắt, đi ngoài, bổ sung), **báo cáo 1 trang cho bác sĩ** (lưu thành ảnh).
+- **Đi chợ** — chỉ hiện các lần đi chợ sắp tới (lần đã qua gom lại); **ngăn đá** một dòng tóm tắt, chạm để chỉnh; tự cộng khi tick thịt cá, tự trừ khi ghi bữa, cảnh báo thiếu cho 7 ngày tới.
+- **Nhật ký** — ba mục: *Bữa ăn*, *Cân nặng* (biểu đồ chuẩn WHO bé gái, P3–P97), *Tổng quan* (báo cáo 1 trang cho bác sĩ, lượng ăn 14 ngày, đi ngoài, bổ sung, các món đã thử).
 - **Hỏi đáp** — hỏi nhanh (bản Claude) và cẩm nang.
-- **Cài đặt** — nhật ký chung của gia đình (Firebase), **sao lưu/khôi phục** ra file JSON.
+- **Cài đặt** — nhật ký chung của gia đình (Firebase), nhắc việc Lịch iPhone, **sao lưu/khôi phục** ra file JSON.
 - Dùng được khi mất mạng (service worker), có màn hình chào khi mở từ màn hình chính. Tuổi bé luôn hiện ở đầu app; nền sáng và tối.
 
 ## Lộ trình 5 tuần
