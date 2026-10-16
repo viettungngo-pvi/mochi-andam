@@ -2,7 +2,7 @@
 // Trang chính: lấy bản mới từ mạng trước, mất mạng thì dùng bản đã lưu (bỏ qua ?fam=…).
 // Thư viện Firebase, html2canvas, phông chữ: lưu lại sau lần tải đầu.
 // Không chặn kết nối Firestore (googleapis), Firebase tự lo phần ngoại tuyến.
-const CACHE = "mochi-v4";
+const CACHE = "mochi-v5";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./assets/apple-touch-icon.png", "./assets/logo-512.png", "./assets/icon-192.png", "./reminders.ics"];
 
 self.addEventListener("install", e => {

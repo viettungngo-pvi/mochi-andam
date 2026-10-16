@@ -6,7 +6,7 @@ App lịch ăn dặm cho bé Mochi (sinh 02/05/2026), bắt đầu ăn dặm ki�
 
 ## Tính năng
 
-- **Hôm nay** — thực đơn từng ngày: công thức, lượng thành phẩm (ml), lượng bé ăn tham khảo. Ghi nhanh một chạm (*Ăn hết / Một nửa / Từ chối*), nút *⋯* để ghi chi tiết (ml, phản ứng, ảnh); bữa đã ghi tự thu gọn. Thẻ **Mochi hôm nay**: tick sắt, D3K2, DHA, men vi sinh và ghi đi ngoài (kèm gợi ý xử lý). Nhắc việc chuẩn bị tối hôm trước.
+- **Hôm nay** — thực đơn từng ngày: công thức, lượng thành phẩm (ml), lượng bé ăn tham khảo. Ghi nhanh một chạm (*Ăn hết / Một nửa / Từ chối*), nút *⋯* để ghi chi tiết (ml, phản ứng, ảnh); bữa đã ghi tự thu gọn. Nút **Đổi** trên mỗi bữa: chọn món gợi ý nhanh từ những gì Mochi đã ăn được, hoặc tự ghép nền, đạm, rau củ, trái cây; công thức và lượng tự tính lại, nhắc rã đông, ngăn đá và chế độ nấu theo món mới. Thẻ **Mochi hôm nay**: tick sắt, D3K2, DHA, men vi sinh và ghi đi ngoài (kèm gợi ý xử lý). Nhắc việc chuẩn bị tối hôm trước.
 - **Chế độ nấu** — nút *Nấu* trên mỗi bữa mở từng bước toàn màn hình, chữ to, hẹn giờ có chuông, giữ màn hình sáng.
 - **Lịch** — lộ trình 5 tuần (31 ngày); **Gợi ý tuần mới** đến tháng thứ 12, tự đổi số bữa (2 → 3 bữa từ 9 tháng), lượng đạm, độ thô theo tuổi, kèm danh sách đi chợ; lịch sử các tuần đã lưu.
 - **Đi chợ** — chỉ hiện các lần đi chợ sắp tới (lần đã qua gom lại); **ngăn đá** một dòng tóm tắt, chạm để chỉnh; tự cộng khi tick thịt cá, tự trừ khi ghi bữa, cảnh báo thiếu cho 7 ngày tới.

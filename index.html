@@ -283,6 +283,23 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .daily{display:flex;flex-direction:column;gap:12px}
 .drow{display:flex;flex-direction:column;gap:8px}
 .dlabel{font-size:12.5px;font-weight:700;color:var(--muted)}
+.mhbtns{display:flex;gap:6px}
+.swapnote{font-size:12.5px;color:var(--muted);margin:-4px 0 8px}
+.swapnote b{color:var(--ink);font-weight:600}
+.qalt{display:flex;flex-direction:column;gap:6px}
+.qalt button{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 12px;cursor:pointer;font:inherit;color:inherit}
+.qalt button b{display:block;font-size:15px}
+.qalt button span{font-size:12.5px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-weight:600;font-size:13.5px;cursor:pointer;color:var(--ink)}
+.chip small{font-weight:600;color:var(--muted);font-size:11px;margin-left:3px}
+.chip[aria-pressed="true"]{background:var(--mochi-deep);border-color:transparent;color:#fff}
+.chip[aria-pressed="true"] small{color:#fff;opacity:.8}
+.chip.newf{border-style:dashed}
+.chip:disabled{opacity:.4;cursor:not-allowed}
+.preview{background:var(--surface-2);border-radius:16px;padding:12px 14px}
+.preview .pn{font-family:var(--f-display);font-weight:800;font-size:19px;line-height:1.15}
+.preview .pr{font-size:13.5px;margin-top:4px}
 .dbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .dbtns button,.supps button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 4px;font-weight:600;font-size:13.5px;cursor:pointer}
 .supps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
@@ -627,7 +644,7 @@ function blockFor(n){return PLAN.find(b=>n>=b.from&&n<=b.to)}
 const weekColor=w=>`var(--w${Math.min(w,6)})`;
 
 /* ===================== Lưu trữ ===================== */
-const COLS=["meals","weights","shop","weeks","foods","asks","notes","photos","daily","freezer"];
+const COLS=["meals","weights","shop","weeks","foods","asks","notes","photos","daily","freezer","swaps"];
 const CAPS={sample:null,assets:null,downloads:null};
 async function connectCaps(){
   if(!window.claude||!window.claude.use) return;
@@ -636,7 +653,7 @@ async function connectCaps(){
   CAPS.sample=s;CAPS.assets=a;CAPS.downloads=d; render(false);
 }
 const Store={
-  mode:"local", db:null, fs:null, fam:null, data:{meals:{},weights:{},shop:{},weeks:{},foods:{},asks:{},notes:{},photos:{},daily:{},freezer:{}},
+  mode:"local", db:null, fs:null, fam:null, data:{meals:{},weights:{},shop:{},weeks:{},foods:{},asks:{},notes:{},photos:{},daily:{},freezer:{},swaps:{}},
   load(){try{const s=localStorage.getItem("mochi-an-dam-v1");if(s){const o=JSON.parse(s);COLS.forEach(c=>{if(o[c])this.data[c]=o[c]})}}catch(e){}},
   cache(){try{localStorage.setItem("mochi-an-dam-v1",JSON.stringify(this.data))}catch(e){}},
   async connect(){
@@ -826,7 +843,11 @@ function renderAge(){
 }
 
 /* ---------- Hôm nay ---------- */
-function mealsFor(d){
+const mid=(n,i)=>`d${String(n).padStart(3,"0")}-${i+1}`;
+function applySwaps(n,info){if(!info.meals.length)return info;const sw=Store.data.swaps||{};
+  return {...info,meals:info.meals.map((m,i)=>{const s=sw[mid(n,i)];return s?{...m,t:s.t,r:s.r,f:s.f||null,n:null,swapped:true,orig:m.t}:m})}}
+function mealsFor(d){return applySwaps(dayNum(d),mealsRaw(d))}
+function mealsRaw(d){
   const n=dayNum(d);
   if(n>=1&&n<=PLAN_DAYS){const b=blockFor(n);return {n,week:weekOf(n),nf:b.nf&&n===b.from?b.nf:null,nfAny:b.nf,meals:b.meals,src:"plan"}}
   // ngoài lộ trình: tìm tuần gợi ý đã lưu
@@ -876,13 +897,13 @@ function renderToday(){
     const id=`d${String(n).padStart(3,"0")}-${i+1}`, lg=Store.data.meals[id];
     const isNew=info.nf&&i===0;
     const cook=`<button class="cookbtn" data-act="cook" data-v="${n}" data-i="${i}"><svg viewBox="0 0 24 24"><path d="M4 11h16v2a8 8 0 0 1-16 0z"/><path d="M9 7c0-2 2-2 2-4M14 7c0-2 2-2 2-4"/></svg>Nấu</button>`;
-    const head=`<div class="meal-head"><div class="eyebrow">Bữa ${i+1}${mealLabel(i,info.meals.length)}${isNew?` <span class="newtag">Món mới</span>`:""}</div>${lg?"":cook}</div>`;
+    const head=`<div class="meal-head"><div class="eyebrow">Bữa ${i+1}${mealLabel(i,info.meals.length)}${isNew?` <span class="newtag">Món mới</span>`:""}</div>${lg?"":`<div class="mhbtns"><button class="cookbtn" data-act="swap" data-v="${n}" data-i="${i}"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>Đổi</button>${cook}</div>`}</div>`;
     if(lg){
       h+=`<div class="card meal done">${head}<div class="meal-name">${esc(m.t)}</div>
         <div class="logged ${lg.mood==="react"?"react":""}"><span class="check">${ICON_CHECK}</span><div style="min-width:0"><b class="num">${lg.ml} ml</b> · ${MOODS[lg.mood]||""}${lg.note?`<div class="small muted">${esc(lg.note)}</div>`:""}</div><button class="edit" data-act="log" data-v="${id}" data-i="${i}">Sửa</button></div>${thumbs(lg.photos)}`;
     } else {
       h+=`<div class="card meal ${isNew?"isnew":""}">${head}
-      <div class="meal-name">${esc(m.t)}</div>
+      <div class="meal-name">${esc(m.t)}</div>${m.swapped?`<div class="swapnote">Đã đổi từ <b>${esc(m.orig)}</b></div>`:""}
       <div class="recipe">${esc(m.r)}${m.f?`<br><span class="muted">+ ${esc(m.f)}</span>`:""}${m.n?`<span class="note">${esc(m.n)}</span>`:""}</div>
       <div class="qty"><div class="qbox"><div class="k">Thành phẩm</div><div class="v num">~${m.y} ml</div></div><div class="qbox eat"><div class="k">Bé ăn</div><div class="v num">${esc(m.e)} ml</div></div></div>
       <div class="quick4"><button class="qbtn all" data-act="qlog" data-v="${id}" data-i="${i}" data-k="all">Ăn hết</button><button class="qbtn" data-act="qlog" data-v="${id}" data-i="${i}" data-k="half">Một nửa</button><button class="qbtn refuse" data-act="qlog" data-v="${id}" data-i="${i}" data-k="refuse">Từ chối</button><button class="qbtn more" data-act="log" data-v="${id}" data-i="${i}" aria-label="Ghi chi tiết: ml, phản ứng, ảnh"><svg viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3.2"/></svg></button></div>`;
@@ -1394,7 +1415,7 @@ $("#cook").addEventListener("click",e=>{
 });
 
 /* ---------- Sao lưu & khôi phục ---------- */
-const BK_COLS=["meals","weights","shop","weeks","foods","notes","daily","freezer","asks"];
+const BK_COLS=["meals","weights","shop","weeks","foods","notes","daily","freezer","swaps","asks"];
 function backupBlock(){return `<div class="field"><label>Sao lưu &amp; khôi phục</label><p class="small muted" style="margin:0 0 6px">Lưu toàn bộ nhật ký (trừ ảnh) thành một file. Khi đổi máy hay lỡ xóa app, nhập lại file này.</p><div class="row2"><button class="btn soft" data-sh="export">Xuất file sao lưu</button><label class="btn soft" for="importIn" style="cursor:pointer">Nhập file</label></div><input type="file" id="importIn" accept="application/json,.json" hidden><div id="importBox"></div></div>`}
 async function exportBackup(){
   const data={};BK_COLS.forEach(c=>data[c]=Store.data[c]||{});
@@ -1410,6 +1431,70 @@ function readImport(file){
   }catch(e){$("#importBox").innerHTML=`<div class="alert" style="margin-top:8px">File không đúng định dạng sao lưu của app Mochi.</div>`}};fr.readAsText(file);
 }
 async function doImport(){const o=sheetState&&sheetState.imp;if(!o)return;closeSheet();toast("Đang nhập dữ liệu…");for(const c of BK_COLS){const d=o.data[c];if(d&&Object.keys(d).length)await Store.setMany(c,d)}toast("Đã nhập xong")}
+
+/* ---------- Đổi món ---------- */
+const SW_OKS=["ok","trying"];
+function swapBases(n,d){const B=[];if(n<=14)B.push(["bot","Bột HiPP"]);if(n>=15)B.push(["chao",ageParams(d).base]);if(SW_OKS.includes(foodStatus("bellamy",d)))B.push(["bellamy","Bột Bellamy's"]);return B}
+function swapCompose(st){
+  const {base,dam,veg,qua,beo}=st, d=dateOf(st.n), ap=ageParams(d), orig=st.orig, bot=base!=="chao";
+  const vshort=v=>VSHORT[v]||FOODS[v].n.toLowerCase();
+  const head=base==="chao"?"Cháo":base==="bellamy"?"Bột Bellamy's":"Bột";
+  const dn=dam?(PSHORT[dam]||FOODS[dam].n.toLowerCase()):"";
+  const name=(dam==="longdo"||dam==="trung"?[head,...veg.map(vshort),dn]:[head,dn,...veg.map(vshort)]).filter(Boolean).join(" ");
+  const parts=[];
+  if(base==="chao") parts.push(`~${Math.max(40,orig.y-30)} ml cháo nền`);
+  else if(base==="bellamy") parts.push(`2 thìa canh bột Bellamy's (14 g) + 100 ml sữa HiPP`);
+  else parts.push(`1½–2 tcf bột HiPP + 30 ml sữa HiPP`);
+  if(dam){ if(bot&&dam==="longdo") parts.push("¼–½ lòng đỏ trứng chín kỹ"); else parts.push(pamt(dam,bot?Math.min(15,ap.g):ap.g)); }
+  veg.forEach(v=>parts.push(bot?`10 g ${vshort(v)} ${FOODS[v].g==="rau"?"luộc xay mịn":"hấp nghiền"}`:vamt(v,ap)));
+  if(beo) parts.push("¼ tcf bơ đậu phộng nguyên chất pha loãng");
+  if(st.n>=10) parts.push(bot?"½ tcf dầu":"1 tcf dầu");
+  const f=qua?`${FAMT[qua]||FOODS[qua].n.toLowerCase()} nghiền 2–3 tcf sau bữa`:null;
+  return {t:name,r:parts.join(" + "),f};
+}
+function swapIngredients(st){
+  const d=dateOf(st.n);
+  return ["dam","cu","rau","qua","beo"].map(g=>({g,ids:Object.keys(FOODS).filter(id=>FOODS[id].g===g&&!(st.base!=="chao"&&g==="dam"&&id!=="longdo"))}));
+}
+function swapQuick(st){
+  const d=dateOf(st.n), ok=id=>SW_OKS.includes(foodStatus(id,d));
+  const P=["bo","lon","ga","ca","longdo","dauphu","trung","gan"].filter(ok), V=["bido","khoailang","carot","raungot","caingot","mongtoi"].filter(ok);
+  const cur=proteinsIn(st.orig.t+" "+st.orig.r), out=[], seen=new Set([st.orig.t]);
+  const base=st.n>=15?"chao":"bot";
+  const order=[...P.filter(p=>cur.includes(p)||(p==="longdo"&&/lòng đỏ/i.test(st.orig.t))),...P.filter(p=>!(cur.includes(p)||(p==="longdo"&&/lòng đỏ/i.test(st.orig.t))))];
+  const prots=base==="bot"?(P.includes("longdo")?["longdo",null]:[null]):order;
+  for(const p of prots){for(const v of V){if(out.length>=4)break;const c=swapCompose({...st,base,dam:p,veg:[v],qua:null,beo:false});if(seen.has(c.t))continue;seen.add(c.t);
+    const thaw=p&&["lon","bo","ga","ca","gan"].includes(p)&&!cur.includes(p);c.note=thaw?`Cần rã đông ${FOODS[p].n.toLowerCase()}`:p&&cur.includes(p)?"Cùng loại đạm, không phải rã đông thêm":"";out.push(c)}}
+  return out;
+}
+function openSwap(n,i){
+  const d=dateOf(n), raw=mealsRaw(d).meals[i]; if(!raw) return;
+  const B=swapBases(n,d), cur=Store.data.swaps[mid(n,i)];
+  sheetState={kind:"swap",n,i,orig:raw,base:(cur&&cur.base)||(/^bột bellamy/i.test(raw.t)?"bellamy":n>=15?"chao":"bot"),dam:(cur&&cur.dam)||null,veg:(cur&&cur.veg)||[],qua:(cur&&cur.qua)||null,beo:!!(cur&&cur.beo),bases:B};
+  if(!B.some(b=>b[0]===sheetState.base))sheetState.base=B[0][0];
+  openSheet(swapBody());
+}
+function swapBody(){
+  const st=sheetState, d=dateOf(st.n), cur=Store.data.swaps[mid(st.n,st.i)], q=swapQuick(st);
+  const picked=st.dam||st.veg.length, c=picked?swapCompose(st):null;
+  const newPicked=[st.dam,...st.veg,st.qua,st.beo?"bdp":null].filter(x=>x&&!SW_OKS.includes(foodStatus(x,d)));
+  const chip=(id,on,g)=>{const s=foodStatus(id,d),isNew=!SW_OKS.includes(s);return `<button class="chip ${isNew?"newf":""}" data-sh="swpick" data-g="${g}" data-v="${id}" aria-pressed="${on}" ${s==="react"?"disabled":""}>${esc(FOODS[id].n)}${isNew?`<small>${s==="react"?"phản ứng":"chưa thử"}</small>`:""}</button>`};
+  const grp={dam:"Đạm (chọn 1)",cu:"Củ",rau:"Rau",qua:"Trái cây ăn sau bữa",beo:"Thêm"};
+  return `<div><div class="eyebrow">Ngày ${st.n} · Bữa ${st.i+1}</div><h4>Đổi món</h4><div class="small muted" style="margin-top:2px">Theo lịch: ${esc(st.orig.t)}</div></div>
+   ${q.length?`<div class="field"><label>Gợi ý nhanh từ món Mochi đã ăn được</label><div class="qalt">${q.map((x,k)=>`<button data-sh="swquick" data-v="${k}"><b>${esc(x.t)}</b><span>${esc(x.note||x.r)}</span></button>`).join("")}</div></div>`:""}
+   <div class="field"><label>Hoặc tự ghép nguyên liệu</label>
+    ${st.bases.length>1?`<div class="chips" style="margin-bottom:10px">${st.bases.map(([k,l])=>`<button class="chip" data-sh="swbase" data-v="${k}" aria-pressed="${st.base===k}">${esc(l)}</button>`).join("")}</div>`:""}
+    ${swapIngredients(st).map(({g,ids})=>(ids=ids.filter(id=>st.showNew||SW_OKS.includes(foodStatus(id,d))||[st.dam,st.qua,...st.veg].includes(id)||(id==="bdp"&&st.beo))).length?`<div class="eyebrow" style="margin:8px 0 6px">${grp[g]}</div><div class="chips">${ids.map(id=>chip(id,g==="dam"?st.dam===id:g==="qua"?st.qua===id:g==="beo"?st.beo:st.veg.includes(id),g)).join("")}</div>`:"").join("")}
+    <button class="chip newf" style="margin-top:10px" data-sh="swnew">${st.showNew?"Ẩn món chưa thử":"+ Hiện cả món chưa thử"}</button>
+   </div>
+   ${c?`<div class="preview"><div class="pn">${esc(c.t)}</div><div class="pr">${esc(c.r)}${c.f?`<br><span class="muted">+ ${esc(c.f)}</span>`:""}</div></div>`:""}
+   ${newPicked.length>1?`<div class="alert">Chỉ nên thử <b>1 món mới</b> mỗi lần, theo dõi 3 ngày rồi mới thêm món khác.</div>`:newPicked.length?`<div class="hint">${esc(FOODS[newPicked[0]].n)} là món mới: cho ít, ăn bữa sáng để dễ theo dõi, 3 ngày tới không thêm món mới khác.</div>`:""}
+   <button class="btn pink block" data-sh="swsave" ${c&&newPicked.length<=1?"":"disabled style='opacity:.45'"}>Dùng món này</button>
+   ${cur?`<button class="btn soft block" data-sh="swreset">Về món theo lịch</button>`:""}
+   <button class="btn soft" data-sh="close">Đóng</button>`;
+}
+function redrawSwap(){const el=$("#sheet"),y=el.scrollTop;$("#sheetIn").innerHTML='<div class="grab"></div>'+swapBody();el.scrollTop=y}
+function saveSwap(c,extra){const st=sheetState;Store.set("swaps",mid(st.n,st.i),{t:c.t,r:c.r,f:c.f||null,base:st.base,dam:st.dam,veg:st.veg,qua:st.qua,beo:st.beo,...(extra||{}),ts:Date.now()});closeSheet();toast("Đã đổi sang "+c.t)}
 
 /* ===================== Sheet ghi bữa / cân ===================== */
 let sheetState=null;
@@ -1461,6 +1546,19 @@ $("#sheet").addEventListener("click",e=>{
   if(a==="close"){closeSheet();return}
   if(a==="create"){createFamily();return}
   if(a==="export"){exportBackup();return}
+  if(s&&s.kind==="swap"){
+    if(a==="swnew"){s.showNew=!s.showNew;redrawSwap();return}
+    if(a==="swbase"){s.base=b.dataset.v;if(s.base!=="chao"&&s.dam&&s.dam!=="longdo")s.dam=null;redrawSwap();return}
+    if(a==="swpick"){const g=b.dataset.g,id=b.dataset.v;
+      if(g==="dam")s.dam=s.dam===id?null:id;
+      else if(g==="qua")s.qua=s.qua===id?null:id;
+      else if(g==="beo")s.beo=!s.beo;
+      else{if(s.veg.includes(id))s.veg=s.veg.filter(x=>x!==id);else{s.veg=[...s.veg,id];if(s.veg.length>2)s.veg.shift()}}
+      redrawSwap();return}
+    if(a==="swquick"){const q=swapQuick(s)[+b.dataset.v];if(q)saveSwap(q,{base:s.n>=15?"chao":"bot",dam:null,veg:[],qua:null,beo:false});return}
+    if(a==="swsave"){if(b.disabled)return;saveSwap(swapCompose(s));return}
+    if(a==="swreset"){Store.del("swaps",mid(s.n,s.i));closeSheet();toast("Đã về món theo lịch");return}
+  }
   if(a==="poop"){addPoop(b.dataset.d,b.dataset.v);closeSheet();return}
   if(a==="rmpoop"){rmPoop(b.dataset.d,+b.dataset.v);openPoop(b.dataset.d);return}
   if(a==="frz"){freezerAdj(b.dataset.v,+b.dataset.n);$("#sheetIn").innerHTML='<div class="grab"></div>'+freezerSheetBody();return}
@@ -1514,6 +1612,7 @@ $("#main").addEventListener("click",e=>{
   else if(a==="zoom"){e.stopPropagation();zoom(v)}
   else if(a==="qlog"){quickLog(v,+b.dataset.i,b.dataset.k)}
   else if(a==="cook"){openCook(+v,+b.dataset.i)}
+  else if(a==="swap"){openSwap(+v,+b.dataset.i)}
   else if(a==="poopsheet"){openPoop(b.dataset.d)}
   else if(a==="freezer"){openFreezer()}
   else if(a==="showpast"){state.showPast=!state.showPast;render(false)}
