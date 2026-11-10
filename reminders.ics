@@ -82,7 +82,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261111T124900Z
 DTEND:20261111T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Mai đi chợ lần 2 (tuần 2): Rau ngót 1 bó nhỏ.
+DESCRIPTION:Mai đi chợ lần 2 (tuần 2): Rau ngót 1 bó nhỏ (cần 
+ ~30 g lá).
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -123,8 +124,8 @@ DTSTART:20261116T124900Z
 DTEND:20261116T130400Z
 SUMMARY:Mochi: mai có món mới
 DESCRIPTION:Mai bắt đầu món mới: thịt lợn\, dùng nửa phần.
-  Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). Vo và ng
- âm gạo cho cháo sáng mai.
+  Rã đông 1 phần thịt lợn (~15 g)\, để ngăn mát qua đêm. Vo
+  và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -137,8 +138,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261117T124900Z
 DTEND:20261117T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
- Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 1 phần thịt lợn (~15 g)\, để ngăn mát qua
+  đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -151,8 +152,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261118T124900Z
 DTEND:20261118T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
- Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 1 phần thịt lợn (~15 g)\, để ngăn mát qua
+  đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -166,8 +167,8 @@ DTSTART:20261119T124900Z
 DTEND:20261119T130400Z
 SUMMARY:Mochi: mai có món mới
 DESCRIPTION:Mai bắt đầu món mới: thịt bò\, dùng nửa phần. R
- ã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo và ngâm g
- ạo cho cháo sáng mai.
+ ã đông 1 phần thịt bò (~15 g)\, để ngăn mát qua đêm. Vo và
+  ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -180,8 +181,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261120T124900Z
 DTEND:20261120T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
-  và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 1 phần thịt bò (~15 g)\, để ngăn mát qua 
+ đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -194,8 +195,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261121T124900Z
 DTEND:20261121T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
-  và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 1 phần thịt bò (~15 g)\, để ngăn mát qua 
+ đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -208,10 +209,11 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261122T124900Z
 DTEND:20261122T130400Z
 SUMMARY:Mochi: mai có món mới
-DESCRIPTION:Mai bắt đầu 2 bữa/ngày và món mới đu đủ (chỉ 
- 1 thìa cà phê sau cháo). Rã đông 1 phần thịt lợn (để ngăn
-  mát qua đêm). Vo và ngâm gạo cho cháo sáng mai. Kiểm tra còn 
- trứng.
+DESCRIPTION:Mai bắt đầu 2 bữa/ngày\, 2 bữa cùng món cháo lợn
+  rau ngót (nấu 1 nồi chia đôi)\, và món mới đu đủ (chỉ 1 
+ thìa cà phê sau bữa sáng). Rã đông 2 phần thịt lợn (~15 g/p
+ hần\, cho 2 bữa)\, để ngăn mát qua đêm. Vo và ngâm gạo cho 
+ cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -224,8 +226,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261123T124900Z
 DTEND:20261123T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
- Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 phần thịt lợn (~15 g/phần\, cho 2 bữa)\,
+  để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -238,10 +240,9 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261124T124900Z
 DTEND:20261124T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt lợn (để ngăn mát qua đêm). 
- Vo và ngâm gạo cho cháo sáng mai. Mai đi chợ lần 2 (tuần 4): 
- Đu đủ chín 150 g\; bí đỏ 100 g\; rau ngót 1 bó nhỏ\; khoai la
- ng 1 củ nhỏ.
+DESCRIPTION:Rã đông 2 phần thịt lợn (~15 g/phần\, cho 2 bữa)\,
+  để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai. Mai 
+ đi chợ lần 2 (tuần 4): Bí đỏ 200 g\; đu đủ chín 150 g.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -254,9 +255,10 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261125T124900Z
 DTEND:20261125T130400Z
 SUMMARY:Mochi: mai có món mới
-DESCRIPTION:Mai bắt đầu món mới: cá hồi\, dùng nửa miếng\, 
- gỡ kỹ xương. Rã đông 1 miếng cá hồi + 1 phần thịt bò (
- để ngăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Mai bắt đầu món mới: cá hồi\, mỗi bữa chỉ nử
+ a lượng (~8 g)\, gỡ kỹ xương. Rã đông 2 miếng cá hồi (~15
+  g/miếng\, cho 2 bữa)\, để ngăn mát qua đêm. Vo và ngâm gạo
+  cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -269,8 +271,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261126T124900Z
 DTEND:20261126T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 miếng cá hồi + 1 phần thịt bò (để ng
- ăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 miếng cá hồi (~15 g/miếng\, cho 2 bữa)\, 
+ để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -283,8 +285,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261127T124900Z
 DTEND:20261127T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 miếng cá hồi + 1 phần thịt bò (để ng
- ăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 miếng cá hồi (~15 g/miếng\, cho 2 bữa)\, 
+ để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -297,8 +299,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261128T124900Z
 DTEND:20261128T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt bò + 1 phần thịt lợn (để n
- găn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 phần thịt bò (~15 g/phần\, cho 2 bữa)\, 
+ để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -311,9 +313,10 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261129T124900Z
 DTEND:20261129T130400Z
 SUMMARY:Mochi: mai có món mới
-DESCRIPTION:Mai bắt đầu bột Bellamy's táo quế (yến mạch\, tá
- o\, quế\, gluten): theo dõi kỹ 3 ngày. Rã đông 1 phần thịt b
- ò (để ngăn mát qua đêm). Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Mai bắt đầu bột Bellamy's táo quế sau bữa sáng (y
+ ến mạch\, táo\, quế\, gluten): theo dõi kỹ 3 ngày. Rã đông 2
+  phần thịt bò (~15 g/phần\, cho 2 bữa)\, để ngăn mát qua đ
+ êm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -326,8 +329,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261130T124900Z
 DTEND:20261130T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
-  và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 phần thịt bò (~15 g/phần\, cho 2 bữa)\, 
+ để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -340,8 +343,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261201T124900Z
 DTEND:20261201T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 1 phần thịt bò (để ngăn mát qua đêm). Vo
-  và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 phần thịt bò (~15 g/phần\, cho 2 bữa)\, 
+ để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -383,8 +386,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261112T004600Z
 DTEND:20261112T011600Z
 SUMMARY:Mochi: đi chợ lần 2 (tuần 2)
-DESCRIPTION:Rau ngót 1 bó nhỏ. Thịt cá chia phần\, trữ đông ng
- ay khi về.
+DESCRIPTION:Rau ngót 1 bó nhỏ (cần ~30 g lá). Thịt cá chia phần
+ \, trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ lần 2 (tuần 2)
@@ -397,10 +400,10 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261115T004600Z
 DTEND:20261115T011600Z
 SUMMARY:Mochi: đi chợ tuần 3
-DESCRIPTION:Gạo tẻ 1 kg\; thịt lợn nạc thăn 150 g (chia 7 phần
- \, trữ đông)\; thịt bò thăn 150 g (chia 7 phần\, trữ đông)\;
-  bí đỏ 100 g\; khoai lang 150 g. Thịt cá chia phần\, trữ đông
-  ngay khi về.
+DESCRIPTION:Gạo tẻ 1 kg\; thịt lợn nạc thăn 150 g (chia 9 phần
+  ~15 g\, trữ đông)\; thịt bò thăn 100 g (chia 5 phần ~15 g\, tr
+ ữ đông)\; bí đỏ 100 g\; khoai lang 150 g. Thịt cá chia phần\,
+  trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ tuần 3
@@ -413,9 +416,9 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261122T004600Z
 DTEND:20261122T011600Z
 SUMMARY:Mochi: đi chợ tuần 4
-DESCRIPTION:Cá hồi phi lê 100 g (cắt 5 miếng\, trữ đông)\; tr
- ứng gà 3 quả\; đu đủ chín 150 g\; bí đỏ 100 g\; rau ngót 1 
- bó nhỏ. Thịt cá chia phần\, trữ đông ngay khi về.
+DESCRIPTION:Cá hồi phi lê 100 g (cắt 6 miếng ~15 g\, trữ đông)\
+ ; rau ngót 1 bó nhỏ (cần ~60 g lá)\; đu đủ chín 150 g. Thịt 
+ cá chia phần\, trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ tuần 4
@@ -428,9 +431,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261125T004600Z
 DTEND:20261125T011600Z
 SUMMARY:Mochi: đi chợ lần 2 (tuần 4)
-DESCRIPTION:Đu đủ chín 150 g\; bí đỏ 100 g\; rau ngót 1 bó nhỏ
- \; khoai lang 1 củ nhỏ. Thịt cá chia phần\, trữ đông ngay khi
-  về.
+DESCRIPTION:Bí đỏ 200 g\; đu đủ chín 150 g. Thịt cá chia phần
+ \, trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ lần 2 (tuần 4)
@@ -443,8 +445,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261129T004600Z
 DTEND:20261129T011600Z
 SUMMARY:Mochi: đi chợ tuần 5
-DESCRIPTION:Thịt bò thăn 100 g (chia 5 phần\, trữ đông)\; bí đ
- ỏ 100 g. Thịt cá chia phần\, trữ đông ngay khi về.
+DESCRIPTION:Thịt bò thăn 100 g (chia 6 phần ~15 g\, trữ đông)\; k
+ hoai lang 200 g. Thịt cá chia phần\, trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ tuần 5

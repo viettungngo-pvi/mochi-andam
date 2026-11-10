@@ -18,23 +18,20 @@ def date_of(n):
 
 # Món chính theo ngày (để suy ra cần chuẩn bị gì tối hôm trước)
 def meals(n):
-    if n <= 9:
-        return {"chao": False, "thaw": [], "egg": n >= 10}
+    """Đồ cần chuẩn bị cho ngày n. Từ ngày 22 ăn 2 bữa cùng món, mỗi phần thịt cá ~15 g cân sống."""
     if n <= 14:
-        return {"chao": False, "thaw": [], "egg": True}
+        return {"chao": False, "thaw": [], "egg": n >= 10}
     if n == 15:
         return {"chao": True, "thaw": [], "egg": True}
     if n <= 18:
-        return {"chao": True, "thaw": ["1 phần thịt lợn"], "egg": False}
+        return {"chao": True, "thaw": ["1 phần thịt lợn (~15 g)"], "egg": False}
     if n <= 21:
-        return {"chao": True, "thaw": ["1 phần thịt bò"], "egg": False}
+        return {"chao": True, "thaw": ["1 phần thịt bò (~15 g)"], "egg": False}
     if n <= 24:
-        return {"chao": True, "thaw": ["1 phần thịt lợn"], "egg": True}
+        return {"chao": True, "thaw": ["2 phần thịt lợn (~15 g/phần, cho 2 bữa)"], "egg": False}
     if n <= 27:
-        return {"chao": True, "thaw": ["1 miếng cá hồi", "1 phần thịt bò"], "egg": False}
-    if n == 28:
-        return {"chao": True, "thaw": ["1 phần thịt bò", "1 phần thịt lợn"], "egg": False}
-    return {"chao": True, "thaw": ["1 phần thịt bò"], "egg": False}
+        return {"chao": True, "thaw": ["2 miếng cá hồi (~15 g/miếng, cho 2 bữa)"], "egg": False}
+    return {"chao": True, "thaw": ["2 phần thịt bò (~15 g/phần, cho 2 bữa)"], "egg": False}
 
 
 NEW_FOOD = {
@@ -46,20 +43,20 @@ NEW_FOOD = {
     15: "Mai chuyển từ bột sang cháo rây.",
     16: "Mai bắt đầu món mới: thịt lợn, dùng nửa phần.",
     19: "Mai bắt đầu món mới: thịt bò, dùng nửa phần.",
-    22: "Mai bắt đầu 2 bữa/ngày và món mới đu đủ (chỉ 1 thìa cà phê sau cháo).",
-    25: "Mai bắt đầu món mới: cá hồi, dùng nửa miếng, gỡ kỹ xương.",
-    29: "Mai bắt đầu bột Bellamy's táo quế (yến mạch, táo, quế, gluten): theo dõi kỹ 3 ngày.",
+    22: "Mai bắt đầu 2 bữa/ngày, 2 bữa cùng món cháo lợn rau ngót (nấu 1 nồi chia đôi), và món mới đu đủ (chỉ 1 thìa cà phê sau bữa sáng).",
+    25: "Mai bắt đầu món mới: cá hồi, mỗi bữa chỉ nửa lượng (~8 g), gỡ kỹ xương.",
+    29: "Mai bắt đầu bột Bellamy's táo quế sau bữa sáng (yến mạch, táo, quế, gluten): theo dõi kỹ 3 ngày.",
 }
 
 # Đi chợ: (số ngày của bữa đầu tiên dùng đồ, tiêu đề, danh sách)
 SHOP = [
     (0, "Đi chợ tuần 1", "Bột HiPP gạo nhũ nhi 1 hộp; sữa HiPP số 2 nếu sắp hết; bí đỏ 200 g; khoai lang 250 g; dầu ăn dặm 1 chai"),
     (7, "Đi chợ tuần 2", "Trứng gà 6 quả; bí đỏ 100 g"),
-    (11, "Đi chợ lần 2 (tuần 2)", "Rau ngót 1 bó nhỏ"),
-    (14, "Đi chợ tuần 3", "Gạo tẻ 1 kg; thịt lợn nạc thăn 150 g (chia 7 phần, trữ đông); thịt bò thăn 150 g (chia 7 phần, trữ đông); bí đỏ 100 g; khoai lang 150 g"),
-    (21, "Đi chợ tuần 4", "Cá hồi phi lê 100 g (cắt 5 miếng, trữ đông); trứng gà 3 quả; đu đủ chín 150 g; bí đỏ 100 g; rau ngót 1 bó nhỏ"),
-    (24, "Đi chợ lần 2 (tuần 4)", "Đu đủ chín 150 g; bí đỏ 100 g; rau ngót 1 bó nhỏ; khoai lang 1 củ nhỏ"),
-    (28, "Đi chợ tuần 5", "Thịt bò thăn 100 g (chia 5 phần, trữ đông); bí đỏ 100 g"),
+    (11, "Đi chợ lần 2 (tuần 2)", "Rau ngót 1 bó nhỏ (cần ~30 g lá)"),
+    (14, "Đi chợ tuần 3", "Gạo tẻ 1 kg; thịt lợn nạc thăn 150 g (chia 9 phần ~15 g, trữ đông); thịt bò thăn 100 g (chia 5 phần ~15 g, trữ đông); bí đỏ 100 g; khoai lang 150 g"),
+    (21, "Đi chợ tuần 4", "Cá hồi phi lê 100 g (cắt 6 miếng ~15 g, trữ đông); rau ngót 1 bó nhỏ (cần ~60 g lá); đu đủ chín 150 g"),
+    (24, "Đi chợ lần 2 (tuần 4)", "Bí đỏ 200 g; đu đủ chín 150 g"),
+    (28, "Đi chợ tuần 5", "Thịt bò thăn 100 g (chia 6 phần ~15 g, trữ đông); khoai lang 200 g"),
 ]
 
 
@@ -77,10 +74,10 @@ def evenings():
         if n == 1:
             parts.append("Chuẩn bị thìa silicone, ghế ăn, cốc có vạch ml.")
         if m["thaw"]:
-            parts.append("Rã đông " + " + ".join(m["thaw"]) + " (để ngăn mát qua đêm).")
+            parts.append("Rã đông " + " + ".join(m["thaw"]) + ", để ngăn mát qua đêm.")
         if m["chao"]:
             parts.append("Vo và ngâm gạo cho cháo sáng mai.")
-        if n in (10, 15, 22):
+        if n in (10, 15):
             parts.append("Kiểm tra còn trứng.")
         tomorrow = date_of(n)
         if tomorrow in shop_next and tomorrow.weekday() != 6:
