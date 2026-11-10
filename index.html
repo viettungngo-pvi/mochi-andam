@@ -286,6 +286,7 @@ details.g .gb{padding:0 16px 16px;font-size:14.5px}
 .mhbtns{display:flex;gap:6px}
 .raw{background:var(--yolk-soft);border-radius:14px;padding:9px 12px;font-size:13.5px;display:flex;flex-direction:column;gap:6px;margin-top:10px}
 .raw .rk{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:1px}
+.raw .safe{color:var(--danger);font-weight:600}
 .lrow{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:center;margin-top:8px}
 .lrow .lbl{font-weight:700;font-size:13.5px;color:var(--muted)}
 .lrow .quick4{grid-template-columns:1fr 1fr 1fr 40px;gap:5px}
@@ -783,7 +784,7 @@ function ageParams(d){const m=age(d).m;
   if(m>=12) return {m,meals:3,y:220,e:"180–220",g:30,cu:30,rau:15,tex:"Ăn cùng gia đình: cơm nát hoặc cháo đặc hạt nguyên, cắt nhỏ, nêm rất nhạt",base:"Cơm nát / cháo đặc"};
   if(m>=9) return {m,meals:3,y:190,e:"150–180",g:25,cu:30,rau:15,tex:"Cháo hạt nguyên nấu nhừ, rau củ cắt hạt lựu mềm, tập đồ ăn cầm tay",base:"Cháo hạt nguyên"};
   if(m>=7) return {m,meals:2,y:140,e:"110–125",g:20,cu:20,rau:10,tex:"Cháo nghiền còn hạt vỡ, thịt băm nhỏ, rau củ dầm bằng thìa",base:"Cháo hạt vỡ"};
-  return {m,meals:2,y:130,e:"90–120",g:20,cu:20,rau:10,tex:"Cháo rây mịn",base:"Cháo rây"};}
+  return {m,meals:2,y:130,e:"90–120",g:15,cu:20,rau:10,tex:"Cháo rây mịn",base:"Cháo rây"};}
 function pamt(p,g){return ({lon:`${g} g thịt lợn nạc`,bo:`${g} g thịt bò thăn`,ca:`${g} g cá phi lê, gỡ kỹ xương`,longdo:"1 lòng đỏ trứng chín kỹ",ga:`${g} g thịt gà bỏ da, nấu chín kỹ`,dauphu:`${g} g đậu phụ non nghiền`,trung:"1 quả trứng chín kỹ, dầm nát",gan:"10–15 g gan gà luộc chín hẳn, nghiền"})[p]||FOODS[p].n}
 function vamt(v,ap){return FOODS[v].g==="rau"?`${ap.rau} g lá ${FOODS[v].n.toLowerCase()}`:`${ap.cu} g ${FOODS[v].n.toLowerCase()}`}
 const RAWN={lon:"thịt lợn nạc",bo:"thịt bò thăn",ca:"cá phi lê bỏ da",ga:"thịt gà bỏ da",dauphu:"đậu phụ non",gan:"gan gà"};
@@ -1082,7 +1083,24 @@ function renderGuide(){
   h+=g("Thiếu nguyên liệu thì thay",SWAPS.map(([f,alts])=>`<div class="swap"><div class="from">${f}</div>${alts.map(([a,y,c])=>`<div class="alt"><span class="tag ${y?"y":""}">${a}${y?" ✓":""}</span><span class="small">${c}</span></div>`).join("")}</div>`).join("")+`<p class="small muted">✓ là món Mochi đã ăn. Món chưa ăn coi như món mới: cho ít, theo dõi 3 ngày, không thử 2 món mới cùng lúc.</p>`);
   h+=g("Dị ứng: khi nào cần lo",`<ul><li><b>Bình thường:</b> phân đổi màu theo món, hơi táo, phân sẫm do sắt.</li><li><b>Dừng món, hỏi bác sĩ:</b> mẩn đỏ, mề đay, nôn, tiêu chảy sau món mới.</li><li style="color:var(--danger)"><b>Đi cấp cứu ngay:</b> sưng môi/mặt, khò khè, khó thở, lừ đừ.</li><li><b>Hóc nghẹn:</b> bé ọe, đỏ mặt nhưng còn ho là bình thường. Bé im lặng, không ho, tím tái là hóc — sơ cứu ngay.</li></ul>`);
   h+=g("Không cho bé ăn trước 1 tuổi",`<p style="margin:0">Mật ong, muối, nước mắm, hạt nêm, đường, nước ép, trứng/thịt/cá tái, cá lớn (cá kiếm, cá ngừ lớn, cá thu vua), hạt và nho nguyên quả.</p>`);
-  h+=g("Bảo quản",`<ul><li>Thịt, cá: chia phần ~20 g, ghi ngày, ngăn đông, dùng trong 2 tuần. Rã đông ở ngăn mát, không cấp đông lại.</li><li>Bí đỏ đã cắt: bọc màng, ngăn mát 3–5 ngày.</li><li>Rau ngót: tuốt lá, không rửa, bọc khăn giấy, ngăn mát 3–4 ngày.</li><li>Khoai lang: nơi khô thoáng, không để tủ lạnh.</li><li>Bột HiPP đã mở: đóng kín, dùng trong 28 ngày.</li></ul>`);
+  h+=g("Kết hợp nguyên liệu an toàn",`<ul>
+<li><b>Các món trong thực đơn của Mochi kết hợp với nhau đều an toàn</b> khi nấu chín: thịt, cá, trứng với bí đỏ, khoai lang, rau ngót, cải ngọt, cà rốt. Các cặp "kỵ nhau" truyền miệng phần lớn chưa có bằng chứng. Ngộ độc thật thường do nấu chưa chín, bảo quản sai hoặc dùng sai loại thực phẩm.</li>
+<li><b>Mỗi bát chỉ 1 loại đạm.</b> Không trộn thịt với cá, hay cá với trứng trong cùng một bát. Bát cháo nhẹ bụng hơn, và nếu bé có phản ứng thì biết ngay do món nào.</li>
+<li><b>Mỗi lần chỉ 1 món mới.</b> Món mới nấu cùng rau củ bé đã quen, ăn bữa sáng, theo dõi 3 ngày.</li>
+<li><b>Chỉ 1 loại rau lá xanh trong một bát</b> (rau ngót, cải ngọt hoặc mồng tơi), 10–15 g lá. Rau lá có nitrat: nấu tươi trong ngày, không để cháo có rau qua đêm, không hâm nhiều lần.</li>
+<li><b>Cá:</b> chọn cá hồi, cá basa, cá quả (cá lóc), cá diêu hồng. Tránh cá ngừ đại dương, cá kiếm, cá thu vua, cá mập vì có nhiều thủy ngân. Gỡ xương bằng tay, bóp kỹ.</li>
+<li><b>Gan gà:</b> tối đa 1 lần mỗi tuần, 10–15 g, luộc chín hẳn, vì gan có rất nhiều vitamin A.</li>
+<li><b>Rau củ không dùng:</b> khoai tây mọc mầm hoặc vỏ xanh, khoai lang có đốm đen hay vị đắng, bí đỏ bị mốc. Gặp thì bỏ cả củ, không gọt bỏ phần hỏng.</li>
+</ul>`,true);
+  h+=g("Nấu chín và vệ sinh",`<ul>
+<li><b>Thịt băm</b> nấu đến khi không còn màu hồng, sôi lửa nhỏ ít nhất 7–10 phút (gà, gan 10 phút). <b>Cá</b> chín đục, gỡ ra thành thớ. <b>Trứng</b> luộc 10 phút, lòng đỏ đông hẳn.</li>
+<li><b>Thớt, dao riêng cho đồ sống.</b> Rửa tay bằng xà phòng sau khi chạm thịt cá sống, trước khi bón cho bé.</li>
+<li><b>Rã đông</b> trong ngăn mát từ tối hôm trước, không rã đông ngoài bàn hay ngâm nước nóng. Đã rã đông thì nấu trong 24 giờ, không cấp đông lại.</li>
+<li><b>Nấu 1 nồi cho 2 bữa:</b> múc ngay phần chiều ra hộp sạch có nắp, trước khi bón, không dùng thìa bé đã ngậm. Để nguội tối đa 1 giờ rồi cất ngăn mát. Chiều hâm sôi lại một lần, khuấy đều, để ấm rồi cho ăn. Ăn hết trong ngày.</li>
+<li><b>Bé ăn dở thì bỏ phần trong bát</b>, không cất lại, vì nước bọt làm cháo hỏng nhanh.</li>
+<li>Cháo, bột đã pha để ngoài nhiệt độ phòng quá 2 giờ thì bỏ.</li>
+</ul>`);
+  h+=g("Bảo quản",`<ul><li>Thịt, cá: chia phần ~15 g, ghi ngày, ngăn đông, dùng trong 2 tuần. Rã đông ở ngăn mát, không cấp đông lại.</li><li>Bí đỏ đã cắt: bọc màng, ngăn mát 3–5 ngày.</li><li>Rau ngót: tuốt lá, không rửa, bọc khăn giấy, ngăn mát 3–4 ngày.</li><li>Khoai lang: nơi khô thoáng, không để tủ lạnh.</li><li>Bột HiPP đã mở: đóng kín, dùng trong 28 ngày.</li></ul>`);
   const ms=[[6,"Bột, cháo rây mịn · 1→2 bữa/ngày"],[7,"Cháo nghiền còn hạt vỡ · 2 bữa/ngày"],[8,"Thịt cá băm nhỏ, rau củ dầm thìa · tập cốc"],[9,"Cháo hạt nguyên nấu nhừ · 3 bữa/ngày · đồ ăn cầm tay mềm"],[12,"Ăn cùng gia đình, cắt nhỏ, nêm rất nhạt"]];
   h+=g("Mốc ăn dặm của Mochi",`<div>${ms.map(([m,t])=>{const d=new Date(BIRTH.getFullYear(),BIRTH.getMonth()+m,BIRTH.getDate());const past=d<=new Date();return `<div class="logrow"><span class="mood ${past?"m-ok":""}" style="${past?"":"background:var(--line)"}"></span><div><b>${m} tháng · ${dm(d)}/${d.getFullYear()}</b><div class="small muted">${t}</div></div></div>`}).join("")}</div>`);
   return h;
@@ -1457,10 +1475,16 @@ async function doImport(){const o=sheetState&&sheetState.imp;if(!o)return;closeS
 /* ---------- Bữa cùng món, lượng cân sống ---------- */
 function mealGroups(ms){const g=[];ms.forEach((m,i)=>{const f=g.find(x=>ms[x[0]].t===m.t&&ms[x[0]].r===m.r);if(f)f.push(i);else g.push([i])});return g}
 function sameIdx(ms,i){return (mealGroups(ms).find(g=>g.includes(i)))||[i]}
+function safetyFor(m){
+  const s=(m.t+" "+m.r).toLowerCase(), out=[];
+  if(/gan/.test(s)) out.push("Gan gà: tối đa 1 lần/tuần, luộc chín hẳn.");
+  if(/cá/.test(s)&&!/cá hồi|cá phi lê|basa|cá quả|cá lóc|diêu hồng/.test(s)) out.push("Không dùng cá ngừ đại dương, cá kiếm, cá thu vua.");
+  return out;
+}
 function rawBlock(m,k){
   if(!m.w||!m.w.length) return "";
   const one=m.w.map(([l,g])=>`${l} <b class="num">${g} g</b>`).join(" · ");
-  return `<div class="raw"><div><span class="rk">Cân sống mỗi bữa</span>${one}</div>${k>1?`<div><span class="rk">Mua và nấu cho ${k} bữa</span>${m.w.map(([l,g])=>`${l} <b class="num">${g*k} g</b>`).join(" · ")}. Nấu 1 lần rồi chia ${k===2?"đôi":k+" phần"}, phần sau cất ngăn mát, hâm sôi lại.</div>`:""}</div>`;
+  return `<div class="raw"><div><span class="rk">Cân sống mỗi bữa</span>${one}</div>${k>1?`<div><span class="rk">Mua và nấu cho ${k} bữa</span>${m.w.map(([l,g])=>`${l} <b class="num">${g*k} g</b>`).join(" · ")}. Nấu 1 lần rồi chia ${k===2?"đôi":k+" phần"}: múc phần sau ra hộp sạch trước khi bón, nguội thì cất ngăn mát, hâm sôi lại 1 lần, ăn hết trong ngày${m.w.some(([l])=>/^lá /.test(l))?". Có rau lá: không để qua đêm":""}.</div>`:""}${safetyFor(m).map(x=>`<div class="safe">${esc(x)}</div>`).join("")}</div>`;
 }
 
 /* ---------- Đổi món ---------- */
@@ -1510,7 +1534,7 @@ function swapBody(){
   const picked=st.dam||st.veg.length, c=picked?swapCompose(st):null;
   const newPicked=[st.dam,...st.veg,st.beo?"bdp":null].filter(x=>x&&!SW_OKS.includes(foodStatus(x,d)));
   const chip=(id,on,g)=>{const s=foodStatus(id,d),isNew=!SW_OKS.includes(s);return `<button class="chip ${isNew?"newf":""}" data-sh="swpick" data-g="${g}" data-v="${id}" aria-pressed="${on}" ${s==="react"?"disabled":""}>${esc(FOODS[id].n)}${isNew?`<small>${s==="react"?"phản ứng":"chưa thử"}</small>`:""}</button>`};
-  const grp={dam:"Đạm (chọn 1)",cu:"Củ",rau:"Rau",beo:"Thêm"};
+  const grp={dam:"Đạm (chọn 1)",cu:"Củ (chọn 1)",rau:"Rau lá (chọn 1)",beo:"Thêm"};
   return `<div><div class="eyebrow">Ngày ${st.n} · ${st.idx.length>1?`${st.idx.length} bữa cùng món`:`Bữa ${st.i+1}`}</div><h4>Đổi món</h4><div class="small muted" style="margin-top:2px">Theo lịch: ${esc(st.orig.t)}</div></div>
    ${q.length?`<div class="field"><label>Gợi ý nhanh từ món Mochi đã ăn được</label><div class="qalt">${q.map((x,k)=>`<button data-sh="swquick" data-v="${k}"><b>${esc(x.t)}</b><span>${esc(x.note||x.r)}</span></button>`).join("")}</div></div>`:""}
    <div class="field"><label>Hoặc tự ghép nguyên liệu</label>
@@ -1519,10 +1543,20 @@ function swapBody(){
     <button class="chip newf" style="margin-top:10px" data-sh="swnew">${st.showNew?"Ẩn món chưa thử":"+ Hiện cả món chưa thử"}</button>
    </div>
    ${c?`<div class="preview"><div class="pn">${esc(c.t)}</div><div class="pr">${esc(c.r)}${c.f?`<br><span class="muted">+ ${esc(c.f)}</span>`:""}</div>${rawBlock(c,st.idx.length)}</div>`:""}
+   ${swapWarn(st,d).map(x=>`<div class="hint">${esc(x)}</div>`).join("")}
    ${newPicked.length>1?`<div class="alert">Chỉ nên thử <b>1 món mới</b> mỗi lần, theo dõi 3 ngày rồi mới thêm món khác.</div>`:newPicked.length?`<div class="hint">${esc(FOODS[newPicked[0]].n)} là món mới: cho ít, ăn bữa sáng để dễ theo dõi, 3 ngày tới không thêm món mới khác.</div>`:""}
    <button class="btn pink block" data-sh="swsave" ${c&&newPicked.length<=1?"":"disabled style='opacity:.45'"}>Dùng món này</button>
    ${cur?`<button class="btn soft block" data-sh="swreset">Về món theo lịch</button>`:""}
    <button class="btn soft" data-sh="close">Đóng</button>`;
+}
+function swapWarn(st,d){
+  const out=[], greens=st.veg.filter(v=>FOODS[v].g==="rau");
+  if(greens.length>1) out.push("Chỉ nên dùng 1 loại rau lá trong một bát (rau lá có nitrat).");
+  if(st.dam==="ca") out.push("Dùng cá hồi, basa, cá quả hoặc diêu hồng; tránh cá ngừ đại dương, cá kiếm, cá thu vua. Gỡ kỹ xương.");
+  if(st.dam==="gan"){const wk=[...Array(7)].map((_,i)=>iso(addD(d,-i))).some(k=>Object.values(Store.data.meals).some(m=>m.date===k&&/gan/i.test(m.dish)));
+    out.push(wk?"Tuần này Mochi đã ăn gan rồi: gan chỉ nên 1 lần/tuần.":"Gan gà: 10–15 g, luộc chín hẳn, tối đa 1 lần/tuần.");}
+  if(["trung","longdo"].includes(st.dam)) out.push("Trứng luộc 10 phút cho lòng đỏ đông hẳn rồi mới trộn vào.");
+  return out;
 }
 function redrawSwap(){const el=$("#sheet"),y=el.scrollTop;$("#sheetIn").innerHTML='<div class="grab"></div>'+swapBody();el.scrollTop=y}
 function saveSwap(c,extra){const st=sheetState;const doc={t:c.t,r:c.r,f:c.f||null,w:c.w||null,base:st.base,dam:st.dam,veg:st.veg,qua:st.qua,beo:st.beo,...(extra||{}),ts:Date.now()};
@@ -1585,7 +1619,7 @@ $("#sheet").addEventListener("click",e=>{
       if(g==="dam")s.dam=s.dam===id?null:id;
       else if(g==="qua")s.qua=s.qua===id?null:id;
       else if(g==="beo")s.beo=!s.beo;
-      else{if(s.veg.includes(id))s.veg=s.veg.filter(x=>x!==id);else{s.veg=[...s.veg,id];if(s.veg.length>2)s.veg.shift()}}
+      else{if(s.veg.includes(id))s.veg=s.veg.filter(x=>x!==id);else{const g2=FOODS[id].g;s.veg=[...s.veg.filter(x=>FOODS[x].g!==g2),id]}}
       redrawSwap();return}
     if(a==="swquick"){const q=swapQuick(s)[+b.dataset.v];if(q)saveSwap(q,{base:s.n>=15?"chao":"bot",dam:null,veg:[],qua:null,beo:false});return}
     if(a==="swsave"){if(b.disabled)return;saveSwap(swapCompose(s));return}
