@@ -577,24 +577,23 @@ const WD = ["CN","T2","T3","T4","T5","T6","T7"];
 const FOODS = {
   gao:{n:"Gạo",g:"nen",day:1}, bido:{n:"Bí đỏ",g:"cu",day:4}, khoailang:{n:"Khoai lang",g:"cu",day:7},
   longdo:{n:"Lòng đỏ trứng",g:"dam",day:10}, raungot:{n:"Rau ngót",g:"rau",day:13}, lon:{n:"Thịt lợn",g:"dam",day:16},
-  bo:{n:"Thịt bò",g:"dam",day:19}, dudu:{n:"Đu đủ",g:"qua",day:22}, ca:{n:"Cá hồi",g:"dam",day:25},
-  bellamy:{n:"Bột Bellamy's táo quế",g:"nen",day:29},
-  ga:{n:"Thịt gà",g:"dam"}, chuoi:{n:"Chuối",g:"qua"}, boqua:{n:"Quả bơ",g:"qua"}, caingot:{n:"Cải ngọt",g:"rau"},
+  bo:{n:"Thịt bò",g:"dam",day:19}, ca:{n:"Cá hồi",g:"dam",day:25},
+  ga:{n:"Thịt gà",g:"dam"}, caingot:{n:"Cải ngọt",g:"rau"},
   dauphu:{n:"Đậu phụ",g:"dam"}, trung:{n:"Trứng cả quả",g:"dam"}, carot:{n:"Cà rốt",g:"cu"}, mongtoi:{n:"Mồng tơi",g:"rau"},
   gan:{n:"Gan gà",g:"dam"}, bdp:{n:"Bơ đậu phộng",g:"beo"}
 };
-const QUEUE = ["ga","chuoi","boqua","caingot","dauphu","trung","carot","mongtoi","gan","bdp"];
-const GROUP_NAME = {nen:"Nền",cu:"Củ",rau:"Rau xanh",dam:"Đạm",qua:"Trái cây",beo:"Chất béo"};
+const QUEUE = ["ga","caingot","dauphu","trung","carot","mongtoi","gan","bdp"];
+const GROUP_NAME = {nen:"Nền",cu:"Củ",rau:"Rau xanh",dam:"Đạm",beo:"Chất béo"};
 
 const WEEKS = [
   {w:1,label:"Bột loãng",meals:1,base:"Bột HiPP chỉ pha, không nấu: sữa HiPP ấm đổ vào bột, khuấy mịn, chờ 1–2 phút."},
   {w:2,label:"Bột đặc dần",meals:1,base:"Bột HiPP pha sữa HiPP. Từ ngày 10 thêm ½ tcf dầu mỗi bữa."},
   {w:3,label:"Cháo rây",meals:1,base:"Cháo nền mỗi sáng: 1½ thìa canh gạo (~18 g) + 150 ml nước, nấu và xay còn ~90 ml."},
-  {w:4,label:"Cháo đặc",meals:2,base:"2 bữa ăn cùng một món. Sáng nấu 1 nồi cho cả ngày: 3 thìa canh gạo (~40 g) + 250 ml nước → ~200 ml cháo nền, thịt rau cân đủ cho 2 bữa, nấu chung rồi chia đôi. Phần chiều để nguội, cất ngăn mát, hâm sôi lại trước khi ăn."},
-  {w:5,label:"Thử Bellamy's",meals:2,base:"2 bữa cùng món cháo bò khoai lang, nấu 1 nồi chia đôi như tuần 4. Bột Bellamy's chỉ cho thêm sau bữa sáng."}
+  {w:4,label:"Cháo đặc",meals:2,base:"2 bữa trong ngày cùng một món, mỗi ngày đổi rau củ. Sáng nấu 1 nồi cho cả ngày: 3 thìa canh gạo (~40 g) + 250 ml nước → ~200 ml cháo nền, thịt rau cân đủ cho 2 bữa, nấu chung rồi chia đôi. Phần chiều để nguội, cất ngăn mát, hâm sôi lại trước khi ăn."},
+  {w:5,label:"Cháo đặc",meals:2,base:"2 bữa trong ngày cùng một món, nấu 1 nồi chia đôi như tuần 4. Mỗi ngày đổi rau củ hoặc loại thịt."}
 ];
 
-// Mỗi khối: ngày from–to, món mới, các bữa {t: tên, r: công thức, y: thành phẩm ml, e: bé ăn ml, n: ghi chú, f: trái cây sau bữa}
+// Mỗi khối: ngày from–to, món mới, các bữa {t: tên, r: công thức, y: thành phẩm ml, e: bé ăn ml, n: ghi chú, w: gram cân sống mỗi bữa}
 const PLAN = [
   {from:1,to:3,nf:"gao",meals:[{t:"Bột gạo",r:"1½ tcf bột HiPP + 30 ml sữa HiPP",y:30,e:"10–20",n:"Ngày 1 chỉ 2–3 tcf"}]},
   {from:4,to:6,nf:"bido",meals:[{t:"Bột bí đỏ",r:"1½ tcf bột + 25 ml sữa HiPP + 10 g bí đỏ hấp nghiền",y:35,e:"20–30",w:[["bí đỏ đã gọt vỏ",10]]}]},
@@ -605,17 +604,35 @@ const PLAN = [
   {from:15,to:15,meals:[{t:"Cháo rau ngót lòng đỏ",r:"Cháo nền + 10 g lá rau ngót + ½ lòng đỏ + ½ tcf dầu",y:100,e:"~60",w:[["lá rau ngót",10]]}]},
   {from:16,to:18,nf:"lon",meals:[{t:"Cháo thịt lợn bí đỏ",r:"Cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:110,e:"60–80",n:"Ngày 16 dùng nửa lượng thịt (~8 g)",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
   {from:19,to:21,nf:"bo",meals:[{t:"Cháo bò khoai lang",r:"Cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"70–90",n:"Ngày 19 dùng nửa lượng thịt (~8 g)",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]}]},
-  {from:22,to:24,nf:"dudu",meals:[
-    {t:"Cháo lợn rau ngót",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",f:"Sau bữa sáng: đu đủ nghiền 2–3 tcf",n:"Ngày 22 chỉ cho 1 tcf đu đủ",w:[["thịt lợn nạc",15],["lá rau ngót",10]]},
-    {t:"Cháo lợn rau ngót",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["lá rau ngót",10]]}]},
-  {from:25,to:27,nf:"ca",meals:[
-    {t:"Cháo cá hồi bí đỏ",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",f:"Sau bữa sáng: đu đủ nghiền 2–3 tcf",n:"Ngày 25 mỗi bữa chỉ dùng nửa lượng cá (~8 g)",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]},
-    {t:"Cháo cá hồi bí đỏ",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:22,to:22,meals:[
+    {t:"Cháo lợn rau ngót",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",n:"Bắt đầu 2 bữa/ngày, 2 bữa cùng món",w:[["thịt lợn nạc",15],["lá rau ngót",10]]},
+    {t:"Cháo lợn rau ngót",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",n:"Bắt đầu 2 bữa/ngày, 2 bữa cùng món",w:[["thịt lợn nạc",15],["lá rau ngót",10]]}]},
+  {from:23,to:23,meals:[
+    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]},
+    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:24,to:24,meals:[
+    {t:"Cháo lợn khoai lang",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["khoai lang đã gọt vỏ",20]]},
+    {t:"Cháo lợn khoai lang",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["khoai lang đã gọt vỏ",20]]}]},
+  {from:25,to:25,nf:"ca",meals:[
+    {t:"Cháo cá hồi bí đỏ",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",n:"Ngày đầu ăn cá: mỗi bữa chỉ nửa lượng cá (~8 g)",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]},
+    {t:"Cháo cá hồi bí đỏ",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",n:"Ngày đầu ăn cá: mỗi bữa chỉ nửa lượng cá (~8 g)",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:26,to:26,meals:[
+    {t:"Cháo cá hồi khoai lang",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["khoai lang đã gọt vỏ",20]]},
+    {t:"Cháo cá hồi khoai lang",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["khoai lang đã gọt vỏ",20]]}]},
+  {from:27,to:27,meals:[
+    {t:"Cháo cá hồi rau ngót",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["lá rau ngót",10]]},
+    {t:"Cháo cá hồi rau ngót",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["lá rau ngót",10]]}]},
   {from:28,to:28,meals:[
-    {t:"Cháo bò bí đỏ",r:"~100 ml cháo nền + 15 g thịt bò thăn + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",f:"Sau bữa sáng: đu đủ nghiền 2–3 tcf",w:[["thịt bò thăn",15],["bí đỏ đã gọt vỏ",15]]},
+    {t:"Cháo bò bí đỏ",r:"~100 ml cháo nền + 15 g thịt bò thăn + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["bí đỏ đã gọt vỏ",15]]},
     {t:"Cháo bò bí đỏ",r:"~100 ml cháo nền + 15 g thịt bò thăn + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["bí đỏ đã gọt vỏ",15]]}]},
-  {from:29,to:31,nf:"bellamy",meals:[
-    {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",f:"Sau bữa sáng: bột Bellamy's 1 thìa canh (7 g) + 60 ml sữa HiPP, pha ăn liền",n:"Bellamy's là món mới (yến mạch, táo, quế, gluten): chỉ cho sau bữa sáng, theo dõi kỹ 3 ngày",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]},
+  {from:29,to:29,meals:[
+    {t:"Cháo bò rau ngót",r:"~100 ml cháo nền + 15 g thịt bò thăn + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["lá rau ngót",10]]},
+    {t:"Cháo bò rau ngót",r:"~100 ml cháo nền + 15 g thịt bò thăn + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["lá rau ngót",10]]}]},
+  {from:30,to:30,meals:[
+    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]},
+    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:31,to:31,meals:[
+    {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]},
     {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]}]}
 ];
 
@@ -623,10 +640,10 @@ const SHOP = [
   {w:1,trips:[{d:-1,label:"Lần 1",items:["Bột HiPP gạo nhũ nhi · 1 hộp","Sữa HiPP số 2 (nếu sắp hết)","Bí đỏ · 200 g","Khoai lang · 250 g","Dầu ăn dặm (ô liu hoặc gấc) · 1 chai"]}]},
   {w:2,trips:[{d:6,label:"Lần 1",items:["Trứng gà · 6 quả","Bí đỏ · 100 g"]},{d:10,label:"Lần 2",items:["Rau ngót · 1 bó nhỏ (cần ~30 g lá)"]}]},
   {w:3,trips:[{d:13,label:"Lần 1",items:["Gạo tẻ ngon · 1 kg","Thịt lợn nạc thăn · 150 g → chia 9 phần ~15 g, trữ đông","Thịt bò thăn · 100 g → chia 5 phần ~15 g, trữ đông","Bí đỏ · 100 g","Khoai lang · 150 g"]}]},
-  {w:4,trips:[{d:20,label:"Lần 1",items:["Cá hồi phi lê · 100 g → cắt 6 miếng ~15 g, trữ đông","Rau ngót · 1 bó nhỏ (cần ~60 g lá)","Đu đủ chín · 1 miếng ~150 g"]},{d:23,label:"Lần 2",items:["Bí đỏ · 200 g (dùng đến ngày 28)","Đu đủ chín · 1 miếng ~150 g"]}]},
-  {w:5,trips:[{d:27,label:"Lần 1",items:["Thịt bò thăn · 100 g → chia 6 phần ~15 g, trữ đông","Khoai lang · 200 g","Bột Bellamy's: đã có sẵn"]}]}
+  {w:4,trips:[{d:20,label:"Lần 1",items:["Cá hồi phi lê · 100 g → cắt 6 miếng ~15 g, trữ đông","Rau ngót · 1 bó nhỏ (ngày 22 cần ~20 g lá)","Bí đỏ · 100 g (ngày 23, 25)","Khoai lang · 1 củ ~150 g (ngày 24, 26)"]},{d:23,label:"Lần 2",items:["Rau ngót · 1 bó nhỏ (ngày 27 cần ~20 g lá)","Bí đỏ · 100 g (ngày 28)"]}]},
+  {w:5,trips:[{d:27,label:"Lần 1",items:["Thịt bò thăn · 100 g → chia 6 phần ~15 g, trữ đông (2 phần để dành)","Thịt lợn nạc thăn · 50 g → chia 2 phần ~15 g, trữ đông","Rau ngót · 1 bó nhỏ (ngày 29 cần ~20 g lá)","Bí đỏ · 100 g (ngày 30)","Khoai lang · 1 củ nhỏ (ngày 31)"]}]}
 ];
-const PRESTART = ["Ghế ăn có đệm lưng, thìa silicone mềm, cốc có vạch ml","Nồi nhỏ chống dính, rây inox hoặc máy xay cầm tay, khay đá có nắp","Thử cho Mochi ngồi ghế ăn: đầu giữ thẳng, lưng không đổ","Hỏi bác sĩ nhi về liều sắt khi bé bắt đầu ăn thịt và bột Bellamy's","Học cách sơ cứu hóc dị vật cho trẻ dưới 1 tuổi (vỗ lưng, ấn ngực)","Đi chợ tuần 1 vào Chủ nhật 01/11"];
+const PRESTART = ["Ghế ăn có đệm lưng, thìa silicone mềm, cốc có vạch ml","Nồi nhỏ chống dính, rây inox hoặc máy xay cầm tay, khay đá có nắp","Thử cho Mochi ngồi ghế ăn: đầu giữ thẳng, lưng không đổ","Hỏi bác sĩ nhi về liều sắt khi bé bắt đầu ăn thịt","Học cách sơ cứu hóc dị vật cho trẻ dưới 1 tuổi (vỗ lưng, ấn ngực)","Đi chợ tuần 1 vào Chủ nhật 01/11"];
 
 /* ===================== Tiện ích ngày ===================== */
 const DAY=864e5;
@@ -724,6 +741,7 @@ function setSync(msg){
 
 /* ===================== Trạng thái món ===================== */
 function foodStatus(id,ref){
+  if(!FOODS[id]) return "new";
   const o=Store.data.foods[id]; if(o&&o.s) return o.s;
   const f=FOODS[id]; const today=dayNum(ref||new Date());
   if(f.day){ if(today>f.day+2) return "ok"; if(today>=f.day) return "trying"; return "plan"; }
@@ -738,13 +756,11 @@ const PSHORT={lon:"lợn",bo:"bò",ca:"cá",longdo:"lòng đỏ",ga:"gà",dauphu
 const PAMT={lon:"1 phần thịt lợn (~20 g)",bo:"1 phần thịt bò (~20 g)",ca:"1 miếng cá (~20 g), gỡ kỹ xương",longdo:"1 lòng đỏ trứng chín kỹ",ga:"1 phần thịt gà (~20 g), nấu chín kỹ",dauphu:"20 g đậu phụ non nghiền",trung:"1 quả trứng chín kỹ, dầm nát",gan:"10 g gan gà luộc chín hẳn, nghiền"};
 const VSHORT={bido:"bí đỏ",khoailang:"khoai lang",raungot:"rau ngót",carot:"cà rốt",caingot:"cải ngọt",mongtoi:"mồng tơi"};
 const VAMT={bido:"20 g bí đỏ",khoailang:"20 g khoai lang",raungot:"10 g rau ngót",carot:"20 g cà rốt",caingot:"10 g cải ngọt",mongtoi:"10 g mồng tơi"};
-const FAMT={dudu:"đu đủ",chuoi:"chuối",boqua:"quả bơ"};
 function suggestWeek(startD,seed){
   const r=rng(seed*9973+startD.getDate()*31+startD.getMonth());
   const ok=id=>foodStatus(id,startD)==="ok";
   const P=["bo","lon","ca","longdo","ga","dauphu","trung","gan"].filter(ok);
   const V=["bido","khoailang","raungot","carot","caingot","mongtoi"].filter(ok);
-  const F=["dudu","chuoi","boqua"].filter(ok);
   const news=QUEUE.filter(id=>{const s=foodStatus(id,startD);return s==="new"}).slice(0,2);
   // 14 suất đạm, ưu tiên sắt; cá tối đa 2, gan tối đa 1
   let pool=[]; const add=(id,n)=>{if(P.includes(id))for(let i=0;i<n;i++)pool.push(id)};
@@ -756,9 +772,9 @@ function suggestWeek(startD,seed){
   for(let i=0;i<7;i++){
     let p1=pool[i*2],p2=pool[i*2+1]; if(p1===p2){const j=(i*2+2)%14;[pool[i*2+1],pool[j]]=[pool[j],pool[i*2+1]];p2=pool[i*2+1]}
     let v1=vpool[i*2],v2=vpool[i*2+1]; if(v1===v2&&V.length>1){v2=V.find(v=>v!==v1)}
-    const nf=i<3?news[0]:i<6?news[1]:null; let extra=null,fruit=F.length?F[(i)%F.length]:null;
-    if(nf){const g=FOODS[nf].g; if(g==="dam")p1=nf; else if(g==="cu"||g==="rau")v1=nf; else if(g==="qua")fruit=nf; else extra=nf}
-    days.push({d:addD(startD,i),nf,b1:{p:p1,v:v1,fruit,extra},b2:{p:p1,v:v1,extra}});
+    const nf=i<3?news[0]:i<6?news[1]:null; let extra=null;
+    if(nf){const g=FOODS[nf].g; if(g==="dam")p1=nf; else if(g==="cu"||g==="rau")v1=nf; else extra=nf}
+    days.push({d:addD(startD,i),nf,b1:{p:p1,v:v1,extra},b2:{p:p1,v:v1,extra}});
   }
   return {start:iso(startD),days,news};
 }
@@ -775,23 +791,17 @@ function rawW(p,veg,g,ap){const w=[];if(p&&RAWN[p])w.push([RAWN[p],p==="gan"?12:
 function dishRecipe(b,base,ap){ap=ap||ageParams(new Date());let s=`${base} + ${pamt(b.p,ap.g)} + ${vamt(b.v,ap)} + 1 tcf dầu`;if(b.extra==="bdp")s+=" + ¼ tcf bơ đậu phộng nguyên chất pha loãng (lần đầu)";return s}
 function mealLabel(i,n){const L=n===3?[" · sáng"," · trưa"," · chiều"]:n===2?[" · sáng"," · chiều"]:[""];return L[i]||""}
 function buildWeekView(sw,startD){
-  const ap=ageParams(startD), okB=foodStatus("bellamy",startD)==="ok";
-  const F=["dudu","chuoi","boqua"].filter(id=>foodStatus(id,startD)==="ok");
-  const days=sw.days.map((d,i)=>{
-    const fr=d.b1.fruit?`${(FAMT[d.b1.fruit]||FOODS[d.b1.fruit].n.toLowerCase())} nghiền 2–3 tcf sau cháo`:null;
+  const ap=ageParams(startD);
+  const days=sw.days.map(d=>{
     const w=rawW(d.b1.p,[d.b1.v],ap.g,ap), main={t:dishName(d.b1),r:dishRecipe(d.b1,ap.base,ap),y:ap.y,e:ap.e,w};
-    const meals=[{...main,f:fr?"Sau bữa sáng: "+fr.replace(" sau cháo",""):null},{...main}];
-    if(ap.meals===3){const f2=F.length?F[(i+1)%F.length]:null;const fn=f2?(FAMT[f2]||FOODS[f2].n.toLowerCase()):"";
-      meals.splice(1,0,okB?{t:`Bột Bellamy's${fn?" "+fn:""}`,r:`2 thìa canh bột Bellamy's (14 g) + 100 ml sữa HiPP${fn?` + 2–3 tcf ${fn} nghiền`:""}, pha ăn liền`,y:120,e:"90–120"}
-        :{t:`Cháo ${VSHORT[d.b1.v]||"bí đỏ"} lòng đỏ`,r:`${ap.base} + 1 lòng đỏ + ${vamt(d.b1.v,ap)} + 1 tcf dầu`,y:ap.y-30,e:ap.e,w:rawW(null,[d.b1.v],0,ap)});}
-    return {date:iso(d.d),nf:d.nf,meals};
+    return {date:iso(d.d),nf:d.nf,meals:Array.from({length:ap.meals},()=>({...main}))};
   });
-  const shop=weekShopping(sw,ap); if(ap.meals===3&&!okB) shop.push("Trứng gà · thêm 7 quả cho bữa trưa");
-  return {days,shop,ap};
+  return {days,shop:weekShopping(sw,ap),ap};
 }
 function weekShopping(sw,ap){ap=ap||{g:20};
   const pc={},vc={},fc={};
-  sw.days.forEach(d=>{[d.b1,d.b2].forEach(b=>{pc[b.p]=(pc[b.p]||0)+1;vc[b.v]=(vc[b.v]||0)+1});if(d.b1.fruit)fc[d.b1.fruit]=(fc[d.b1.fruit]||0)+1;if(d.b1.extra)pc[d.b1.extra]=(pc[d.b1.extra]||0)+1});
+  const k=ap.meals||2;
+  sw.days.forEach(d=>{pc[d.b1.p]=(pc[d.b1.p]||0)+k;vc[d.b1.v]=(vc[d.b1.v]||0)+k;if(d.b1.extra)pc[d.b1.extra]=(pc[d.b1.extra]||0)+1});
   const out=[];
   Object.entries(pc).forEach(([p,n])=>{
     if(["lon","bo","ga"].includes(p))out.push(`${FOODS[p].n} · ${Math.max(100,Math.ceil(n*ap.g*1.1/50)*50)} g → chia ${n} phần ~${ap.g} g, trữ đông`);
@@ -803,7 +813,6 @@ function weekShopping(sw,ap){ap=ap||{g:20};
     else if(p==="bdp")out.push(`Bơ đậu phộng nguyên chất, không đường · 1 hũ nhỏ`);
   });
   Object.entries(vc).forEach(([v,n])=>{const g=FOODS[v].g;out.push(g==="rau"?`${FOODS[v].n} · ${Math.ceil(n/5)} bó nhỏ (cần ~${n*(ap.rau||10)} g lá, mua làm 2 lần cho tươi)`:`${FOODS[v].n} · ${Math.max(100,Math.ceil(n*(ap.cu||20)*1.3/50)*50)} g`)});
-  Object.entries(fc).forEach(([f,n])=>out.push(`${FOODS[f].n} · ${f==="chuoi"?Math.ceil(n/2)+" quả":Math.ceil(n/3)+" miếng/quả nhỏ"}`));
   return out;
 }
 
@@ -961,7 +970,7 @@ function renderSuggest(){
    <div class="pillrow" style="justify-content:center"><span class="pill">Mochi ${a.m} tháng</span><span class="pill">${meals}</span>${sw.news.map(x=>`<span class="pill new">Món mới: ${esc(FOODS[x].n)}</span>`).join("")}</div>
    <p class="small muted" style="margin:10px 0 0;text-align:center">${tex}. Gợi ý dựng từ các món Mochi đã ăn ổn, ưu tiên đạm giàu sắt, cá tối đa 2 lần/tuần. Lượng tham khảo: mỗi bữa chính thành phẩm ~${ap.y} ml, bé ăn ${ap.e} ml.</p></div>`;
   const view=saved||buildWeekView(sw,s);
-  h+=`<div class="card">${view.days.map((d,i)=>{const x=fromIso(d.date);return `<div class="sday"><div class="dl num">${WD[x.getDay()]}<small>${dm(x)}</small></div><div class="sm">${d.nf&&(i===0||i===3)?`<span class="pill new" style="margin-bottom:4px">Bắt đầu ${esc(FOODS[d.nf].n)}</span><br>`:""}${d.meals.map((m,j)=>`<b>${(d.meals.length===3?["Sáng","Trưa","Chiều"]:["Sáng","Chiều"])[j]}:</b> ${esc(m.t)}${m.f?` <span class="fr">+ ${esc(m.f)}</span>`:""}`).join("<br>")}</div></div>`}).join("")}</div>`;
+  h+=`<div class="card">${view.days.map((d,i)=>{const x=fromIso(d.date);return `<div class="sday"><div class="dl num">${WD[x.getDay()]}<small>${dm(x)}</small></div><div class="sm">${d.nf&&(i===0||i===3)?`<span class="pill new" style="margin-bottom:4px">Bắt đầu ${esc(FOODS[d.nf].n)}</span><br>`:""}${mealGroups(d.meals).map(g=>`<b>${g.length===d.meals.length&&g.length>1?`Cả ${g.length} bữa`:g.map(j=>(d.meals.length===3?["Sáng","Trưa","Chiều"]:["Sáng","Chiều"])[j]).join(" & ")}:</b> ${esc(d.meals[g[0]].t)}`).join("<br>")}</div></div>`}).join("")}</div>`;
   h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${saved?`<button class="btn soft" data-act="unsave" data-v="${sw.start}">Bỏ tuần đã lưu</button><button class="btn" data-act="openwk" data-v="${sw.start}">Xem trong Hôm nay</button>${IN_CLAUDE?"":`<button class="btn pink" style="grid-column:1/-1" data-act="weekics" data-v="${sw.start}">Thêm nhắc tuần này vào Lịch iPhone</button>`}`:`<button class="btn soft" data-act="reroll">Đổi gợi ý khác</button><button class="btn pink" data-act="savewk">Dùng tuần này</button>`}</div>`;
   h+=`<h2 class="sec">Đi chợ cho tuần này</h2><div class="card"><ul class="checklist">${view.shop.map(t=>`<li><span>${esc(t)}</span></li>`).join("")}</ul></div>`;
   const hist=Object.values(Store.data.weeks).sort((a,b)=>a.start<b.start?1:-1);
@@ -1062,19 +1071,18 @@ const SWAPS=[
  ["Thịt bò",[["Thịt lợn",1,"Nấu như thịt bò"],["Gan gà",0,"Bỏ gân, luộc 8–10 phút chín hẳn, nghiền qua rây; ~10 g, tối đa 1 lần/tuần"]]],
  ["Cá hồi",[["Cá quả / diêu hồng",0,"Phi lê bỏ da, hấp 7–10 phút, bóp kỹ tìm xương dăm"],["Cá basa",0,"Bỏ da và mỡ vàng, hấp 7–10 phút, nghiền"]]],
  ["Trứng gà",[["Trứng cút",0,"Luộc 5 phút, lấy lòng đỏ; 3 lòng đỏ cút ≈ 1 lòng đỏ gà"]]],
- ["Đu đủ",[["Xoài chín",0,"Nạo thịt, bỏ phần xơ sát hạt"],["Chuối tiêu chín",0,"Nghiền bằng dĩa"],["Quả bơ",0,"Nạo, nghiền, trộn được vào cháo"]]],
- ["Bột HiPP",[["Bột Bellamy's",0,"Pha ăn liền; có sắt, gluten — thử riêng trước"],["Cháo rây loãng",1,"1 thìa canh gạo + 150 ml nước, nấu nhừ, xay, pha thêm sữa"]]],
+ ["Bột HiPP",[["Cháo rây loãng",1,"1 thìa canh gạo + 150 ml nước, nấu nhừ, xay, pha thêm sữa"]]],
  ["Dầu ăn dặm",[["Dầu ô liu / dầu gấc",0,"1 tcf sau khi tắt bếp"],["Mỡ lợn tự rán",0,"Rán mỡ lá, lọc, để ngăn mát; 1 tcf/bữa"]]]
 ];
 function renderGuide(){
   const g=(t,b,open)=>`<details class="g"${open?" open":""}><summary>${t}</summary><div class="gb">${b}</div></details>`;
   let h="";
-  h+=g("Nguyên tắc",`<ul><li>Mỗi 3 ngày 1 món mới, cho ăn buổi sáng để theo dõi.</li><li>Giữ nguyên các cữ bú mẹ và cữ sữa HiPP; ăn dặm khoảng 1 giờ sau bú.</li><li>Không muối, nước mắm, hạt nêm, đường trước 1 tuổi. Có đạm thì thêm dầu.</li><li>Bé quay đầu, ngậm miệng là dừng. Không ép.</li><li>Men vi sinh, DHA không trộn vào bột còn nóng.</li><li>Hỏi bác sĩ nhi về liều sắt khi bé ăn thịt bò, lòng đỏ, bột Bellamy's.</li></ul>`,true);
-  h+=g("Nấu nền",`<ul><li><b>Bột HiPP / Bellamy's:</b> chỉ pha, không nấu, không hâm lò vi sóng. Bé ăn dở thì bỏ.</li><li><b>Cháo rây:</b> tối ngâm gạo; sáng nấu lửa nhỏ 30–40 phút (nồi áp suất 15 phút), xay mịn.</li><li><b>Củ:</b> hấp 10–15 phút, nghiền mịn.</li><li><b>Rau ngót:</b> luộc lá 3–4 phút, xay thật mịn.</li><li><b>Lòng đỏ:</b> luộc 10 phút cho chín hẳn.</li><li><b>Thịt:</b> rã đông qua đêm, dầm tơi với nước lạnh, thả vào cháo sôi, nấu 5–7 phút, xay lại.</li><li><b>Cá:</b> hấp 7–10 phút, bóp kỹ tìm xương.</li><li><b>Dầu:</b> cho vào bát sau khi tắt bếp.</li></ul>`);
+  h+=g("Nguyên tắc",`<ul><li>Mỗi 3 ngày 1 món mới, cho ăn buổi sáng để theo dõi.</li><li>Từ khi ăn 2 bữa: 2 bữa trong ngày cùng một món (nấu 1 nồi chia đôi), sang ngày khác đổi rau củ hoặc thịt để bé không ngán. Đang thử món mới thì giữ nguyên món mới đó 3 ngày, chỉ đổi phần rau củ đã quen.</li><li>Giữ nguyên các cữ bú mẹ và cữ sữa HiPP; ăn dặm khoảng 1 giờ sau bú.</li><li>Không muối, nước mắm, hạt nêm, đường trước 1 tuổi. Có đạm thì thêm dầu.</li><li>Bé quay đầu, ngậm miệng là dừng. Không ép.</li><li>Men vi sinh, DHA không trộn vào bột còn nóng.</li><li>Hỏi bác sĩ nhi về liều sắt khi bé ăn thịt bò, lòng đỏ.</li></ul>`,true);
+  h+=g("Nấu nền",`<ul><li><b>Bột HiPP:</b> chỉ pha, không nấu, không hâm lò vi sóng. Bé ăn dở thì bỏ.</li><li><b>Cháo rây:</b> tối ngâm gạo; sáng nấu lửa nhỏ 30–40 phút (nồi áp suất 15 phút), xay mịn.</li><li><b>Củ:</b> hấp 10–15 phút, nghiền mịn.</li><li><b>Rau ngót:</b> luộc lá 3–4 phút, xay thật mịn.</li><li><b>Lòng đỏ:</b> luộc 10 phút cho chín hẳn.</li><li><b>Thịt:</b> rã đông qua đêm, dầm tơi với nước lạnh, thả vào cháo sôi, nấu 5–7 phút, xay lại.</li><li><b>Cá:</b> hấp 7–10 phút, bóp kỹ tìm xương.</li><li><b>Dầu:</b> cho vào bát sau khi tắt bếp.</li></ul>`);
   h+=g("Thiếu nguyên liệu thì thay",SWAPS.map(([f,alts])=>`<div class="swap"><div class="from">${f}</div>${alts.map(([a,y,c])=>`<div class="alt"><span class="tag ${y?"y":""}">${a}${y?" ✓":""}</span><span class="small">${c}</span></div>`).join("")}</div>`).join("")+`<p class="small muted">✓ là món Mochi đã ăn. Món chưa ăn coi như món mới: cho ít, theo dõi 3 ngày, không thử 2 món mới cùng lúc.</p>`);
   h+=g("Dị ứng: khi nào cần lo",`<ul><li><b>Bình thường:</b> phân đổi màu theo món, hơi táo, phân sẫm do sắt.</li><li><b>Dừng món, hỏi bác sĩ:</b> mẩn đỏ, mề đay, nôn, tiêu chảy sau món mới.</li><li style="color:var(--danger)"><b>Đi cấp cứu ngay:</b> sưng môi/mặt, khò khè, khó thở, lừ đừ.</li><li><b>Hóc nghẹn:</b> bé ọe, đỏ mặt nhưng còn ho là bình thường. Bé im lặng, không ho, tím tái là hóc — sơ cứu ngay.</li></ul>`);
   h+=g("Không cho bé ăn trước 1 tuổi",`<p style="margin:0">Mật ong, muối, nước mắm, hạt nêm, đường, nước ép, trứng/thịt/cá tái, cá lớn (cá kiếm, cá ngừ lớn, cá thu vua), hạt và nho nguyên quả.</p>`);
-  h+=g("Bảo quản",`<ul><li>Thịt, cá: chia phần ~20 g, ghi ngày, ngăn đông, dùng trong 2 tuần. Rã đông ở ngăn mát, không cấp đông lại.</li><li>Bí đỏ đã cắt, đu đủ đã cắt: bọc màng, ngăn mát 3–5 ngày.</li><li>Rau ngót: tuốt lá, không rửa, bọc khăn giấy, ngăn mát 3–4 ngày.</li><li>Khoai lang: nơi khô thoáng, không để tủ lạnh.</li><li>Bột HiPP, Bellamy's đã mở: đóng kín, dùng trong 28 ngày.</li></ul>`);
+  h+=g("Bảo quản",`<ul><li>Thịt, cá: chia phần ~20 g, ghi ngày, ngăn đông, dùng trong 2 tuần. Rã đông ở ngăn mát, không cấp đông lại.</li><li>Bí đỏ đã cắt: bọc màng, ngăn mát 3–5 ngày.</li><li>Rau ngót: tuốt lá, không rửa, bọc khăn giấy, ngăn mát 3–4 ngày.</li><li>Khoai lang: nơi khô thoáng, không để tủ lạnh.</li><li>Bột HiPP đã mở: đóng kín, dùng trong 28 ngày.</li></ul>`);
   const ms=[[6,"Bột, cháo rây mịn · 1→2 bữa/ngày"],[7,"Cháo nghiền còn hạt vỡ · 2 bữa/ngày"],[8,"Thịt cá băm nhỏ, rau củ dầm thìa · tập cốc"],[9,"Cháo hạt nguyên nấu nhừ · 3 bữa/ngày · đồ ăn cầm tay mềm"],[12,"Ăn cùng gia đình, cắt nhỏ, nêm rất nhạt"]];
   h+=g("Mốc ăn dặm của Mochi",`<div>${ms.map(([m,t])=>{const d=new Date(BIRTH.getFullYear(),BIRTH.getMonth()+m,BIRTH.getDate());const past=d<=new Date();return `<div class="logrow"><span class="mood ${past?"m-ok":""}" style="${past?"":"background:var(--line)"}"></span><div><b>${m} tháng · ${dm(d)}/${d.getFullYear()}</b><div class="small muted">${t}</div></div></div>`}).join("")}</div>`);
   return h;
@@ -1094,7 +1102,7 @@ function reportData(){
 function renderReport(){
   const t=new Date(), a=age(t), n=dayNum(t), R=reportData();
   const logo=$("#logo svg")?$("#logo svg").outerHTML:"";
-  const q=(Store.data.notes.doctor&&Store.data.notes.doctor.q)||"Liều sắt bổ sung có cần chỉnh khi bé ăn thịt bò, lòng đỏ và bột Bellamy's có sắt không?";
+  const q=(Store.data.notes.doctor&&Store.data.notes.doctor.q)||"Liều sắt bổ sung có cần chỉnh khi bé ăn thịt bò, và lòng đỏ không?";
   let wrows="";
   R.ws.slice(-6).forEach((w,i,arr)=>{const p=i?arr[i-1]:null;let g="";if(p){const dd=(fromIso(w.date)-fromIso(p.date))/DAY;if(dd>0)g=Math.round((w.kg-p.kg)*1000/dd*7)+" g/tuần"}const aa=age(fromIso(w.date));wrows+=`<tr><td>${dm(fromIso(w.date))}</td><td>${aa.m} tháng ${aa.days} ngày</td><td><b>${(+w.kg).toFixed(2)}</b></td><td>${w.cm||"—"}</td><td>${g||"—"}</td></tr>`});
   let h=`<div class="report" id="report">
@@ -1251,7 +1259,7 @@ function dailyCard(d){
   const hard=doc.poop.filter(p=>p.t==="hard").length, loose=doc.poop.filter(p=>p.t==="loose").length, gap=isToday?poopGap():null;
   let hint="";
   if(loose>=3) hint="Đi lỏng nhiều lần: cho bú thêm để bù nước. Có sốt, nôn, phân có máu hoặc bé lừ đừ thì đi khám ngay.";
-  else if(hard) hint="Táo: cho bé thêm vài ngụm nước, tăng khoai lang, rau xanh, đu đủ. Kéo dài hoặc đau khi đi thì hỏi bác sĩ.";
+  else if(hard) hint="Táo: cho bé thêm vài ngụm nước, tăng khoai lang, rau xanh. Kéo dài hoặc đau khi đi thì hỏi bác sĩ.";
   else if(gap!==null&&gap>=3) hint=`Đã ${gap} ngày chưa ghi đi ngoài. Nếu bé chưa đi thật, thêm nước và rau củ; quá 4–5 ngày hoặc bụng chướng thì hỏi bác sĩ.`;
   return `<div class="card mini"><div class="eyebrow">Mochi ${isToday?"hôm nay":dm(d)}</div>
    <div class="mini-row"><span class="lb">Đã uống</span>${SUPPS.map(([s,l])=>`<button class="tg" data-act="supp" data-d="${k}" data-v="${s}" aria-pressed="${!!doc.supp[s]}">${l}</button>`).join("")}</div>
@@ -1270,7 +1278,7 @@ function weekSummaryText(){
   days.forEach(k=>{const d=Store.data.daily[k];if(!d)return;(d.poop||[]).forEach(p=>{if(p.t==="normal")n++;else if(p.t==="hard")h++;else l++});SUPPS.forEach(([s])=>{if(d.supp&&d.supp[s])sup[s]++})});
   return `Đi ngoài: ${n} bình thường, ${h} táo, ${l} lỏng. Bổ sung đã uống: ${SUPPS.map(([s,lb])=>`${lb} ${sup[s]}/7`).join(", ")}. Ngày có đạm giàu sắt: ${ironDays()}/7.`;
 }
-function ironDays(){let c=0;for(let i=0;i<7;i++){const k=iso(addD(new Date(),-i));const ms=Object.values(Store.data.meals).filter(m=>m.date===k&&m.ml>0);if(ms.some(m=>/bò|lợn|lòng đỏ|trứng|cá|gan|gà|bellamy|đậu phụ/i.test(m.dish)))c++}return c}
+function ironDays(){let c=0;for(let i=0;i<7;i++){const k=iso(addD(new Date(),-i));const ms=Object.values(Store.data.meals).filter(m=>m.date===k&&m.ml>0);if(ms.some(m=>/bò|lợn|lòng đỏ|trứng|cá|gan|gà|đậu phụ/i.test(m.dish)))c++}return c}
 
 /* ---------- Kho ngăn đá ---------- */
 const FRZ=[["lon","Thịt lợn","phần"],["bo","Thịt bò","phần"],["ga","Thịt gà","phần"],["ca","Cá","miếng"],["gan","Gan gà","phần"]];
@@ -1369,7 +1377,7 @@ let COOK=null, TIMER=null, AC=null, WL=null;
 function cookSteps(m){
   const t=(m.t+" "+m.r+" "+(m.f||"")).toLowerCase(), S=[];
   const hasCu=/bí đỏ|khoai lang|cà rốt|khoai tây/.test(t), hasRau=/rau ngót|cải ngọt|mồng tơi|rau dền/.test(t), hasEgg=/lòng đỏ|trứng/.test(t);
-  const ps=proteinsIn(t), isBot=/bột/.test(t)&&!/cháo|cơm/.test(t), fruit=m.f||/đu đủ|chuối|quả bơ|xoài/.test(t);
+  const ps=proteinsIn(t), isBot=/bột/.test(t)&&!/cháo|cơm/.test(t), fruit=false;
   S.push({h:"Chuẩn bị",x:m.r+(m.f?". Sau bữa: "+m.f:"")+(m.n?". Lưu ý: "+m.n:"")});
   if(hasEgg)S.push({h:"Luộc trứng",x:"Thả trứng vào nồi nước đang sôi, luộc 10 phút cho chín hẳn, ngâm nước lạnh rồi lấy lòng đỏ.",min:10});
   if(hasCu)S.push({h:"Hấp củ",x:"Gọt vỏ, cắt miếng nhỏ, hấp đến khi xiên que thấy mềm.",min:12});
@@ -1385,7 +1393,6 @@ function cookSteps(m){
   }
   if(hasCu||hasEgg||ps.includes("ca"))S.push({h:"Trộn",x:"Nghiền mịn củ, lòng đỏ hoặc cá rồi trộn đều vào bát."});
   if(/dầu/.test(t))S.push({h:"Thêm dầu",x:"Tắt bếp, cho dầu ăn dặm vào bát, trộn đều."});
-  if(fruit)S.push({h:"Trái cây",x:"Nghiền trái cây để cho Mochi ăn ngay sau bữa."});
   S.push({h:"Thử nhiệt độ",x:"Để nguội vừa, nhỏ một chút lên cổ tay thấy ấm là được. Chúc Mochi ăn ngon!"});
   return S;
 }
@@ -1458,28 +1465,27 @@ function rawBlock(m,k){
 
 /* ---------- Đổi món ---------- */
 const SW_OKS=["ok","trying"];
-function swapBases(n,d){const B=[];if(n<=14)B.push(["bot","Bột HiPP"]);if(n>=15)B.push(["chao",ageParams(d).base]);if(SW_OKS.includes(foodStatus("bellamy",d)))B.push(["bellamy","Bột Bellamy's"]);return B}
+function swapBases(n,d){const B=[];if(n<=14)B.push(["bot","Bột HiPP"]);if(n>=15)B.push(["chao",ageParams(d).base]);return B}
 function swapCompose(st){
   const {base,dam,veg,qua,beo}=st, d=dateOf(st.n), ap=ageParams(d), orig=st.orig, bot=base!=="chao";
   const vshort=v=>VSHORT[v]||FOODS[v].n.toLowerCase();
-  const head=base==="chao"?"Cháo":base==="bellamy"?"Bột Bellamy's":"Bột";
+  const head=base==="chao"?"Cháo":"Bột";
   const dn=dam?(PSHORT[dam]||FOODS[dam].n.toLowerCase()):"";
   const name=(dam==="longdo"||dam==="trung"?[head,...veg.map(vshort),dn]:[head,dn,...veg.map(vshort)]).filter(Boolean).join(" ");
   const parts=[];
   if(base==="chao") parts.push(`~${Math.max(40,orig.y-30)} ml cháo nền`);
-  else if(base==="bellamy") parts.push(`2 thìa canh bột Bellamy's (14 g) + 100 ml sữa HiPP`);
   else parts.push(`1½–2 tcf bột HiPP + 30 ml sữa HiPP`);
   if(dam){ if(bot&&dam==="longdo") parts.push("¼–½ lòng đỏ trứng chín kỹ"); else parts.push(pamt(dam,bot?Math.min(15,ap.g):ap.g)); }
   veg.forEach(v=>parts.push(bot?`10 g ${vshort(v)} ${FOODS[v].g==="rau"?"luộc xay mịn":"hấp nghiền"}`:vamt(v,ap)));
   if(beo) parts.push("¼ tcf bơ đậu phộng nguyên chất pha loãng");
   if(st.n>=10) parts.push(bot?"½ tcf dầu":"1 tcf dầu");
-  const f=qua?`${FAMT[qua]||FOODS[qua].n.toLowerCase()} nghiền 2–3 tcf sau bữa`:null;
+  const f=null;
   const gg=bot?Math.min(15,ap.g):ap.g, w=rawW(dam,[],gg,ap).concat(veg.map(v=>{const r=FOODS[v].g==="rau";return [r?"lá "+FOODS[v].n.toLowerCase():FOODS[v].n.toLowerCase()+" đã gọt vỏ",bot?10:(r?ap.rau:ap.cu)]}));
   return {t:name,r:parts.join(" + "),f,w};
 }
 function swapIngredients(st){
   const d=dateOf(st.n);
-  return ["dam","cu","rau","qua","beo"].map(g=>({g,ids:Object.keys(FOODS).filter(id=>FOODS[id].g===g&&!(st.base!=="chao"&&g==="dam"&&id!=="longdo"))}));
+  return ["dam","cu","rau","beo"].map(g=>({g,ids:Object.keys(FOODS).filter(id=>FOODS[id].g===g&&!(st.base!=="chao"&&g==="dam"&&id!=="longdo"))}));
 }
 function swapQuick(st){
   const d=dateOf(st.n), ok=id=>SW_OKS.includes(foodStatus(id,d));
@@ -1495,16 +1501,16 @@ function swapQuick(st){
 function openSwap(n,i){
   const d=dateOf(n), raw=mealsRaw(d).meals[i]; if(!raw) return;
   const B=swapBases(n,d), cur=Store.data.swaps[mid(n,i)];
-  sheetState={kind:"swap",n,i,idx:sameIdx(mealsRaw(d).meals,i),orig:raw,base:(cur&&cur.base)||(/^bột bellamy/i.test(raw.t)?"bellamy":n>=15?"chao":"bot"),dam:(cur&&cur.dam)||null,veg:(cur&&cur.veg)||[],qua:(cur&&cur.qua)||null,beo:!!(cur&&cur.beo),bases:B};
+  sheetState={kind:"swap",n,i,idx:sameIdx(mealsRaw(d).meals,i),orig:raw,base:(cur&&cur.base)||(n>=15?"chao":"bot"),dam:(cur&&cur.dam)||null,veg:(cur&&cur.veg)||[],qua:(cur&&cur.qua)||null,beo:!!(cur&&cur.beo),bases:B};
   if(!B.some(b=>b[0]===sheetState.base))sheetState.base=B[0][0];
   openSheet(swapBody());
 }
 function swapBody(){
   const st=sheetState, d=dateOf(st.n), cur=Store.data.swaps[mid(st.n,st.i)], q=swapQuick(st);
   const picked=st.dam||st.veg.length, c=picked?swapCompose(st):null;
-  const newPicked=[st.dam,...st.veg,st.qua,st.beo?"bdp":null].filter(x=>x&&!SW_OKS.includes(foodStatus(x,d)));
+  const newPicked=[st.dam,...st.veg,st.beo?"bdp":null].filter(x=>x&&!SW_OKS.includes(foodStatus(x,d)));
   const chip=(id,on,g)=>{const s=foodStatus(id,d),isNew=!SW_OKS.includes(s);return `<button class="chip ${isNew?"newf":""}" data-sh="swpick" data-g="${g}" data-v="${id}" aria-pressed="${on}" ${s==="react"?"disabled":""}>${esc(FOODS[id].n)}${isNew?`<small>${s==="react"?"phản ứng":"chưa thử"}</small>`:""}</button>`};
-  const grp={dam:"Đạm (chọn 1)",cu:"Củ",rau:"Rau",qua:"Trái cây ăn sau bữa",beo:"Thêm"};
+  const grp={dam:"Đạm (chọn 1)",cu:"Củ",rau:"Rau",beo:"Thêm"};
   return `<div><div class="eyebrow">Ngày ${st.n} · ${st.idx.length>1?`${st.idx.length} bữa cùng món`:`Bữa ${st.i+1}`}</div><h4>Đổi món</h4><div class="small muted" style="margin-top:2px">Theo lịch: ${esc(st.orig.t)}</div></div>
    ${q.length?`<div class="field"><label>Gợi ý nhanh từ món Mochi đã ăn được</label><div class="qalt">${q.map((x,k)=>`<button data-sh="swquick" data-v="${k}"><b>${esc(x.t)}</b><span>${esc(x.note||x.r)}</span></button>`).join("")}</div></div>`:""}
    <div class="field"><label>Hoặc tự ghép nguyên liệu</label>

@@ -27,11 +27,9 @@ def meals(n):
         return {"chao": True, "thaw": ["1 phần thịt lợn (~15 g)"], "egg": False}
     if n <= 21:
         return {"chao": True, "thaw": ["1 phần thịt bò (~15 g)"], "egg": False}
-    if n <= 24:
-        return {"chao": True, "thaw": ["2 phần thịt lợn (~15 g/phần, cho 2 bữa)"], "egg": False}
-    if n <= 27:
-        return {"chao": True, "thaw": ["2 miếng cá hồi (~15 g/miếng, cho 2 bữa)"], "egg": False}
-    return {"chao": True, "thaw": ["2 phần thịt bò (~15 g/phần, cho 2 bữa)"], "egg": False}
+    meat = {22: "lợn", 23: "lợn", 24: "lợn", 25: "cá", 26: "cá", 27: "cá", 28: "bò", 29: "bò", 30: "lợn", 31: "bò"}[n]
+    thaw = "2 miếng cá hồi (~15 g/miếng, cho 2 bữa)" if meat == "cá" else f"2 phần thịt {meat} (~15 g/phần, cho 2 bữa)"
+    return {"chao": True, "thaw": [thaw], "egg": False}
 
 
 NEW_FOOD = {
@@ -43,9 +41,8 @@ NEW_FOOD = {
     15: "Mai chuyển từ bột sang cháo rây.",
     16: "Mai bắt đầu món mới: thịt lợn, dùng nửa phần.",
     19: "Mai bắt đầu món mới: thịt bò, dùng nửa phần.",
-    22: "Mai bắt đầu 2 bữa/ngày, 2 bữa cùng món cháo lợn rau ngót (nấu 1 nồi chia đôi), và món mới đu đủ (chỉ 1 thìa cà phê sau bữa sáng).",
+    22: "Mai bắt đầu 2 bữa/ngày, 2 bữa cùng món cháo lợn rau ngót (nấu 1 nồi chia đôi).",
     25: "Mai bắt đầu món mới: cá hồi, mỗi bữa chỉ nửa lượng (~8 g), gỡ kỹ xương.",
-    29: "Mai bắt đầu bột Bellamy's táo quế sau bữa sáng (yến mạch, táo, quế, gluten): theo dõi kỹ 3 ngày.",
 }
 
 # Đi chợ: (số ngày của bữa đầu tiên dùng đồ, tiêu đề, danh sách)
@@ -54,9 +51,9 @@ SHOP = [
     (7, "Đi chợ tuần 2", "Trứng gà 6 quả; bí đỏ 100 g"),
     (11, "Đi chợ lần 2 (tuần 2)", "Rau ngót 1 bó nhỏ (cần ~30 g lá)"),
     (14, "Đi chợ tuần 3", "Gạo tẻ 1 kg; thịt lợn nạc thăn 150 g (chia 9 phần ~15 g, trữ đông); thịt bò thăn 100 g (chia 5 phần ~15 g, trữ đông); bí đỏ 100 g; khoai lang 150 g"),
-    (21, "Đi chợ tuần 4", "Cá hồi phi lê 100 g (cắt 6 miếng ~15 g, trữ đông); rau ngót 1 bó nhỏ (cần ~60 g lá); đu đủ chín 150 g"),
-    (24, "Đi chợ lần 2 (tuần 4)", "Bí đỏ 200 g; đu đủ chín 150 g"),
-    (28, "Đi chợ tuần 5", "Thịt bò thăn 100 g (chia 6 phần ~15 g, trữ đông); khoai lang 200 g"),
+    (21, "Đi chợ tuần 4", "Cá hồi phi lê 100 g (cắt 6 miếng ~15 g, trữ đông); rau ngót 1 bó nhỏ; bí đỏ 100 g; khoai lang 1 củ ~150 g"),
+    (24, "Đi chợ lần 2 (tuần 4)", "Rau ngót 1 bó nhỏ; bí đỏ 100 g"),
+    (28, "Đi chợ tuần 5", "Thịt bò thăn 100 g (chia 6 phần ~15 g, trữ đông); thịt lợn nạc 50 g (chia 2 phần); rau ngót 1 bó nhỏ; bí đỏ 100 g; khoai lang 1 củ nhỏ"),
 ]
 
 
