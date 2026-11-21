@@ -590,8 +590,8 @@ const WEEKS = [
   {w:1,label:"Bột loãng",meals:1,base:"Bột HiPP chỉ pha, không nấu: sữa HiPP ấm đổ vào bột, khuấy mịn, chờ 1–2 phút."},
   {w:2,label:"Bột đặc dần",meals:1,base:"Bột HiPP pha sữa HiPP. Từ ngày 10 thêm ½ tcf dầu mỗi bữa."},
   {w:3,label:"Cháo rây",meals:1,base:"Cháo nền mỗi sáng: 1½ thìa canh gạo (~18 g) + 150 ml nước, nấu và xay còn ~90 ml."},
-  {w:4,label:"Cháo đặc",meals:2,base:"2 bữa trong ngày cùng một món, mỗi ngày đổi rau củ. Sáng nấu 1 nồi cho cả ngày: 3 thìa canh gạo (~40 g) + 250 ml nước → ~200 ml cháo nền, thịt rau cân đủ cho 2 bữa, nấu chung rồi chia đôi. Phần chiều để nguội, cất ngăn mát, hâm sôi lại trước khi ăn."},
-  {w:5,label:"Cháo đặc",meals:2,base:"2 bữa trong ngày cùng một món, nấu 1 nồi chia đôi như tuần 4. Mỗi ngày đổi rau củ hoặc loại thịt."}
+  {w:4,label:"Cháo đặc",meals:1,base:"Vẫn 1 bữa/ngày, mỗi ngày đổi rau củ hoặc thịt. Cháo nền: 2 thìa canh gạo (~25 g) + 200 ml nước, nấu nhừ, xay còn ~120 ml."},
+  {w:5,label:"Tròn 7 tháng",meals:2,base:"30/11–01/12 vẫn 1 bữa. Từ 02/12 Mochi tròn 7 tháng, ăn 2 bữa cùng một món: sáng nấu 1 nồi cho cả ngày, 3 thìa canh gạo (~40 g) + 250 ml nước → ~200 ml cháo nền, thịt rau cân đủ cho 2 bữa, nấu chung rồi chia đôi. Phần chiều múc ra hộp sạch, nguội thì cất ngăn mát, hâm sôi lại trước khi ăn."}
 ];
 
 // Mỗi khối: ngày from–to, món mới, các bữa {t: tên, r: công thức, y: thành phẩm ml, e: bé ăn ml, n: ghi chú, w: gram cân sống mỗi bữa}
@@ -605,44 +605,26 @@ const PLAN = [
   {from:15,to:15,meals:[{t:"Cháo rau ngót lòng đỏ",r:"Cháo nền + 10 g lá rau ngót + ½ lòng đỏ + ½ tcf dầu",y:100,e:"~60",w:[["lá rau ngót",10]]}]},
   {from:16,to:18,nf:"lon",meals:[{t:"Cháo thịt lợn bí đỏ",r:"Cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:110,e:"60–80",n:"Ngày 16 dùng nửa lượng thịt (~8 g)",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
   {from:19,to:21,nf:"bo",meals:[{t:"Cháo bò khoai lang",r:"Cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"70–90",n:"Ngày 19 dùng nửa lượng thịt (~8 g)",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]}]},
-  {from:22,to:22,meals:[
-    {t:"Cháo lợn rau ngót",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",n:"Bắt đầu 2 bữa/ngày, 2 bữa cùng món",w:[["thịt lợn nạc",15],["lá rau ngót",10]]},
-    {t:"Cháo lợn rau ngót",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",n:"Bắt đầu 2 bữa/ngày, 2 bữa cùng món",w:[["thịt lợn nạc",15],["lá rau ngót",10]]}]},
-  {from:23,to:23,meals:[
-    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]},
-    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
-  {from:24,to:24,meals:[
-    {t:"Cháo lợn khoai lang",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["khoai lang đã gọt vỏ",20]]},
-    {t:"Cháo lợn khoai lang",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["khoai lang đã gọt vỏ",20]]}]},
-  {from:25,to:25,nf:"ca",meals:[
-    {t:"Cháo cá hồi bí đỏ",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",n:"Ngày đầu ăn cá: mỗi bữa chỉ nửa lượng cá (~8 g)",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]},
-    {t:"Cháo cá hồi bí đỏ",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",n:"Ngày đầu ăn cá: mỗi bữa chỉ nửa lượng cá (~8 g)",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]}]},
-  {from:26,to:26,meals:[
-    {t:"Cháo cá hồi khoai lang",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["khoai lang đã gọt vỏ",20]]},
-    {t:"Cháo cá hồi khoai lang",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["khoai lang đã gọt vỏ",20]]}]},
-  {from:27,to:27,meals:[
-    {t:"Cháo cá hồi rau ngót",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["lá rau ngót",10]]},
-    {t:"Cháo cá hồi rau ngót",r:"~100 ml cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["lá rau ngót",10]]}]},
-  {from:28,to:28,meals:[
-    {t:"Cháo bò bí đỏ",r:"~100 ml cháo nền + 15 g thịt bò thăn + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["bí đỏ đã gọt vỏ",15]]},
-    {t:"Cháo bò bí đỏ",r:"~100 ml cháo nền + 15 g thịt bò thăn + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["bí đỏ đã gọt vỏ",15]]}]},
-  {from:29,to:29,meals:[
-    {t:"Cháo bò rau ngót",r:"~100 ml cháo nền + 15 g thịt bò thăn + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["lá rau ngót",10]]},
-    {t:"Cháo bò rau ngót",r:"~100 ml cháo nền + 15 g thịt bò thăn + 10 g lá rau ngót + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["lá rau ngót",10]]}]},
-  {from:30,to:30,meals:[
-    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]},
-    {t:"Cháo lợn bí đỏ",r:"~100 ml cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:120,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:22,to:22,meals:[{t:"Cháo lợn rau ngót",r:"Cháo nền + 15 g thịt lợn nạc + 10 g lá rau ngót + 1 tcf dầu",y:130,e:"80–110",w:[["thịt lợn nạc",15],["lá rau ngót",10]]}]},
+  {from:23,to:23,meals:[{t:"Cháo lợn bí đỏ",r:"Cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:130,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:24,to:24,meals:[{t:"Cháo lợn khoai lang",r:"Cháo nền + 15 g thịt lợn nạc + 20 g khoai lang + 1 tcf dầu",y:130,e:"80–110",w:[["thịt lợn nạc",15],["khoai lang đã gọt vỏ",20]]}]},
+  {from:25,to:25,nf:"ca",meals:[{t:"Cháo cá hồi bí đỏ",r:"Cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 15 g bí đỏ + 1 tcf dầu",y:130,e:"80–110",n:"Ngày đầu ăn cá: chỉ dùng nửa lượng cá (~8 g)",w:[["cá hồi phi lê bỏ da",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:26,to:26,meals:[{t:"Cháo cá hồi khoai lang",r:"Cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:130,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["khoai lang đã gọt vỏ",20]]}]},
+  {from:27,to:27,meals:[{t:"Cháo cá hồi rau ngót",r:"Cháo nền + 15 g cá hồi hấp, gỡ kỹ xương + 10 g lá rau ngót + 1 tcf dầu",y:130,e:"80–110",w:[["cá hồi phi lê bỏ da",15],["lá rau ngót",10]]}]},
+  {from:28,to:28,meals:[{t:"Cháo bò bí đỏ",r:"Cháo nền + 15 g thịt bò thăn + 15 g bí đỏ + 1 tcf dầu",y:130,e:"80–110",w:[["thịt bò thăn",15],["bí đỏ đã gọt vỏ",15]]}]},
+  {from:29,to:29,meals:[{t:"Cháo bò rau ngót",r:"Cháo nền + 15 g thịt bò thăn + 10 g lá rau ngót + 1 tcf dầu",y:130,e:"80–110",w:[["thịt bò thăn",15],["lá rau ngót",10]]}]},
+  {from:30,to:30,meals:[{t:"Cháo lợn bí đỏ",r:"Cháo nền + 15 g thịt lợn nạc + 15 g bí đỏ + 1 tcf dầu",y:130,e:"80–110",w:[["thịt lợn nạc",15],["bí đỏ đã gọt vỏ",15]]}]},
   {from:31,to:31,meals:[
-    {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]},
-    {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]}]}
+    {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",n:"Mochi tròn 7 tháng: bắt đầu 2 bữa/ngày, 2 bữa cùng món",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]},
+    {t:"Cháo bò khoai lang",r:"~100 ml cháo nền + 15 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:120,e:"80–110",n:"Mochi tròn 7 tháng: bắt đầu 2 bữa/ngày, 2 bữa cùng món",w:[["thịt bò thăn",15],["khoai lang đã gọt vỏ",20]]}]}
 ];
 
 const SHOP = [
   {w:1,trips:[{d:-1,label:"Lần 1",items:["Bột HiPP gạo nhũ nhi · 1 hộp","Sữa HiPP số 2 (nếu sắp hết)","Bí đỏ · 200 g","Khoai lang · 250 g","Dầu ăn dặm (ô liu hoặc gấc) · 1 chai"]}]},
   {w:2,trips:[{d:6,label:"Lần 1",items:["Trứng gà · 6 quả","Bí đỏ · 100 g"]},{d:10,label:"Lần 2",items:["Rau ngót · 1 bó nhỏ (cần ~30 g lá)"]}]},
   {w:3,trips:[{d:13,label:"Lần 1",items:["Gạo tẻ ngon · 1 kg","Thịt lợn nạc thăn · 150 g → chia 9 phần ~15 g, trữ đông","Thịt bò thăn · 100 g → chia 5 phần ~15 g, trữ đông","Bí đỏ · 100 g","Khoai lang · 150 g"]}]},
-  {w:4,trips:[{d:20,label:"Lần 1",items:["Cá hồi phi lê · 100 g → cắt 6 miếng ~15 g, trữ đông","Rau ngót · 1 bó nhỏ (ngày 22 cần ~20 g lá)","Bí đỏ · 100 g (ngày 23, 25)","Khoai lang · 1 củ ~150 g (ngày 24, 26)"]},{d:23,label:"Lần 2",items:["Rau ngót · 1 bó nhỏ (ngày 27 cần ~20 g lá)","Bí đỏ · 100 g (ngày 28)"]}]},
-  {w:5,trips:[{d:27,label:"Lần 1",items:["Thịt bò thăn · 100 g → chia 6 phần ~15 g, trữ đông (2 phần để dành)","Thịt lợn nạc thăn · 50 g → chia 2 phần ~15 g, trữ đông","Rau ngót · 1 bó nhỏ (ngày 29 cần ~20 g lá)","Bí đỏ · 100 g (ngày 30)","Khoai lang · 1 củ nhỏ (ngày 31)"]}]}
+  {w:4,trips:[{d:20,label:"Lần 1",items:["Cá hồi phi lê · 100 g → cắt 6 miếng ~15 g, trữ đông (3 miếng dư, dùng trong 2 tuần)","Rau ngót · 1 bó nhỏ (ngày 22 cần ~10 g lá)","Bí đỏ · 100 g (ngày 23, 25)","Khoai lang · 1 củ ~150 g (ngày 24, 26)"]},{d:23,label:"Lần 2",items:["Rau ngót · 1 bó nhỏ (ngày 27 cần ~10 g lá)","Bí đỏ · 100 g (ngày 28)"]}]},
+  {w:5,trips:[{d:27,label:"Lần 1",items:["Thịt bò thăn · 100 g → chia 6 phần ~15 g, trữ đông (2 phần cho ngày 31, còn lại để dành)","Rau ngót · 1 bó nhỏ (ngày 29 cần ~10 g lá)","Bí đỏ · 100 g (ngày 30)","Khoai lang · 1 củ nhỏ (ngày 31)"]}]}
 ];
 const PRESTART = ["Ghế ăn có đệm lưng, thìa silicone mềm, cốc có vạch ml","Nồi nhỏ chống dính, rây inox hoặc máy xay cầm tay, khay đá có nắp","Thử cho Mochi ngồi ghế ăn: đầu giữ thẳng, lưng không đổ","Hỏi bác sĩ nhi về liều sắt khi bé bắt đầu ăn thịt","Học cách sơ cứu hóc dị vật cho trẻ dưới 1 tuổi (vỗ lưng, ấn ngực)","Đi chợ tuần 1 vào Chủ nhật 01/11"];
 
@@ -784,7 +766,7 @@ function ageParams(d){const m=age(d).m;
   if(m>=12) return {m,meals:3,y:220,e:"180–220",g:30,cu:30,rau:15,tex:"Ăn cùng gia đình: cơm nát hoặc cháo đặc hạt nguyên, cắt nhỏ, nêm rất nhạt",base:"Cơm nát / cháo đặc"};
   if(m>=9) return {m,meals:3,y:190,e:"150–180",g:25,cu:30,rau:15,tex:"Cháo hạt nguyên nấu nhừ, rau củ cắt hạt lựu mềm, tập đồ ăn cầm tay",base:"Cháo hạt nguyên"};
   if(m>=7) return {m,meals:2,y:140,e:"110–125",g:20,cu:20,rau:10,tex:"Cháo nghiền còn hạt vỡ, thịt băm nhỏ, rau củ dầm bằng thìa",base:"Cháo hạt vỡ"};
-  return {m,meals:2,y:130,e:"90–120",g:15,cu:20,rau:10,tex:"Cháo rây mịn",base:"Cháo rây"};}
+  return {m,meals:1,y:130,e:"90–120",g:15,cu:20,rau:10,tex:"Cháo rây mịn",base:"Cháo rây"};}
 function pamt(p,g){return ({lon:`${g} g thịt lợn nạc`,bo:`${g} g thịt bò thăn`,ca:`${g} g cá phi lê, gỡ kỹ xương`,longdo:"1 lòng đỏ trứng chín kỹ",ga:`${g} g thịt gà bỏ da, nấu chín kỹ`,dauphu:`${g} g đậu phụ non nghiền`,trung:"1 quả trứng chín kỹ, dầm nát",gan:"10–15 g gan gà luộc chín hẳn, nghiền"})[p]||FOODS[p].n}
 function vamt(v,ap){return FOODS[v].g==="rau"?`${ap.rau} g lá ${FOODS[v].n.toLowerCase()}`:`${ap.cu} g ${FOODS[v].n.toLowerCase()}`}
 const RAWN={lon:"thịt lợn nạc",bo:"thịt bò thăn",ca:"cá phi lê bỏ da",ga:"thịt gà bỏ da",dauphu:"đậu phụ non",gan:"gan gà"};
@@ -1101,7 +1083,7 @@ function renderGuide(){
 <li>Cháo, bột đã pha để ngoài nhiệt độ phòng quá 2 giờ thì bỏ.</li>
 </ul>`);
   h+=g("Bảo quản",`<ul><li>Thịt, cá: chia phần ~15 g, ghi ngày, ngăn đông, dùng trong 2 tuần. Rã đông ở ngăn mát, không cấp đông lại.</li><li>Bí đỏ đã cắt: bọc màng, ngăn mát 3–5 ngày.</li><li>Rau ngót: tuốt lá, không rửa, bọc khăn giấy, ngăn mát 3–4 ngày.</li><li>Khoai lang: nơi khô thoáng, không để tủ lạnh.</li><li>Bột HiPP đã mở: đóng kín, dùng trong 28 ngày.</li></ul>`);
-  const ms=[[6,"Bột, cháo rây mịn · 1→2 bữa/ngày"],[7,"Cháo nghiền còn hạt vỡ · 2 bữa/ngày"],[8,"Thịt cá băm nhỏ, rau củ dầm thìa · tập cốc"],[9,"Cháo hạt nguyên nấu nhừ · 3 bữa/ngày · đồ ăn cầm tay mềm"],[12,"Ăn cùng gia đình, cắt nhỏ, nêm rất nhạt"]];
+  const ms=[[6,"Bột, cháo rây mịn · 1 bữa/ngày"],[7,"Cháo nghiền còn hạt vỡ · 2 bữa/ngày"],[8,"Thịt cá băm nhỏ, rau củ dầm thìa · tập cốc"],[9,"Cháo hạt nguyên nấu nhừ · 3 bữa/ngày · đồ ăn cầm tay mềm"],[12,"Ăn cùng gia đình, cắt nhỏ, nêm rất nhạt"]];
   h+=g("Mốc ăn dặm của Mochi",`<div>${ms.map(([m,t])=>{const d=new Date(BIRTH.getFullYear(),BIRTH.getMonth()+m,BIRTH.getDate());const past=d<=new Date();return `<div class="logrow"><span class="mood ${past?"m-ok":""}" style="${past?"":"background:var(--line)"}"></span><div><b>${m} tháng · ${dm(d)}/${d.getFullYear()}</b><div class="small muted">${t}</div></div></div>`}).join("")}</div>`);
   return h;
 }
@@ -1169,7 +1151,7 @@ function contextText(){
   const ws=R.ws.slice(-3).map(w=>`${w.date}: ${w.kg} kg${w.cm?", "+w.cm+" cm":""}`).join("; ")||"chưa ghi";
   return `THÔNG TIN BÉ
 - Mochi, bé gái, sinh 02/05/2026. Hôm nay ${iso(t)}, bé ${a.m} tháng ${a.days} ngày.
-- Ăn dặm kiểu truyền thống Việt Nam từ 02/11/2026${n>=1?` (hôm nay là ngày thứ ${n})`:" (chưa bắt đầu)"}. Bột HiPP gạo pha sữa HiPP tuần 1–2, cháo rây từ tuần 3, 2 bữa/ngày từ tuần 4.
+- Ăn dặm kiểu truyền thống Việt Nam từ 02/11/2026${n>=1?` (hôm nay là ngày thứ ${n})`:" (chưa bắt đầu)"}. Bột HiPP gạo pha sữa HiPP tuần 1–2, cháo rây từ tuần 3, 1 bữa/ngày đến hết 01/12, 2 bữa/ngày từ 02/12 (tròn 7 tháng).
 - Sữa: bú mẹ theo nhu cầu + 1 cữ sữa HiPP/ngày. Đang dùng sắt, D3K2, DHA, men vi sinh.
 - Mục tiêu của bố mẹ: phát triển toàn diện, tăng cân tốt. Gia đình không có tiền sử dị ứng. Đi chợ 1–2 lần/tuần, nấu tươi mỗi ngày, thịt cá trữ đông theo phần.
 - Món đã ăn ổn: ${st.ok.join(", ")||"chưa có"}

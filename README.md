@@ -17,15 +17,15 @@ App lịch ăn dặm cho bé Mochi (sinh 02/05/2026), bắt đầu ăn dặm ki�
 
 ## Lộ trình 5 tuần
 
-Mọi lượng thịt, cá, rau củ ghi theo gram cân sống cho từng bữa (thịt cá ~15 g/bữa, đã bỏ mỡ, da, xương; củ đã gọt vỏ; rau chỉ tính lá). Ngày ăn 2 bữa thì 2 bữa cùng một món, sang ngày sau đổi rau củ hoặc thịt. Chỉ có bữa chính, không trái cây hay bữa phụ.
+Mọi lượng thịt, cá, rau củ ghi theo gram cân sống cho từng bữa (thịt cá ~15 g/bữa, đã bỏ mỡ, da, xương; củ đã gọt vỏ; rau chỉ tính lá). Từ 7 tháng (02/12) mới ăn 2 bữa/ngày, 2 bữa cùng một món, sang ngày sau đổi rau củ hoặc thịt. Chỉ có bữa chính, không trái cây hay bữa phụ.
 
 | Tuần | Ngày | Nền | Món mới |
 | --- | --- | --- | --- |
 | 1 | 02–08/11 | Bột HiPP gạo pha sữa HiPP, 1 bữa | Gạo, bí đỏ, khoai lang |
 | 2 | 09–15/11 | Bột đặc dần, 1 bữa | Lòng đỏ trứng, rau ngót |
 | 3 | 16–22/11 | Cháo rây, 1 bữa | Thịt lợn, thịt bò |
-| 4 | 23–29/11 | Cháo đặc, 2 bữa cùng món (nấu 1 nồi chia đôi), đổi rau củ mỗi ngày | Cá hồi |
-| 5 | 30/11–02/12 | 2 bữa cùng món, đổi thịt và rau mỗi ngày | — |
+| 4 | 23–29/11 | Cháo đặc, 1 bữa, đổi rau củ mỗi ngày | Cá hồi |
+| 5 | 30/11–02/12 | 1 bữa; từ 02/12 (tròn 7 tháng) 2 bữa cùng món | — |
 
 Ảnh thực đơn từng tuần và bảng nguyên liệu thay thế nằm trong thư mục [`anh/`](anh).
 
