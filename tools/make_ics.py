@@ -34,18 +34,15 @@ def meals(n):
         return {"chao": True, "thaw": [thaw], "egg": False}
     # Ngày 32–63: 2 bữa cùng món, mỗi phần ~20 g
     p = PLAN2[n]
-    if p in ("dauphu", "trung"):
-        return {"chao": True, "thaw": [], "egg": p == "trung"}
+    if p in ("dauphu", "trung", "longdo"):
+        return {"chao": True, "thaw": [], "egg": p in ("trung", "longdo")}
     k = 1 if n == 33 else 2  # ngày đầu thử gà: mỗi bữa nửa lượng
     g = 15 if n == 32 else 20
     unit, name = {"ca": ("miếng", "cá hồi"), "lon": ("phần", "thịt lợn"), "bo": ("phần", "thịt bò"), "ga": ("phần", "thịt gà"), "gan": ("phần", "gan gà")}[p]
     return {"chao": True, "thaw": [f"{k} {unit} {name} (~{g} g/{unit}), cho 2 bữa"], "egg": False}
 
 
-PLAN2 = {32: "ca", 33: "ga", 34: "ga", 35: "ga", 36: "lon", 37: "bo", 38: "ga", 39: "bo", 40: "lon", 41: "ca",
-         42: "dauphu", 43: "dauphu", 44: "dauphu", 45: "trung", 46: "trung", 47: "trung", 48: "bo", 49: "lon", 50: "ga",
-         51: "bo", 52: "lon", 53: "ca", 54: "bo", 55: "ga", 56: "lon", 57: "bo", 58: "ga", 59: "ca", 60: "trung",
-         61: "bo", 62: "ga", 63: "lon"}
+PLAN2 = {32: 'ca', 33: 'ga', 34: 'ga', 35: 'ga', 36: 'bo', 37: 'ca', 38: 'longdo', 39: 'bo', 40: 'lon', 41: 'ca', 42: 'dauphu', 43: 'dauphu', 44: 'dauphu', 45: 'trung', 46: 'trung', 47: 'trung', 48: 'bo', 49: 'ca', 50: 'trung', 51: 'bo', 52: 'ca', 53: 'lon', 54: 'bo', 55: 'ga', 56: 'ca', 57: 'bo', 58: 'ca', 59: 'ga', 60: 'trung', 61: 'bo', 62: 'ca', 63: 'lon'}
 
 
 NEW_FOOD = {
@@ -79,11 +76,11 @@ SHOP = [
     (24, "Đi chợ lần 2 (tuần 4)", "Rau ngót 1 bó nhỏ; bí đỏ 100 g"),
     (28, "Đi chợ tuần 5 (đồ cả tuần)", "Thịt bò ~50 g (chia 2 phần ~15 g, ngày 31); thịt gà 100 g (chia 5 phần ~20 g, ngày 33–35); rau ngót 1 bó nhỏ; bí đỏ 200 g; khoai lang 2 củ. Thịt cá trữ đông, dùng hết trong tuần"),
     (32, "Đi chợ lần 2 (tuần 5)", "Rau ngót 1 bó nhỏ"),
-    (35, "Đi chợ tuần 6 (đồ cả tuần)", "Thịt lợn 100 g (4 phần); thịt bò 100 g (4 phần); thịt gà 50 g (2 phần); cá hồi 50 g (2 miếng); cải ngọt 1 bó; cà rốt 2 củ nhỏ; bí đỏ 100 g. Thịt cá chia phần ~20 g, trữ đông, dùng hết trong tuần"),
-    (42, "Đi chợ tuần 7 (đồ cả tuần)", "Thịt bò 50 g (2 phần); thịt lợn 50 g (2 phần); đậu phụ non 1 bìa; trứng gà 6 quả; rau ngót 1 bó; bí đỏ 100 g; khoai lang 1 củ; cà rốt 1 củ"),
+    (35, "Đi chợ tuần 6 (đồ cả tuần)", "Thịt bò 100 g (4 phần); cá hồi 100 g (4 miếng); thịt lợn 50 g (2 phần); trứng gà 6 quả; cải ngọt 1 bó; cà rốt 2 củ nhỏ; bí đỏ 100 g. Thịt cá chia phần ~20 g, trữ đông, dùng hết trong tuần"),
+    (42, "Đi chợ tuần 7 (đồ cả tuần)", "Thịt bò 50 g (2 phần); cá hồi 50 g (2 miếng); đậu phụ non 1 bìa; rau ngót 1 bó; khoai lang 1 củ; bí đỏ 100 g; cà rốt 1 củ"),
     (44, "Đi chợ lần 2 (tuần 7)", "Đậu phụ non 1 bìa; cải ngọt 1 bó nhỏ; mồng tơi 1 bó nhỏ"),
-    (49, "Đi chợ tuần 8 (đồ cả tuần)", "Thịt gà 100 g (4 phần); thịt bò 100 g (4 phần); thịt lợn 100 g (4 phần); cá hồi 50 g (2 miếng); súp lơ xanh 1 bông nhỏ; mồng tơi 1 bó; bí đỏ 100 g; cà rốt 1 củ; khoai lang 1 củ; bơ đậu phộng nguyên chất 1 hũ nhỏ"),
-    (56, "Đi chợ tuần 9 (đồ cả tuần)", "Thịt bò 100 g (4 phần); cá hồi 50 g (2 miếng); thịt gà 100 g (4 phần); thịt lợn 50 g (2 phần); cải ngọt 1 bó; cà rốt 2 củ; khoai lang 1 củ; bí đỏ 100 g"),
+    (49, "Đi chợ tuần 8 (đồ cả tuần)", "Thịt bò 100 g (4 phần); cá hồi 100 g (4 miếng); thịt lợn 50 g (2 phần); thịt gà 50 g (2 phần); trứng gà 4 quả; mồng tơi 1 bó; súp lơ xanh 1 bông nhỏ; bí đỏ 100 g; cà rốt 1 củ; khoai lang 1 củ; bơ đậu phộng nguyên chất 1 hũ nhỏ"),
+    (56, "Đi chợ tuần 9 (đồ cả tuần)", "Thịt bò 100 g (4 phần); cá hồi 100 g (4 miếng); thịt gà 50 g (2 phần); thịt lợn 50 g (2 phần); cải ngọt 1 bó; cà rốt 2 củ; khoai lang 1 củ; bí đỏ 100 g"),
     (59, "Đi chợ lần 2 (tuần 9)", "Mồng tơi 1 bó nhỏ"),
 ]
 
@@ -105,7 +102,7 @@ def evenings():
             parts.append("Rã đông " + " + ".join(m["thaw"]) + ", để ngăn mát qua đêm.")
         if m["chao"]:
             parts.append("Vo và ngâm gạo cho cháo sáng mai.")
-        if n in (10, 15, 45, 60):
+        if n in (10, 15, 38, 45, 50, 60):
             parts.append("Kiểm tra còn trứng.")
         tomorrow = date_of(n)
         if tomorrow in shop_next and tomorrow.weekday() != 6:
