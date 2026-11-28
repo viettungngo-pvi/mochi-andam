@@ -27,10 +27,25 @@ def meals(n):
         return {"chao": True, "thaw": ["1 phần thịt lợn (~15 g)"], "egg": False}
     if n <= 21:
         return {"chao": True, "thaw": ["1 phần thịt bò (~15 g)"], "egg": False}
-    meat = {22: "lợn", 23: "lợn", 24: "lợn", 25: "cá", 26: "cá", 27: "cá", 28: "bò", 29: "bò", 30: "lợn", 31: "bò"}[n]
-    k = 2 if n >= 31 else 1  # từ 02/12 (ngày 31, tròn 7 tháng) mới ăn 2 bữa
-    thaw = (f"{k} miếng cá hồi (~15 g/miếng)" if meat == "cá" else f"{k} phần thịt {meat} (~15 g/phần)") + (", cho 2 bữa" if k == 2 else "")
-    return {"chao": True, "thaw": [thaw], "egg": False}
+    if n <= 31:
+        meat = {22: "lợn", 23: "lợn", 24: "lợn", 25: "cá", 26: "cá", 27: "cá", 28: "bò", 29: "bò", 30: "lợn", 31: "bò"}[n]
+        k = 2 if n >= 31 else 1  # từ 02/12 (ngày 31, tròn 7 tháng) mới ăn 2 bữa
+        thaw = (f"{k} miếng cá hồi (~15 g/miếng)" if meat == "cá" else f"{k} phần thịt {meat} (~15 g/phần)") + (", cho 2 bữa" if k == 2 else "")
+        return {"chao": True, "thaw": [thaw], "egg": False}
+    # Ngày 32–63: 2 bữa cùng món, mỗi phần ~20 g
+    p = PLAN2[n]
+    if p in ("dauphu", "trung"):
+        return {"chao": True, "thaw": [], "egg": p == "trung"}
+    k = 1 if n in (33, 51) else 2  # ngày đầu thử gà, gan: mỗi bữa nửa lượng
+    g = 15 if p in ("gan",) or n == 32 else 20
+    unit, name = {"ca": ("miếng", "cá hồi"), "lon": ("phần", "thịt lợn"), "bo": ("phần", "thịt bò"), "ga": ("phần", "thịt gà"), "gan": ("phần", "gan gà")}[p]
+    return {"chao": True, "thaw": [f"{k} {unit} {name} (~{g} g/{unit}), cho 2 bữa"], "egg": False}
+
+
+PLAN2 = {32: "ca", 33: "ga", 34: "ga", 35: "ga", 36: "lon", 37: "bo", 38: "ga", 39: "bo", 40: "lon", 41: "ca",
+         42: "dauphu", 43: "dauphu", 44: "dauphu", 45: "trung", 46: "trung", 47: "trung", 48: "bo", 49: "lon", 50: "ga",
+         51: "gan", 52: "bo", 53: "ca", 54: "bo", 55: "ga", 56: "lon", 57: "bo", 58: "gan", 59: "ca", 60: "trung",
+         61: "bo", 62: "ga", 63: "lon"}
 
 
 NEW_FOOD = {
@@ -43,6 +58,14 @@ NEW_FOOD = {
     16: "Mai bắt đầu món mới: thịt lợn, dùng nửa phần.",
     19: "Mai bắt đầu món mới: thịt bò, dùng nửa phần.",
     31: "Mai Mochi tròn 7 tháng: bắt đầu 2 bữa/ngày, 2 bữa cùng món cháo bò khoai lang (nấu 1 nồi chia đôi).",
+    33: "Mai bắt đầu món mới: thịt gà, ngày đầu mỗi bữa chỉ nửa lượng (~10 g).",
+    36: "Mai bắt đầu món mới: cải ngọt, ngày đầu mỗi bữa 10 g lá.",
+    39: "Mai bắt đầu món mới: cà rốt, ngày đầu mỗi bữa 10 g.",
+    42: "Mai bắt đầu món mới: đậu phụ non, ngày đầu mỗi bữa 15 g. Mua đậu phụ tươi.",
+    45: "Mai bắt đầu món mới: trứng cả quả (có lòng trắng), ngày đầu mỗi bữa ¼ quả, luộc chín kỹ 10 phút.",
+    48: "Mai bắt đầu món mới: mồng tơi, ngày đầu mỗi bữa 10 g lá.",
+    51: "Mai bắt đầu món mới: gan gà, ngày đầu mỗi bữa ~8 g, luộc chín hẳn.",
+    54: "Mai bắt đầu món mới: bơ đậu phộng (dễ dị ứng): chỉ ¼ tcf vào bữa sáng, theo dõi kỹ 2 giờ sau ăn.",
     25: "Mai bắt đầu món mới: cá hồi, chỉ dùng nửa lượng (~8 g), gỡ kỹ xương.",
 }
 
@@ -54,7 +77,16 @@ SHOP = [
     (14, "Đi chợ tuần 3", "Gạo tẻ 1 kg; thịt lợn nạc thăn 150 g (chia 9 phần ~15 g, trữ đông); thịt bò thăn 100 g (chia 5 phần ~15 g, trữ đông); bí đỏ 100 g; khoai lang 150 g"),
     (21, "Đi chợ tuần 4", "Cá hồi phi lê 100 g (cắt 6 miếng ~15 g, trữ đông, 3 miếng dư); rau ngót 1 bó nhỏ; bí đỏ 100 g; khoai lang 1 củ ~150 g"),
     (24, "Đi chợ lần 2 (tuần 4)", "Rau ngót 1 bó nhỏ; bí đỏ 100 g"),
-    (28, "Đi chợ tuần 5", "Thịt bò thăn 100 g (chia 6 phần ~15 g, trữ đông); rau ngót 1 bó nhỏ; bí đỏ 100 g; khoai lang 1 củ nhỏ"),
+    (28, "Đi chợ tuần 5", "Thịt bò thăn 100 g (chia 6 phần ~15 g, trữ đông); rau ngót 1 bó nhỏ; bí đỏ 100 g; khoai lang 1 củ ~150 g"),
+    (32, "Đi chợ lần 2 (tuần 5)", "Thịt gà bỏ da 100 g (chia 5 phần ~20 g, trữ đông); bí đỏ 100 g; rau ngót 1 bó nhỏ; khoai lang 1 củ nhỏ"),
+    (35, "Đi chợ tuần 6", "Thịt bò thăn 100 g (chia 4 phần ~20 g); thịt lợn nạc 100 g (chia 4 phần ~20 g); thịt gà 50 g (chia 2 phần); cải ngọt 1 bó nhỏ"),
+    (38, "Đi chợ lần 2 (tuần 6)", "Cá hồi phi lê 50 g (cắt 2 miếng ~20 g); cà rốt 2 củ nhỏ"),
+    (42, "Đi chợ tuần 7", "Đậu phụ non 1 bìa nhỏ; bí đỏ 100 g; rau ngót 1 bó nhỏ; trứng gà 6 quả; cà rốt 1 củ nhỏ"),
+    (44, "Đi chợ lần 2 (tuần 7)", "Đậu phụ non 1 bìa nhỏ; khoai lang 1 củ nhỏ; cải ngọt 1 bó nhỏ; thịt bò 50 g (2 phần); thịt lợn 50 g (2 phần); mồng tơi 1 bó nhỏ"),
+    (49, "Đi chợ tuần 8", "Thịt gà 50 g (2 phần); mồng tơi 1 bó nhỏ; gan gà 50 g (chia 3 phần ~15 g); thịt bò 50 g (2 phần); khoai lang 1 củ nhỏ; bí đỏ 100 g; bơ đậu phộng nguyên chất 1 hũ nhỏ"),
+    (52, "Đi chợ lần 2 (tuần 8)", "Cá hồi 50 g (2 miếng); thịt bò 50 g; thịt gà 50 g; thịt lợn 50 g (mỗi loại chia 2 phần ~20 g); bí đỏ 100 g; cà rốt 1 củ nhỏ; khoai lang 1 củ nhỏ"),
+    (56, "Đi chợ tuần 9", "Thịt bò 50 g (2 phần); cải ngọt 1 bó nhỏ; cà rốt 1 củ nhỏ; cá hồi 50 g (2 miếng); khoai lang 1 củ nhỏ"),
+    (60, "Đi chợ lần 2 (tuần 9)", "Thịt bò 50 g; thịt gà 50 g; thịt lợn 50 g (mỗi loại chia 2 phần ~20 g); mồng tơi 1 bó nhỏ; bí đỏ 100 g; cà rốt 1 củ nhỏ"),
 ]
 
 
@@ -64,7 +96,7 @@ def evenings():
     out.append((date_of(1) - dt.timedelta(days=2), "Mochi: còn 2 ngày nữa ăn dặm",
                 "Thứ Hai 02/11 Mochi bắt đầu ăn dặm. Chủ nhật 01/11 đi chợ tuần 1."))
     shop_next = {date_of(d) + dt.timedelta(days=0): (t, items) for d, t, items in SHOP}
-    for n in range(1, 32):
+    for n in range(1, 64):
         m = meals(n)
         parts = []
         if n in NEW_FOOD:
@@ -75,7 +107,7 @@ def evenings():
             parts.append("Rã đông " + " + ".join(m["thaw"]) + ", để ngăn mát qua đêm.")
         if m["chao"]:
             parts.append("Vo và ngâm gạo cho cháo sáng mai.")
-        if n in (10, 15):
+        if n in (10, 15, 45, 60):
             parts.append("Kiểm tra còn trứng.")
         tomorrow = date_of(n)
         if tomorrow in shop_next and tomorrow.weekday() != 6:

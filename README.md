@@ -15,7 +15,7 @@ App lịch ăn dặm cho bé Mochi (sinh 02/05/2026), bắt đầu ăn dặm ki�
 - **Cài đặt** — nhật ký chung của gia đình (Firebase), nhắc việc Lịch iPhone, **sao lưu/khôi phục** ra file JSON.
 - Dùng được khi mất mạng (service worker), có màn hình chào khi mở từ màn hình chính. Tuổi bé luôn hiện ở đầu app; nền sáng và tối.
 
-## Lộ trình 5 tuần
+## Lộ trình 9 tuần (63 ngày)
 
 Mọi lượng thịt, cá, rau củ ghi theo gram cân sống cho từng bữa (thịt cá ~15 g/bữa, đã bỏ mỡ, da, xương; củ đã gọt vỏ; rau chỉ tính lá). Từ 7 tháng (02/12) mới ăn 2 bữa/ngày, 2 bữa cùng một món, sang ngày sau đổi rau củ hoặc thịt. Chỉ có bữa chính, không trái cây hay bữa phụ.
 
@@ -25,7 +25,11 @@ Mọi lượng thịt, cá, rau củ ghi theo gram cân sống cho từng bữa 
 | 2 | 09–15/11 | Bột đặc dần, 1 bữa | Lòng đỏ trứng, rau ngót |
 | 3 | 16–22/11 | Cháo rây, 1 bữa | Thịt lợn, thịt bò |
 | 4 | 23–29/11 | Cháo đặc, 1 bữa, đổi rau củ mỗi ngày | Cá hồi |
-| 5 | 30/11–02/12 | 1 bữa; từ 02/12 (tròn 7 tháng) 2 bữa cùng món | — |
+| 5 | 30/11–06/12 | 1 bữa; từ 02/12 (tròn 7 tháng) 2 bữa cùng món | Thịt gà (04/12) |
+| 6 | 07–13/12 | 2 bữa cùng món, mỗi bữa 20 g thịt cá | Cải ngọt, cà rốt, đậu phụ |
+| 7 | 14–20/12 | 2 bữa cùng món | Trứng cả quả, mồng tơi |
+| 8 | 21–27/12 | 2 bữa cùng món | Gan gà (1 lần/tuần), bơ đậu phộng |
+| 9 | 28/12–03/01 | 2 bữa, xoay vòng món đã ăn ổn | — |
 
 Ảnh thực đơn từng tuần và bảng nguyên liệu thay thế nằm trong thư mục [`anh/`](anh).
 
