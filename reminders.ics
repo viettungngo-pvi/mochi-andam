@@ -627,9 +627,9 @@ DTSTART:20261221T124900Z
 DTEND:20261221T130400Z
 SUMMARY:Mochi: mai có món mới
 DESCRIPTION:Mai bắt đầu món mới: gan gà\, ngày đầu mỗi bữa
-  ~8 g\, luộc chín hẳn. Rã đông 1 phần gan gà (~15 g/phần)\, c
- ho 2 bữa\, để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sán
- g mai.
+  ~5 g\, luộc chín hẳn. Gan tối đa 1 lần/tuần. Rã đông 1 ph
+ ần gan gà (~8 g/phần)\, cho 2 bữa\, để ngăn mát qua đêm. Vo 
+ và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -728,8 +728,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261228T124900Z
 DTEND:20261228T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 2 phần gan gà (~15 g/phần)\, cho 2 bữa\, đ
- ể ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 phần gan gà (~8 g/phần)\, cho 2 bữa\, để
+  ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -978,11 +978,11 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261220T004600Z
 DTEND:20261220T011600Z
 SUMMARY:Mochi: đi chợ tuần 8 (đồ cả tuần)
-DESCRIPTION:Thịt gà 100 g (4 phần)\; gan gà ~30 g (1 phần)\; thịt
-  bò 100 g (4 phần)\; cá hồi 50 g (2 miếng)\; thịt lợn 50 g (2 
- phần)\; mồng tơi 1 bó\; bí đỏ 200 g\; khoai lang 1 củ\; cà r
- ốt 1 củ\; bơ đậu phộng nguyên chất 1 hũ nhỏ. Thịt cá ch
- ia phần\, trữ đông ngay khi về.
+DESCRIPTION:Thịt gà 100 g (4 phần)\; gan gà 1 lá nhỏ ~20 g (chỉ 
+ dùng ~10 g)\; thịt bò 100 g (4 phần)\; cá hồi 50 g (2 miếng)\; 
+ thịt lợn 50 g (2 phần)\; mồng tơi 1 bó\; bí đỏ 200 g\; khoai
+  lang 1 củ\; cà rốt 1 củ\; bơ đậu phộng nguyên chất 1 hũ 
+ nhỏ. Thịt cá chia phần\, trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ tuần 8 (đồ cả tuần)
@@ -995,10 +995,11 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261227T004600Z
 DTEND:20261227T011600Z
 SUMMARY:Mochi: đi chợ tuần 9 (đồ cả tuần)
-DESCRIPTION:Thịt bò 100 g (4 phần)\; gan gà ~30 g (2 phần)\; cá h
- ồi 50 g (2 miếng)\; thịt gà 50 g (2 phần)\; thịt lợn 50 g (2 
- phần)\; cải ngọt 1 bó\; cà rốt 2 củ\; khoai lang 1 củ\; bí 
- đỏ 100 g. Thịt cá chia phần\, trữ đông ngay khi về.
+DESCRIPTION:Thịt bò 100 g (4 phần)\; gan gà 1 lá nhỏ ~20 g (2 ph
+ ần ~8 g)\; cá hồi 50 g (2 miếng)\; thịt gà 50 g (2 phần)\; th
+ ịt lợn 50 g (2 phần)\; cải ngọt 1 bó\; cà rốt 2 củ\; khoai
+  lang 1 củ\; bí đỏ 100 g. Thịt cá chia phần\, trữ đông ngay
+  khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ tuần 9 (đồ cả tuần)
