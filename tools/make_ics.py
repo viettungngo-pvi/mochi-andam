@@ -36,15 +36,15 @@ def meals(n):
     p = PLAN2[n]
     if p in ("dauphu", "trung"):
         return {"chao": True, "thaw": [], "egg": p == "trung"}
-    k = 1 if n in (33, 51) else 2  # ngày đầu thử gà, gan: mỗi bữa nửa lượng
-    g = 8 if p == "gan" else (15 if n == 32 else 20)
+    k = 1 if n == 33 else 2  # ngày đầu thử gà: mỗi bữa nửa lượng
+    g = 15 if n == 32 else 20
     unit, name = {"ca": ("miếng", "cá hồi"), "lon": ("phần", "thịt lợn"), "bo": ("phần", "thịt bò"), "ga": ("phần", "thịt gà"), "gan": ("phần", "gan gà")}[p]
     return {"chao": True, "thaw": [f"{k} {unit} {name} (~{g} g/{unit}), cho 2 bữa"], "egg": False}
 
 
 PLAN2 = {32: "ca", 33: "ga", 34: "ga", 35: "ga", 36: "lon", 37: "bo", 38: "ga", 39: "bo", 40: "lon", 41: "ca",
          42: "dauphu", 43: "dauphu", 44: "dauphu", 45: "trung", 46: "trung", 47: "trung", 48: "bo", 49: "lon", 50: "ga",
-         51: "gan", 52: "bo", 53: "ca", 54: "bo", 55: "ga", 56: "lon", 57: "bo", 58: "gan", 59: "ca", 60: "trung",
+         51: "lon", 52: "bo", 53: "ca", 54: "bo", 55: "ga", 56: "lon", 57: "bo", 58: "ga", 59: "ca", 60: "trung",
          61: "bo", 62: "ga", 63: "lon"}
 
 
@@ -64,7 +64,6 @@ NEW_FOOD = {
     42: "Mai bắt đầu món mới: đậu phụ non, ngày đầu mỗi bữa 15 g. Mua đậu phụ tươi.",
     45: "Mai bắt đầu món mới: trứng cả quả (có lòng trắng), ngày đầu mỗi bữa ¼ quả, luộc chín kỹ 10 phút.",
     48: "Mai bắt đầu món mới: mồng tơi, ngày đầu mỗi bữa 10 g lá.",
-    51: "Mai bắt đầu món mới: gan gà, ngày đầu mỗi bữa ~5 g, luộc chín hẳn. Gan tối đa 1 lần/tuần.",
     54: "Mai bắt đầu món mới: bơ đậu phộng (dễ dị ứng): chỉ ¼ tcf vào bữa sáng, theo dõi kỹ 2 giờ sau ăn.",
     25: "Mai bắt đầu món mới: cá hồi, chỉ dùng nửa lượng (~8 g), gỡ kỹ xương.",
 }
@@ -82,8 +81,8 @@ SHOP = [
     (35, "Đi chợ tuần 6 (đồ cả tuần)", "Thịt lợn 100 g (4 phần); thịt bò 100 g (4 phần); thịt gà 50 g (2 phần); cá hồi 50 g (2 miếng); cải ngọt 1 bó; cà rốt 2 củ nhỏ; bí đỏ 100 g. Thịt cá chia phần ~20 g, trữ đông, dùng hết trong tuần"),
     (42, "Đi chợ tuần 7 (đồ cả tuần)", "Thịt bò 50 g (2 phần); thịt lợn 50 g (2 phần); đậu phụ non 1 bìa; trứng gà 6 quả; rau ngót 1 bó; bí đỏ 100 g; khoai lang 1 củ; cà rốt 1 củ"),
     (44, "Đi chợ lần 2 (tuần 7)", "Đậu phụ non 1 bìa; cải ngọt 1 bó nhỏ; mồng tơi 1 bó nhỏ"),
-    (49, "Đi chợ tuần 8 (đồ cả tuần)", "Thịt gà 100 g (4 phần); gan gà 1 lá nhỏ ~20 g (chỉ dùng ~10 g); thịt bò 100 g (4 phần); cá hồi 50 g (2 miếng); thịt lợn 50 g (2 phần); mồng tơi 1 bó; bí đỏ 200 g; khoai lang 1 củ; cà rốt 1 củ; bơ đậu phộng nguyên chất 1 hũ nhỏ"),
-    (56, "Đi chợ tuần 9 (đồ cả tuần)", "Thịt bò 100 g (4 phần); gan gà 1 lá nhỏ ~20 g (2 phần ~8 g); cá hồi 50 g (2 miếng); thịt gà 50 g (2 phần); thịt lợn 50 g (2 phần); cải ngọt 1 bó; cà rốt 2 củ; khoai lang 1 củ; bí đỏ 100 g"),
+    (49, "Đi chợ tuần 8 (đồ cả tuần)", "Thịt gà 100 g (4 phần); thịt bò 100 g (4 phần); cá hồi 50 g (2 miếng); thịt lợn 100 g (4 phần); mồng tơi 1 bó; bí đỏ 200 g; khoai lang 1 củ; cà rốt 1 củ; bơ đậu phộng nguyên chất 1 hũ nhỏ"),
+    (56, "Đi chợ tuần 9 (đồ cả tuần)", "Thịt bò 100 g (4 phần); cá hồi 50 g (2 miếng); thịt gà 100 g (4 phần); thịt lợn 50 g (2 phần); cải ngọt 1 bó; cà rốt 2 củ; khoai lang 1 củ; bí đỏ 100 g"),
     (59, "Đi chợ lần 2 (tuần 9)", "Mồng tơi 1 bó nhỏ"),
 ]
 

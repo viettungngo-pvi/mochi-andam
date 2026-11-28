@@ -581,9 +581,9 @@ const FOODS = {
   bo:{n:"Thịt bò",g:"dam",day:19}, ca:{n:"Cá hồi",g:"dam",day:25},
   ga:{n:"Thịt gà",g:"dam",day:33}, caingot:{n:"Cải ngọt",g:"rau",day:36},
   carot:{n:"Cà rốt",g:"cu",day:39}, dauphu:{n:"Đậu phụ",g:"dam",day:42}, trung:{n:"Trứng cả quả",g:"dam",day:45}, mongtoi:{n:"Mồng tơi",g:"rau",day:48},
-  gan:{n:"Gan gà",g:"dam",day:51}, bdp:{n:"Bơ đậu phộng",g:"beo",day:54}
+  bdp:{n:"Bơ đậu phộng",g:"beo",day:54}
 };
-const QUEUE = ["ga","caingot","dauphu","trung","carot","mongtoi","gan","bdp"];
+const QUEUE = ["ga","caingot","dauphu","trung","carot","mongtoi","bdp"];
 const GROUP_NAME = {nen:"Nền",cu:"Củ",rau:"Rau xanh",dam:"Đạm",beo:"Chất béo"};
 
 const WEEKS = [
@@ -594,7 +594,7 @@ const WEEKS = [
   {w:5,label:"Tròn 7 tháng",meals:2,base:"30/11–01/12 vẫn 1 bữa. Từ 02/12 Mochi tròn 7 tháng, ăn 2 bữa cùng một món: sáng nấu 1 nồi cho cả ngày, 3 thìa canh gạo (~40 g) + 250 ml nước → ~220 ml cháo nền, thịt rau cân đủ cho 2 bữa, nấu chung rồi chia đôi. Phần chiều múc ra hộp sạch, nguội thì cất ngăn mát, hâm sôi lại trước khi ăn. Từ 04/12 thử thịt gà."},
   {w:6,label:"Gà, cải ngọt",meals:2,base:"2 bữa cùng món, mỗi ngày đổi món. Mỗi bữa 20 g thịt hoặc cá cân sống. Cháo xay thô hơn, còn hạt vỡ nhỏ để bé tập nhai. Sáng nấu 1 nồi, chia đôi."},
   {w:7,label:"Đậu phụ, trứng",meals:2,base:"2 bữa cùng món. Đậu phụ, trứng thay thịt trong những ngày thử. Trứng luộc 10 phút, dầm nát cả lòng trắng lẫn lòng đỏ."},
-  {w:8,label:"Gan, bơ đậu phộng",meals:2,base:"2 bữa cùng món. Gan gà tối đa 1 lần/tuần. Bơ đậu phộng là món dễ dị ứng: ngày đầu chỉ ¼ tcf vào bữa sáng, theo dõi kỹ."},
+  {w:8,label:"Bơ đậu phộng",meals:2,base:"2 bữa cùng món. Bơ đậu phộng là món dễ dị ứng: ngày đầu chỉ ¼ tcf vào bữa sáng, theo dõi kỹ."},
   {w:9,label:"Tròn 8 tháng",meals:2,base:"Không thêm món mới, xoay vòng các món Mochi đã ăn ổn. 02/01/2027 Mochi tròn 8 tháng: có thể tăng dần lên 130–150 ml mỗi bữa nếu bé còn đòi ăn."}
 ];
 
@@ -678,9 +678,9 @@ const PLAN = [
   {from:50,to:50,meals:[
     {t:"Cháo gà mồng tơi",r:"~110 ml cháo nền + 20 g thịt gà bỏ da + 15 g lá mồng tơi + 1 tcf dầu",y:140,e:"100–125",w:[["thịt gà bỏ da",20],["lá mồng tơi",15]]},
     {t:"Cháo gà mồng tơi",r:"~110 ml cháo nền + 20 g thịt gà bỏ da + 15 g lá mồng tơi + 1 tcf dầu",y:140,e:"100–125",w:[["thịt gà bỏ da",20],["lá mồng tơi",15]]}]},
-  {from:51,to:51,nf:"gan",meals:[
-    {t:"Cháo gan gà bí đỏ",r:"~110 ml cháo nền + 8 g gan gà luộc chín hẳn, nghiền + 20 g bí đỏ + 1 tcf dầu",y:140,e:"100–125",n:"Ngày đầu ăn gan: mỗi bữa chỉ ~5 g. Gan chỉ 1 lần/tuần, cả ngày không quá 15 g",w:[["gan gà",8],["bí đỏ đã gọt vỏ",20]]},
-    {t:"Cháo gan gà bí đỏ",r:"~110 ml cháo nền + 8 g gan gà luộc chín hẳn, nghiền + 20 g bí đỏ + 1 tcf dầu",y:140,e:"100–125",n:"Ngày đầu ăn gan: mỗi bữa chỉ ~5 g. Gan chỉ 1 lần/tuần, cả ngày không quá 15 g",w:[["gan gà",8],["bí đỏ đã gọt vỏ",20]]}]},
+  {from:51,to:51,meals:[
+    {t:"Cháo lợn bí đỏ",r:"~110 ml cháo nền + 20 g thịt lợn nạc + 20 g bí đỏ + 1 tcf dầu",y:140,e:"100–125",w:[["thịt lợn nạc",20],["bí đỏ đã gọt vỏ",20]]},
+    {t:"Cháo lợn bí đỏ",r:"~110 ml cháo nền + 20 g thịt lợn nạc + 20 g bí đỏ + 1 tcf dầu",y:140,e:"100–125",w:[["thịt lợn nạc",20],["bí đỏ đã gọt vỏ",20]]}]},
   {from:52,to:52,meals:[
     {t:"Cháo bò khoai lang",r:"~110 ml cháo nền + 20 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:140,e:"100–125",w:[["thịt bò thăn",20],["khoai lang đã gọt vỏ",20]]},
     {t:"Cháo bò khoai lang",r:"~110 ml cháo nền + 20 g thịt bò thăn + 20 g khoai lang + 1 tcf dầu",y:140,e:"100–125",w:[["thịt bò thăn",20],["khoai lang đã gọt vỏ",20]]}]},
@@ -700,8 +700,8 @@ const PLAN = [
     {t:"Cháo bò cải ngọt",r:"~110 ml cháo nền + 20 g thịt bò thăn + 15 g lá cải ngọt + 1 tcf dầu",y:140,e:"100–125",w:[["thịt bò thăn",20],["lá cải ngọt",15]]},
     {t:"Cháo bò cải ngọt",r:"~110 ml cháo nền + 20 g thịt bò thăn + 15 g lá cải ngọt + 1 tcf dầu",y:140,e:"100–125",w:[["thịt bò thăn",20],["lá cải ngọt",15]]}]},
   {from:58,to:58,meals:[
-    {t:"Cháo gan gà cà rốt",r:"~110 ml cháo nền + 8 g gan gà luộc chín hẳn, nghiền + 20 g cà rốt + 1 tcf dầu",y:140,e:"100–125",n:"Gan chỉ 1 lần/tuần, cả ngày không quá 15 g",w:[["gan gà",8],["cà rốt đã gọt vỏ",20]]},
-    {t:"Cháo gan gà cà rốt",r:"~110 ml cháo nền + 8 g gan gà luộc chín hẳn, nghiền + 20 g cà rốt + 1 tcf dầu",y:140,e:"100–125",n:"Gan chỉ 1 lần/tuần, cả ngày không quá 15 g",w:[["gan gà",8],["cà rốt đã gọt vỏ",20]]}]},
+    {t:"Cháo gà cà rốt",r:"~110 ml cháo nền + 20 g thịt gà bỏ da + 20 g cà rốt + 1 tcf dầu",y:140,e:"100–125",w:[["thịt gà bỏ da",20],["cà rốt đã gọt vỏ",20]]},
+    {t:"Cháo gà cà rốt",r:"~110 ml cháo nền + 20 g thịt gà bỏ da + 20 g cà rốt + 1 tcf dầu",y:140,e:"100–125",w:[["thịt gà bỏ da",20],["cà rốt đã gọt vỏ",20]]}]},
   {from:59,to:59,meals:[
     {t:"Cháo cá hồi khoai lang",r:"~110 ml cháo nền + 20 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:140,e:"100–125",w:[["cá hồi phi lê bỏ da",20],["khoai lang đã gọt vỏ",20]]},
     {t:"Cháo cá hồi khoai lang",r:"~110 ml cháo nền + 20 g cá hồi hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:140,e:"100–125",w:[["cá hồi phi lê bỏ da",20],["khoai lang đã gọt vỏ",20]]}]},
@@ -727,8 +727,8 @@ const SHOP = [
   {w:5,trips:[{d:27,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · ~50 g → chia 2 phần ~15 g, trữ đông (ngày 31)","Thịt gà bỏ da (lườn hoặc đùi) · 100 g → chia 5 phần ~20 g, trữ đông (ngày 33–35)","Rau ngót · 1 bó nhỏ (ngày 29)","Bí đỏ · 200 g (ngày 30, 33)","Khoai lang · 2 củ ~150 g (ngày 31, 32, 35)"]},{d:31,label:"Lần 2 · rau lá",items:["Rau ngót · 1 bó nhỏ (ngày 34)"]}]},
   {w:6,trips:[{d:34,label:"Lần 1 · đồ cả tuần",items:["Thịt lợn nạc · 100 g → chia 4 phần ~20 g, trữ đông (ngày 36, 40)","Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 37, 39)","Thịt gà bỏ da · 50 g → chia 2 phần ~20 g, trữ đông (ngày 38)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 41)","Cải ngọt · 1 bó nhỏ (ngày 36–38)","Cà rốt · 2 củ nhỏ (ngày 39–41)","Bí đỏ · 100 g (ngày 42)"]}]},
   {w:7,trips:[{d:41,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · 50 g → chia 2 phần ~20 g, trữ đông (ngày 48)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 49)","Đậu phụ non · 1 bìa nhỏ (ngày 42–43, ngăn mát tối đa 2 ngày)","Trứng gà · 6 quả (ngày 45–47, 60)","Rau ngót · 1 bó nhỏ (ngày 43)","Bí đỏ · 100 g (ngày 45)","Khoai lang · 1 củ nhỏ (ngày 44)","Cà rốt · 1 củ nhỏ (ngày 46)"]},{d:43,label:"Lần 2 · rau lá, đậu phụ",items:["Đậu phụ non · 1 bìa nhỏ (ngày 44)","Cải ngọt · 1 bó nhỏ (ngày 47)","Mồng tơi · 1 bó nhỏ (ngày 48–49)"]}]},
-  {w:8,trips:[{d:48,label:"Lần 1 · đồ cả tuần",items:["Thịt gà bỏ da · 100 g → chia 4 phần ~20 g, trữ đông (ngày 50, 55)","Gan gà · 1 lá nhỏ (~20 g) → luộc chín, chỉ dùng ~10 g cho ngày 51, phần còn lại bỏ","Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 52, 54)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 53)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 56)","Mồng tơi · 1 bó nhỏ (ngày 50)","Bí đỏ · 200 g (ngày 51, 53, 54)","Khoai lang · 1 củ ~150 g (ngày 52, 56)","Cà rốt · 1 củ nhỏ (ngày 55)","Bơ đậu phộng nguyên chất, không đường muối · 1 hũ nhỏ (ngày 54–56)"]}]},
-  {w:9,trips:[{d:55,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 57, 61)","Gan gà · 1 lá nhỏ (~20 g) → chia 2 phần ~8 g, trữ đông (ngày 58)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 59)","Thịt gà bỏ da · 50 g → chia 2 phần ~20 g, trữ đông (ngày 62)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 63)","Cải ngọt · 1 bó nhỏ (ngày 57, 60)","Cà rốt · 2 củ nhỏ (ngày 58, 63)","Khoai lang · 1 củ nhỏ (ngày 59)","Bí đỏ · 100 g (ngày 62)"]},{d:58,label:"Lần 2 · rau lá",items:["Mồng tơi · 1 bó nhỏ (ngày 61)"]}]}
+  {w:8,trips:[{d:48,label:"Lần 1 · đồ cả tuần",items:["Thịt gà bỏ da · 100 g → chia 4 phần ~20 g, trữ đông (ngày 50, 55)","Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 52, 54)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 53)","Thịt lợn nạc · 100 g → chia 4 phần ~20 g, trữ đông (ngày 51, 56)","Mồng tơi · 1 bó nhỏ (ngày 50)","Bí đỏ · 200 g (ngày 51, 53, 54)","Khoai lang · 1 củ ~150 g (ngày 52, 56)","Cà rốt · 1 củ nhỏ (ngày 55)","Bơ đậu phộng nguyên chất, không đường muối · 1 hũ nhỏ (ngày 54–56)"]}]},
+  {w:9,trips:[{d:55,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 57, 61)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 59)","Thịt gà bỏ da · 100 g → chia 4 phần ~20 g, trữ đông (ngày 58, 62)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 63)","Cải ngọt · 1 bó nhỏ (ngày 57, 60)","Cà rốt · 2 củ nhỏ (ngày 58, 63)","Khoai lang · 1 củ nhỏ (ngày 59)","Bí đỏ · 100 g (ngày 62)"]},{d:58,label:"Lần 2 · rau lá",items:["Mồng tơi · 1 bó nhỏ (ngày 61)"]}]}
 ];
 const PRESTART = ["Ghế ăn có đệm lưng, thìa silicone mềm, cốc có vạch ml","Nồi nhỏ chống dính, rây inox hoặc máy xay cầm tay, khay đá có nắp","Thử cho Mochi ngồi ghế ăn: đầu giữ thẳng, lưng không đổ","Hỏi bác sĩ nhi về liều sắt khi bé bắt đầu ăn thịt","Học cách sơ cứu hóc dị vật cho trẻ dưới 1 tuổi (vỗ lưng, ấn ngực)","Đi chợ tuần 1 vào Chủ nhật 01/11"];
 
@@ -846,12 +846,12 @@ const VAMT={bido:"20 g bí đỏ",khoailang:"20 g khoai lang",raungot:"10 g rau 
 function suggestWeek(startD,seed){
   const r=rng(seed*9973+startD.getDate()*31+startD.getMonth());
   const ok=id=>foodStatus(id,startD)==="ok";
-  const P=["bo","lon","ca","longdo","ga","dauphu","trung","gan"].filter(ok);
+  const P=["bo","lon","ca","longdo","ga","dauphu","trung"].filter(ok);
   const V=["bido","khoailang","raungot","carot","caingot","mongtoi"].filter(ok);
   const news=QUEUE.filter(id=>{const s=foodStatus(id,startD);return s==="new"}).slice(0,2);
-  // 14 suất đạm, ưu tiên sắt; cá tối đa 2, gan tối đa 1
+  // 14 suất đạm, ưu tiên sắt; cá tối đa 2
   let pool=[]; const add=(id,n)=>{if(P.includes(id))for(let i=0;i<n;i++)pool.push(id)};
-  add("bo",3);add("lon",3);add("ca",2);add("longdo",1);add("trung",1);add("ga",2);add("dauphu",1);add("gan",1);
+  add("bo",3);add("lon",3);add("ca",2);add("longdo",1);add("trung",1);add("ga",2);add("dauphu",1);
   while(pool.length<14) pool.push(pool.length%2?"lon":"bo");
   pool=shuffle(pool,r).slice(0,14);
   let vpool=[]; while(vpool.length<14) vpool=vpool.concat(shuffle(V.length?V:["bido"],r));
@@ -1155,7 +1155,7 @@ const SWAPS=[
  ["Khoai lang",[["Bí đỏ",1,"Bỏ ruột, hấp 10–15 phút, nghiền mịn"],["Khoai tây / cà rốt",0,"Nấu như trên"]]],
  ["Rau ngót",[["Cải ngọt",0,"Lá non, luộc 2–3 phút, xay thật mịn"],["Mồng tơi",0,"Lá non, luộc 1–2 phút, xay mịn"],["Rau dền",0,"Lá non, luộc 2–3 phút, bỏ nước luộc, xay mịn"]]],
  ["Thịt lợn",[["Thịt bò",1,"Băm nhuyễn, bỏ gân, nấu trong cháo 5–7 phút"],["Thịt gà",0,"Ức/đùi lọc da, nấu trong cháo 7–10 phút cho chín kỹ, xay kỹ"]]],
- ["Thịt bò",[["Thịt lợn",1,"Nấu như thịt bò"],["Gan gà",0,"Bỏ gân, luộc 8–10 phút chín hẳn, nghiền qua rây; ~10 g, tối đa 1 lần/tuần"]]],
+ ["Thịt bò",[["Thịt lợn",1,"Nấu như thịt bò"]]],
  ["Cá hồi",[["Cá quả / diêu hồng",0,"Phi lê bỏ da, hấp 7–10 phút, bóp kỹ tìm xương dăm"],["Cá basa",0,"Bỏ da và mỡ vàng, hấp 7–10 phút, nghiền"]]],
  ["Trứng gà",[["Trứng cút",0,"Luộc 5 phút, lấy lòng đỏ; 3 lòng đỏ cút ≈ 1 lòng đỏ gà"]]],
  ["Bột HiPP",[["Cháo rây loãng",1,"1 thìa canh gạo + 150 ml nước, nấu nhừ, xay, pha thêm sữa"]]],
@@ -1175,11 +1175,11 @@ function renderGuide(){
 <li><b>Mỗi lần chỉ 1 món mới.</b> Món mới nấu cùng rau củ bé đã quen, ăn bữa sáng, theo dõi 3 ngày.</li>
 <li><b>Chỉ 1 loại rau lá xanh trong một bát</b> (rau ngót, cải ngọt hoặc mồng tơi), 10–15 g lá. Rau lá có nitrat: nấu tươi trong ngày, không để cháo có rau qua đêm, không hâm nhiều lần.</li>
 <li><b>Cá:</b> chọn cá hồi, cá basa, cá quả (cá lóc), cá diêu hồng. Tránh cá ngừ đại dương, cá kiếm, cá thu vua, cá mập vì có nhiều thủy ngân. Gỡ xương bằng tay, bóp kỹ.</li>
-<li><b>Gan gà:</b> tối đa 1 lần mỗi tuần, cả ngày không quá 15 g (khoảng 1 thìa canh gan nghiền, chia 2 bữa), luộc chín hẳn. 10 g gan gà đã có gần 1.000 µg vitamin A, cao hơn mức tối đa mỗi ngày của trẻ dưới 1 tuổi (600 µg), nên chỉ ăn ít và thưa.</li><li><b>Trứng, đậu phụ, bơ đậu phộng</b> là món dễ dị ứng nhưng nên cho từ 6 tháng: mỗi món thử riêng 3 ngày, ăn ổn rồi thì giữ đều 1–2 lần/tuần, vì bỏ lâu dễ mất dung nạp. Bơ đậu phộng chọn loại mịn, nguyên chất, không đường muối, luôn khuấy tan vào cháo, không cho bé ăn nguyên thìa đặc.</li>
+<li><b>Trứng, đậu phụ, bơ đậu phộng</b> là món dễ dị ứng nhưng nên cho từ 6 tháng: mỗi món thử riêng 3 ngày, ăn ổn rồi thì giữ đều 1–2 lần/tuần, vì bỏ lâu dễ mất dung nạp. Bơ đậu phộng chọn loại mịn, nguyên chất, không đường muối, luôn khuấy tan vào cháo, không cho bé ăn nguyên thìa đặc.</li>
 <li><b>Rau củ không dùng:</b> khoai tây mọc mầm hoặc vỏ xanh, khoai lang có đốm đen hay vị đắng, bí đỏ bị mốc. Gặp thì bỏ cả củ, không gọt bỏ phần hỏng.</li>
 </ul>`,true);
   h+=g("Nấu chín và vệ sinh",`<ul>
-<li><b>Thịt băm</b> nấu đến khi không còn màu hồng, sôi lửa nhỏ ít nhất 7–10 phút (gà, gan 10 phút). <b>Cá</b> chín đục, gỡ ra thành thớ. <b>Trứng</b> luộc 10 phút, lòng đỏ đông hẳn.</li>
+<li><b>Thịt băm</b> nấu đến khi không còn màu hồng, sôi lửa nhỏ ít nhất 7–10 phút (gà 10 phút). <b>Cá</b> chín đục, gỡ ra thành thớ. <b>Trứng</b> luộc 10 phút, lòng đỏ đông hẳn.</li>
 <li><b>Thớt, dao riêng cho đồ sống.</b> Rửa tay bằng xà phòng sau khi chạm thịt cá sống, trước khi bón cho bé.</li>
 <li><b>Rã đông</b> trong ngăn mát từ tối hôm trước, không rã đông ngoài bàn hay ngâm nước nóng. Đã rã đông thì nấu trong 24 giờ, không cấp đông lại.</li>
 <li><b>Nấu 1 nồi cho 2 bữa:</b> múc ngay phần chiều ra hộp sạch có nắp, trước khi bón, không dùng thìa bé đã ngậm. Để nguội tối đa 1 giờ rồi cất ngăn mát. Chiều hâm sôi lại một lần, khuấy đều, để ấm rồi cho ăn. Ăn hết trong ngày.</li>
@@ -1385,7 +1385,7 @@ function weekSummaryText(){
 function ironDays(){let c=0;for(let i=0;i<7;i++){const k=iso(addD(new Date(),-i));const ms=Object.values(Store.data.meals).filter(m=>m.date===k&&m.ml>0);if(ms.some(m=>/bò|lợn|lòng đỏ|trứng|cá|gan|gà|đậu phụ/i.test(m.dish)))c++}return c}
 
 /* ---------- Kho ngăn đá ---------- */
-const FRZ=[["lon","Thịt lợn","phần"],["bo","Thịt bò","phần"],["ga","Thịt gà","phần"],["ca","Cá","miếng"],["gan","Gan gà","phần"]];
+const FRZ=[["lon","Thịt lợn","phần"],["bo","Thịt bò","phần"],["ga","Thịt gà","phần"],["ca","Cá","miếng"]];
 function proteinsIn(text){
   let x=" "+String(text||"").toLowerCase().replace(/trứng gà/g,"trứng")+" "; const out=[];
   if(/gan gà/.test(x)){out.push("gan");x=x.replace(/gan gà/g,"")}
@@ -1563,7 +1563,6 @@ function mealGroups(ms){const g=[];ms.forEach((m,i)=>{const f=g.find(x=>ms[x[0]]
 function sameIdx(ms,i){return (mealGroups(ms).find(g=>g.includes(i)))||[i]}
 function safetyFor(m){
   const s=(m.t+" "+m.r).toLowerCase(), out=[];
-  if(/gan/.test(s)) out.push("Gan gà: tối đa 1 lần/tuần, cả ngày không quá 15 g, luộc chín hẳn.");
   if(/cá/.test(s)&&!/cá hồi|cá phi lê|basa|cá quả|cá lóc|diêu hồng/.test(s)) out.push("Không dùng cá ngừ đại dương, cá kiếm, cá thu vua.");
   return out;
 }
@@ -1599,7 +1598,7 @@ function swapIngredients(st){
 }
 function swapQuick(st){
   const d=dateOf(st.n), ok=id=>SW_OKS.includes(foodStatus(id,d));
-  const P=["bo","lon","ga","ca","longdo","dauphu","trung","gan"].filter(ok), V=["bido","khoailang","carot","raungot","caingot","mongtoi"].filter(ok);
+  const P=["bo","lon","ga","ca","longdo","dauphu","trung"].filter(ok), V=["bido","khoailang","carot","raungot","caingot","mongtoi"].filter(ok);
   const cur=proteinsIn(st.orig.t+" "+st.orig.r), out=[], seen=new Set([st.orig.t]);
   const base=st.n>=15?"chao":"bot";
   const order=[...P.filter(p=>cur.includes(p)||(p==="longdo"&&/lòng đỏ/i.test(st.orig.t))),...P.filter(p=>!(cur.includes(p)||(p==="longdo"&&/lòng đỏ/i.test(st.orig.t))))];
@@ -1639,8 +1638,6 @@ function swapWarn(st,d){
   const out=[], greens=st.veg.filter(v=>FOODS[v].g==="rau");
   if(greens.length>1) out.push("Chỉ nên dùng 1 loại rau lá trong một bát (rau lá có nitrat).");
   if(st.dam==="ca") out.push("Dùng cá hồi, basa, cá quả hoặc diêu hồng; tránh cá ngừ đại dương, cá kiếm, cá thu vua. Gỡ kỹ xương.");
-  if(st.dam==="gan"){const wk=[...Array(7)].map((_,i)=>iso(addD(d,-i))).some(k=>Object.values(Store.data.meals).some(m=>m.date===k&&/gan/i.test(m.dish)));
-    out.push(wk?"Tuần này Mochi đã ăn gan rồi: gan chỉ nên 1 lần/tuần.":"Gan gà: cả ngày không quá 15 g (mỗi bữa ~8 g), luộc chín hẳn, tối đa 1 lần/tuần.");}
   if(["trung","longdo"].includes(st.dam)) out.push("Trứng luộc 10 phút cho lòng đỏ đông hẳn rồi mới trộn vào.");
   return out;
 }
