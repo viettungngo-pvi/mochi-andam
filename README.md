@@ -28,7 +28,7 @@ Mọi lượng thịt, cá, rau củ ghi theo gram cân sống cho từng bữa 
 | 5 | 30/11–06/12 | 1 bữa; từ 02/12 (tròn 7 tháng) 2 bữa cùng món | Thịt gà (04/12) |
 | 6 | 07–13/12 | 2 bữa cùng món, mỗi bữa 20 g thịt cá | Cải ngọt, cà rốt, đậu phụ |
 | 7 | 14–20/12 | 2 bữa cùng món | Trứng cả quả, mồng tơi |
-| 8 | 21–27/12 | 2 bữa cùng món | Bơ đậu phộng |
+| 8 | 21–27/12 | 2 bữa cùng món | Cá quả (cá lóc), bơ đậu phộng |
 | 9 | 28/12–03/01 | 2 bữa, xoay vòng món đã ăn ổn | — |
 
 Ảnh thực đơn từng tuần và bảng nguyên liệu thay thế nằm trong thư mục [`anh/`](anh).
