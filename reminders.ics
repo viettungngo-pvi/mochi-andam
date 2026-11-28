@@ -626,10 +626,10 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261221T124900Z
 DTEND:20261221T130400Z
 SUMMARY:Mochi: mai có món mới
-DESCRIPTION:Mai bắt đầu món mới: cá quả (cá lóc)\, ngày đầ
- u mỗi bữa nửa lượng (~10 g)\, gỡ kỹ xương dăm. Rã đông 
- 1 miếng cá quả (~20 g/miếng)\, cho 2 bữa\, để ngăn mát qua 
- đêm. Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Mai bắt đầu món mới: súp lơ xanh\, ngày đầu mỗi
+  bữa 10 g hoa\, hấp mềm rồi nghiền. Rã đông 2 phần thịt b
+ ò (~20 g/phần)\, cho 2 bữa\, để ngăn mát qua đêm. Vo và ngâm
+  gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: mai có món mới
@@ -642,8 +642,8 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261222T124900Z
 DTEND:20261222T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 2 miếng cá quả (~20 g/miếng)\, cho 2 bữa\, 
- để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
+DESCRIPTION:Rã đông 2 phần thịt lợn (~20 g/phần)\, cho 2 bữa\,
+  để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: chuẩn bị cho mai
@@ -656,7 +656,7 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261223T124900Z
 DTEND:20261223T130400Z
 SUMMARY:Mochi: chuẩn bị cho mai
-DESCRIPTION:Rã đông 2 miếng cá quả (~20 g/miếng)\, cho 2 bữa\, 
+DESCRIPTION:Rã đông 2 miếng cá hồi (~20 g/miếng)\, cho 2 bữa\, 
  để ngăn mát qua đêm. Vo và ngâm gạo cho cháo sáng mai.
 BEGIN:VALARM
 ACTION:DISPLAY
@@ -978,11 +978,11 @@ DTSTAMP:20261015T000000Z
 DTSTART:20261220T004600Z
 DTEND:20261220T011600Z
 SUMMARY:Mochi: đi chợ tuần 8 (đồ cả tuần)
-DESCRIPTION:Thịt gà 100 g (4 phần)\; cá quả phi lê 100 g (5 miến
- g)\; thịt bò 50 g (2 phần)\; thịt lợn 50 g (2 phần)\; mồng t
- ơi 1 bó\; bí đỏ 100 g\; khoai lang 1 củ\; cà rốt 2 củ\; bơ 
- đậu phộng nguyên chất 1 hũ nhỏ. Thịt cá chia phần\, trữ 
- đông ngay khi về.
+DESCRIPTION:Thịt gà 100 g (4 phần)\; thịt bò 100 g (4 phần)\; th
+ ịt lợn 100 g (4 phần)\; cá hồi 50 g (2 miếng)\; súp lơ xanh 1
+  bông nhỏ\; mồng tơi 1 bó\; bí đỏ 100 g\; cà rốt 1 củ\; kh
+ oai lang 1 củ\; bơ đậu phộng nguyên chất 1 hũ nhỏ. Thịt c
+ á chia phần\, trữ đông ngay khi về.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mochi: đi chợ tuần 8 (đồ cả tuần)

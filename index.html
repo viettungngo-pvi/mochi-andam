@@ -581,9 +581,9 @@ const FOODS = {
   bo:{n:"Thịt bò",g:"dam",day:19}, ca:{n:"Cá hồi",g:"dam",day:25},
   ga:{n:"Thịt gà",g:"dam",day:33}, caingot:{n:"Cải ngọt",g:"rau",day:36},
   carot:{n:"Cà rốt",g:"cu",day:39}, dauphu:{n:"Đậu phụ",g:"dam",day:42}, trung:{n:"Trứng cả quả",g:"dam",day:45}, mongtoi:{n:"Mồng tơi",g:"rau",day:48},
-  cqua:{n:"Cá quả (cá lóc)",g:"dam",day:51}, bdp:{n:"Bơ đậu phộng",g:"beo",day:54}
+  suplo:{n:"Súp lơ xanh",g:"cu",day:51}, bdp:{n:"Bơ đậu phộng",g:"beo",day:54}
 };
-const QUEUE = ["ga","caingot","dauphu","trung","carot","mongtoi","cqua","bdp"];
+const QUEUE = ["ga","caingot","dauphu","trung","carot","mongtoi","suplo","bdp"];
 const GROUP_NAME = {nen:"Nền",cu:"Củ",rau:"Rau xanh",dam:"Đạm",beo:"Chất béo"};
 
 const WEEKS = [
@@ -594,7 +594,7 @@ const WEEKS = [
   {w:5,label:"Tròn 7 tháng",meals:2,base:"30/11–01/12 vẫn 1 bữa. Từ 02/12 Mochi tròn 7 tháng, ăn 2 bữa cùng một món: sáng nấu 1 nồi cho cả ngày, 3 thìa canh gạo (~40 g) + 250 ml nước → ~220 ml cháo nền, thịt rau cân đủ cho 2 bữa, nấu chung rồi chia đôi. Phần chiều múc ra hộp sạch, nguội thì cất ngăn mát, hâm sôi lại trước khi ăn. Từ 04/12 thử thịt gà."},
   {w:6,label:"Gà, cải ngọt",meals:2,base:"2 bữa cùng món, mỗi ngày đổi món. Mỗi bữa 20 g thịt hoặc cá cân sống. Cháo xay thô hơn, còn hạt vỡ nhỏ để bé tập nhai. Sáng nấu 1 nồi, chia đôi."},
   {w:7,label:"Đậu phụ, trứng",meals:2,base:"2 bữa cùng món. Đậu phụ, trứng thay thịt trong những ngày thử. Trứng luộc 10 phút, dầm nát cả lòng trắng lẫn lòng đỏ."},
-  {w:8,label:"Cá quả, bơ đậu phộng",meals:2,base:"2 bữa cùng món. Cá quả (cá lóc) là cá nước ngọt, thịt trắng, ít thủy ngân, nhưng nhiều xương dăm: hấp chín, gỡ và bóp kỹ. Bơ đậu phộng là món dễ dị ứng: ngày đầu chỉ ¼ tcf vào bữa sáng, theo dõi kỹ."},
+  {w:8,label:"Súp lơ, bơ đậu phộng",meals:2,base:"2 bữa cùng món. Súp lơ xanh: chỉ dùng phần hoa, ngâm nước muối loãng 10 phút, rửa sạch, hấp 7–8 phút đến khi mềm rồi nghiền. Bơ đậu phộng là món dễ dị ứng: ngày đầu chỉ ¼ tcf vào bữa sáng, theo dõi kỹ."},
   {w:9,label:"Tròn 8 tháng",meals:2,base:"Không thêm món mới, xoay vòng các món Mochi đã ăn ổn. 02/01/2027 Mochi tròn 8 tháng: có thể tăng dần lên 130–150 ml mỗi bữa nếu bé còn đòi ăn."}
 ];
 
@@ -678,15 +678,15 @@ const PLAN = [
   {from:50,to:50,meals:[
     {t:"Cháo gà mồng tơi",r:"~110 ml cháo nền + 20 g thịt gà bỏ da + 15 g lá mồng tơi + 1 tcf dầu",y:140,e:"100–125",w:[["thịt gà bỏ da",20],["lá mồng tơi",15]]},
     {t:"Cháo gà mồng tơi",r:"~110 ml cháo nền + 20 g thịt gà bỏ da + 15 g lá mồng tơi + 1 tcf dầu",y:140,e:"100–125",w:[["thịt gà bỏ da",20],["lá mồng tơi",15]]}]},
-  {from:51,to:51,nf:"cqua",meals:[
-    {t:"Cháo cá quả bí đỏ",r:"~110 ml cháo nền + 20 g cá quả phi lê hấp, gỡ kỹ xương + 20 g bí đỏ + 1 tcf dầu",y:140,e:"100–125",n:"Ngày đầu ăn cá quả: mỗi bữa chỉ nửa lượng (~10 g). Cá quả nhiều xương dăm, bóp kỹ bằng tay",w:[["cá quả phi lê bỏ da",20],["bí đỏ đã gọt vỏ",20]]},
-    {t:"Cháo cá quả bí đỏ",r:"~110 ml cháo nền + 20 g cá quả phi lê hấp, gỡ kỹ xương + 20 g bí đỏ + 1 tcf dầu",y:140,e:"100–125",n:"Ngày đầu ăn cá quả: mỗi bữa chỉ nửa lượng (~10 g). Cá quả nhiều xương dăm, bóp kỹ bằng tay",w:[["cá quả phi lê bỏ da",20],["bí đỏ đã gọt vỏ",20]]}]},
+  {from:51,to:51,nf:"suplo",meals:[
+    {t:"Cháo bò súp lơ",r:"~110 ml cháo nền + 20 g thịt bò thăn + 20 g hoa súp lơ xanh + 1 tcf dầu",y:140,e:"100–125",n:"Ngày đầu ăn súp lơ: mỗi bữa chỉ 10 g hoa",w:[["thịt bò thăn",20],["hoa súp lơ xanh",20]]},
+    {t:"Cháo bò súp lơ",r:"~110 ml cháo nền + 20 g thịt bò thăn + 20 g hoa súp lơ xanh + 1 tcf dầu",y:140,e:"100–125",n:"Ngày đầu ăn súp lơ: mỗi bữa chỉ 10 g hoa",w:[["thịt bò thăn",20],["hoa súp lơ xanh",20]]}]},
   {from:52,to:52,meals:[
-    {t:"Cháo cá quả khoai lang",r:"~110 ml cháo nền + 20 g cá quả phi lê hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:140,e:"100–125",w:[["cá quả phi lê bỏ da",20],["khoai lang đã gọt vỏ",20]]},
-    {t:"Cháo cá quả khoai lang",r:"~110 ml cháo nền + 20 g cá quả phi lê hấp, gỡ kỹ xương + 20 g khoai lang + 1 tcf dầu",y:140,e:"100–125",w:[["cá quả phi lê bỏ da",20],["khoai lang đã gọt vỏ",20]]}]},
+    {t:"Cháo lợn súp lơ",r:"~110 ml cháo nền + 20 g thịt lợn nạc + 20 g hoa súp lơ xanh + 1 tcf dầu",y:140,e:"100–125",w:[["thịt lợn nạc",20],["hoa súp lơ xanh",20]]},
+    {t:"Cháo lợn súp lơ",r:"~110 ml cháo nền + 20 g thịt lợn nạc + 20 g hoa súp lơ xanh + 1 tcf dầu",y:140,e:"100–125",w:[["thịt lợn nạc",20],["hoa súp lơ xanh",20]]}]},
   {from:53,to:53,meals:[
-    {t:"Cháo cá quả cà rốt",r:"~110 ml cháo nền + 20 g cá quả phi lê hấp, gỡ kỹ xương + 20 g cà rốt + 1 tcf dầu",y:140,e:"100–125",w:[["cá quả phi lê bỏ da",20],["cà rốt đã gọt vỏ",20]]},
-    {t:"Cháo cá quả cà rốt",r:"~110 ml cháo nền + 20 g cá quả phi lê hấp, gỡ kỹ xương + 20 g cà rốt + 1 tcf dầu",y:140,e:"100–125",w:[["cá quả phi lê bỏ da",20],["cà rốt đã gọt vỏ",20]]}]},
+    {t:"Cháo cá hồi súp lơ",r:"~110 ml cháo nền + 20 g cá hồi hấp, gỡ kỹ xương + 20 g hoa súp lơ xanh + 1 tcf dầu",y:140,e:"100–125",w:[["cá hồi phi lê bỏ da",20],["hoa súp lơ xanh",20]]},
+    {t:"Cháo cá hồi súp lơ",r:"~110 ml cháo nền + 20 g cá hồi hấp, gỡ kỹ xương + 20 g hoa súp lơ xanh + 1 tcf dầu",y:140,e:"100–125",w:[["cá hồi phi lê bỏ da",20],["hoa súp lơ xanh",20]]}]},
   {from:54,to:54,nf:"bdp",meals:[
     {t:"Cháo bò bí đỏ bơ đậu phộng",r:"~110 ml cháo nền + 20 g thịt bò thăn + 20 g bí đỏ + 1 tcf dầu + ½ tcf bơ đậu phộng nguyên chất, khuấy tan khi cháo còn ấm",y:140,e:"100–125",n:"Ngày đầu ăn bơ đậu phộng: chỉ cho vào bữa sáng, ¼ tcf. Theo dõi kỹ 2 giờ sau ăn",w:[["thịt bò thăn",20],["bí đỏ đã gọt vỏ",20]]},
     {t:"Cháo bò bí đỏ bơ đậu phộng",r:"~110 ml cháo nền + 20 g thịt bò thăn + 20 g bí đỏ + 1 tcf dầu + ½ tcf bơ đậu phộng nguyên chất, khuấy tan khi cháo còn ấm",y:140,e:"100–125",n:"Ngày đầu ăn bơ đậu phộng: chỉ cho vào bữa sáng, ¼ tcf. Theo dõi kỹ 2 giờ sau ăn",w:[["thịt bò thăn",20],["bí đỏ đã gọt vỏ",20]]}]},
@@ -727,7 +727,7 @@ const SHOP = [
   {w:5,trips:[{d:27,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · ~50 g → chia 2 phần ~15 g, trữ đông (ngày 31)","Thịt gà bỏ da (lườn hoặc đùi) · 100 g → chia 5 phần ~20 g, trữ đông (ngày 33–35)","Rau ngót · 1 bó nhỏ (ngày 29)","Bí đỏ · 200 g (ngày 30, 33)","Khoai lang · 2 củ ~150 g (ngày 31, 32, 35)"]},{d:31,label:"Lần 2 · rau lá",items:["Rau ngót · 1 bó nhỏ (ngày 34)"]}]},
   {w:6,trips:[{d:34,label:"Lần 1 · đồ cả tuần",items:["Thịt lợn nạc · 100 g → chia 4 phần ~20 g, trữ đông (ngày 36, 40)","Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 37, 39)","Thịt gà bỏ da · 50 g → chia 2 phần ~20 g, trữ đông (ngày 38)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 41)","Cải ngọt · 1 bó nhỏ (ngày 36–38)","Cà rốt · 2 củ nhỏ (ngày 39–41)","Bí đỏ · 100 g (ngày 42)"]}]},
   {w:7,trips:[{d:41,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · 50 g → chia 2 phần ~20 g, trữ đông (ngày 48)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 49)","Đậu phụ non · 1 bìa nhỏ (ngày 42–43, ngăn mát tối đa 2 ngày)","Trứng gà · 6 quả (ngày 45–47, 60)","Rau ngót · 1 bó nhỏ (ngày 43)","Bí đỏ · 100 g (ngày 45)","Khoai lang · 1 củ nhỏ (ngày 44)","Cà rốt · 1 củ nhỏ (ngày 46)"]},{d:43,label:"Lần 2 · rau lá, đậu phụ",items:["Đậu phụ non · 1 bìa nhỏ (ngày 44)","Cải ngọt · 1 bó nhỏ (ngày 47)","Mồng tơi · 1 bó nhỏ (ngày 48–49)"]}]},
-  {w:8,trips:[{d:48,label:"Lần 1 · đồ cả tuần",items:["Thịt gà bỏ da · 100 g → chia 4 phần ~20 g, trữ đông (ngày 50, 55)","Thịt bò thăn · 50 g → chia 2 phần ~20 g, trữ đông (ngày 54)","Cá quả phi lê (nhờ người bán lọc sẵn) · 100 g → cắt 5 miếng ~20 g, trữ đông (ngày 51–53)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 56)","Mồng tơi · 1 bó nhỏ (ngày 50)","Bí đỏ · 100 g (ngày 51, 54)","Khoai lang · 1 củ ~150 g (ngày 52, 56)","Cà rốt · 2 củ nhỏ (ngày 53, 55)","Bơ đậu phộng nguyên chất, không đường muối · 1 hũ nhỏ (ngày 54–56)"]}]},
+  {w:8,trips:[{d:48,label:"Lần 1 · đồ cả tuần",items:["Thịt gà bỏ da · 100 g → chia 4 phần ~20 g, trữ đông (ngày 50, 55)","Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 51, 54)","Thịt lợn nạc · 100 g → chia 4 phần ~20 g, trữ đông (ngày 52, 56)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 53)","Súp lơ xanh · 1 bông nhỏ (ngày 51–53, cần ~120 g hoa)","Mồng tơi · 1 bó nhỏ (ngày 50)","Bí đỏ · 100 g (ngày 54)","Cà rốt · 1 củ nhỏ (ngày 55)","Khoai lang · 1 củ nhỏ (ngày 56)","Bơ đậu phộng nguyên chất, không đường muối · 1 hũ nhỏ (ngày 54–56)"]}]},
   {w:9,trips:[{d:55,label:"Lần 1 · đồ cả tuần",items:["Thịt bò thăn · 100 g → chia 4 phần ~20 g, trữ đông (ngày 57, 61)","Cá hồi phi lê · 50 g → cắt 2 miếng ~20 g, trữ đông (ngày 59)","Thịt gà bỏ da · 100 g → chia 4 phần ~20 g, trữ đông (ngày 58, 62)","Thịt lợn nạc · 50 g → chia 2 phần ~20 g, trữ đông (ngày 63)","Cải ngọt · 1 bó nhỏ (ngày 57, 60)","Cà rốt · 2 củ nhỏ (ngày 58, 63)","Khoai lang · 1 củ nhỏ (ngày 59)","Bí đỏ · 100 g (ngày 62)"]},{d:58,label:"Lần 2 · rau lá",items:["Mồng tơi · 1 bó nhỏ (ngày 61)"]}]}
 ];
 const PRESTART = ["Ghế ăn có đệm lưng, thìa silicone mềm, cốc có vạch ml","Nồi nhỏ chống dính, rây inox hoặc máy xay cầm tay, khay đá có nắp","Thử cho Mochi ngồi ghế ăn: đầu giữ thẳng, lưng không đổ","Hỏi bác sĩ nhi về liều sắt khi bé bắt đầu ăn thịt","Học cách sơ cứu hóc dị vật cho trẻ dưới 1 tuổi (vỗ lưng, ấn ngực)","Đi chợ tuần 1 vào Chủ nhật 01/11"];
@@ -839,19 +839,19 @@ const STATUS_TXT={ok:"Đã ăn ổn",trying:"Đang thử",plan:"Có trong lịch
 /* ===================== Gợi ý tuần ===================== */
 function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function shuffle(a,r){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-const PSHORT={lon:"lợn",bo:"bò",ca:"cá",cqua:"cá quả",longdo:"lòng đỏ",ga:"gà",dauphu:"đậu phụ",trung:"trứng",gan:"gan gà"};
+const PSHORT={lon:"lợn",bo:"bò",ca:"cá",longdo:"lòng đỏ",ga:"gà",dauphu:"đậu phụ",trung:"trứng",gan:"gan gà"};
 const PAMT={lon:"1 phần thịt lợn (~20 g)",bo:"1 phần thịt bò (~20 g)",ca:"1 miếng cá (~20 g), gỡ kỹ xương",longdo:"1 lòng đỏ trứng chín kỹ",ga:"1 phần thịt gà (~20 g), nấu chín kỹ",dauphu:"20 g đậu phụ non nghiền",trung:"1 quả trứng chín kỹ, dầm nát",gan:"10 g gan gà luộc chín hẳn, nghiền"};
-const VSHORT={bido:"bí đỏ",khoailang:"khoai lang",raungot:"rau ngót",carot:"cà rốt",caingot:"cải ngọt",mongtoi:"mồng tơi"};
-const VAMT={bido:"20 g bí đỏ",khoailang:"20 g khoai lang",raungot:"10 g rau ngót",carot:"20 g cà rốt",caingot:"10 g cải ngọt",mongtoi:"10 g mồng tơi"};
+const VSHORT={suplo:"súp lơ",bido:"bí đỏ",khoailang:"khoai lang",raungot:"rau ngót",carot:"cà rốt",caingot:"cải ngọt",mongtoi:"mồng tơi"};
+const VAMT={suplo:"20 g hoa súp lơ xanh",bido:"20 g bí đỏ",khoailang:"20 g khoai lang",raungot:"10 g rau ngót",carot:"20 g cà rốt",caingot:"10 g cải ngọt",mongtoi:"10 g mồng tơi"};
 function suggestWeek(startD,seed){
   const r=rng(seed*9973+startD.getDate()*31+startD.getMonth());
   const ok=id=>foodStatus(id,startD)==="ok";
-  const P=["bo","lon","ca","cqua","longdo","ga","dauphu","trung"].filter(ok);
-  const V=["bido","khoailang","raungot","carot","caingot","mongtoi"].filter(ok);
+  const P=["bo","lon","ca","longdo","ga","dauphu","trung"].filter(ok);
+  const V=["bido","khoailang","raungot","carot","suplo","caingot","mongtoi"].filter(ok);
   const news=QUEUE.filter(id=>{const s=foodStatus(id,startD);return s==="new"}).slice(0,2);
   // 14 suất đạm, ưu tiên sắt; cá tối đa 2
   let pool=[]; const add=(id,n)=>{if(P.includes(id))for(let i=0;i<n;i++)pool.push(id)};
-  add("bo",3);add("lon",3);add("ca",2);add("longdo",1);add("trung",1);add("ga",2);add("dauphu",1);add("cqua",1);
+  add("bo",3);add("lon",3);add("ca",2);add("longdo",1);add("trung",1);add("ga",2);add("dauphu",1);
   while(pool.length<14) pool.push(pool.length%2?"lon":"bo");
   pool=shuffle(pool,r).slice(0,14);
   let vpool=[]; while(vpool.length<14) vpool=vpool.concat(shuffle(V.length?V:["bido"],r));
@@ -871,10 +871,10 @@ function ageParams(d){const m=age(d).m;
   if(m>=9) return {m,meals:3,y:190,e:"150–180",g:25,cu:30,rau:15,tex:"Cháo hạt nguyên nấu nhừ, rau củ cắt hạt lựu mềm, tập đồ ăn cầm tay",base:"Cháo hạt nguyên"};
   if(m>=7) return {m,meals:2,y:140,e:"110–125",g:20,cu:20,rau:10,tex:"Cháo nghiền còn hạt vỡ, thịt băm nhỏ, rau củ dầm bằng thìa",base:"Cháo hạt vỡ"};
   return {m,meals:1,y:130,e:"90–120",g:15,cu:20,rau:10,tex:"Cháo rây mịn",base:"Cháo rây"};}
-function pamt(p,g){return ({lon:`${g} g thịt lợn nạc`,bo:`${g} g thịt bò thăn`,ca:`${g} g cá phi lê, gỡ kỹ xương`,cqua:`${g} g cá quả phi lê, gỡ kỹ xương`,longdo:"1 lòng đỏ trứng chín kỹ",ga:`${g} g thịt gà bỏ da, nấu chín kỹ`,dauphu:`${g} g đậu phụ non nghiền`,trung:"1 quả trứng chín kỹ, dầm nát",gan:"8 g gan gà luộc chín hẳn, nghiền"})[p]||FOODS[p].n}
+function pamt(p,g){return ({lon:`${g} g thịt lợn nạc`,bo:`${g} g thịt bò thăn`,ca:`${g} g cá phi lê, gỡ kỹ xương`,longdo:"1 lòng đỏ trứng chín kỹ",ga:`${g} g thịt gà bỏ da, nấu chín kỹ`,dauphu:`${g} g đậu phụ non nghiền`,trung:"1 quả trứng chín kỹ, dầm nát",gan:"8 g gan gà luộc chín hẳn, nghiền"})[p]||FOODS[p].n}
 function vamt(v,ap){return FOODS[v].g==="rau"?`${ap.rau} g lá ${FOODS[v].n.toLowerCase()}`:`${ap.cu} g ${FOODS[v].n.toLowerCase()}`}
-const RAWN={lon:"thịt lợn nạc",bo:"thịt bò thăn",ca:"cá phi lê bỏ da",cqua:"cá quả phi lê bỏ da",ga:"thịt gà bỏ da",dauphu:"đậu phụ non",gan:"gan gà"};
-function rawW(p,veg,g,ap){const w=[];if(p&&RAWN[p])w.push([RAWN[p],p==="gan"?8:g]);(veg||[]).forEach(v=>{const r=FOODS[v].g==="rau";w.push([r?"lá "+FOODS[v].n.toLowerCase():FOODS[v].n.toLowerCase()+" đã gọt vỏ",r?ap.rau:ap.cu])});return w}
+const RAWN={lon:"thịt lợn nạc",bo:"thịt bò thăn",ca:"cá phi lê bỏ da",ga:"thịt gà bỏ da",dauphu:"đậu phụ non",gan:"gan gà"};
+function rawW(p,veg,g,ap){const w=[];if(p&&RAWN[p])w.push([RAWN[p],p==="gan"?8:g]);(veg||[]).forEach(v=>{const r=FOODS[v].g==="rau";w.push([r?"lá "+FOODS[v].n.toLowerCase():v==="suplo"?"hoa súp lơ xanh":FOODS[v].n.toLowerCase()+" đã gọt vỏ",r?ap.rau:ap.cu])});return w}
 function dishRecipe(b,base,ap){ap=ap||ageParams(new Date());let s=`${base} + ${pamt(b.p,ap.g)} + ${vamt(b.v,ap)} + 1 tcf dầu`;if(b.extra==="bdp")s+=" + ¼ tcf bơ đậu phộng nguyên chất pha loãng (lần đầu)";return s}
 function mealLabel(i,n){const L=n===3?[" · sáng"," · trưa"," · chiều"]:n===2?[" · sáng"," · chiều"]:[""];return L[i]||""}
 function buildWeekView(sw,startD){
@@ -1485,6 +1485,7 @@ function cookSteps(m){
   S.push({h:"Chuẩn bị",x:m.r+(m.f?". Sau bữa: "+m.f:"")+(m.n?". Lưu ý: "+m.n:"")});
   if(hasEgg)S.push({h:"Luộc trứng",x:"Thả trứng vào nồi nước đang sôi, luộc 10 phút cho chín hẳn, ngâm nước lạnh rồi lấy lòng đỏ.",min:10});
   if(hasCu)S.push({h:"Hấp củ",x:"Gọt vỏ, cắt miếng nhỏ, hấp đến khi xiên que thấy mềm.",min:12});
+  if(/súp lơ/.test(t))S.push({h:"Hấp súp lơ",x:"Tách lấy phần hoa, ngâm nước muối loãng 10 phút, rửa sạch, hấp đến khi mềm rồi nghiền nhuyễn.",min:8});
   if(ps.includes("ca"))S.push({h:"Hấp cá",x:"Hấp miếng cá đến khi chín đều. Gỡ nhỏ, bóp kỹ bằng tay để tìm xương.",min:8});
   if(isBot){
     S.push({h:"Pha bột",x:"Pha sữa HiPP ấm theo hộp. Cho bột vào bát, đổ sữa, khuấy mịn rồi chờ bột nở.",min:2});
@@ -1598,7 +1599,7 @@ function swapIngredients(st){
 }
 function swapQuick(st){
   const d=dateOf(st.n), ok=id=>SW_OKS.includes(foodStatus(id,d));
-  const P=["bo","lon","ga","ca","cqua","longdo","dauphu","trung"].filter(ok), V=["bido","khoailang","carot","raungot","caingot","mongtoi"].filter(ok);
+  const P=["bo","lon","ga","ca","longdo","dauphu","trung"].filter(ok), V=["bido","khoailang","carot","suplo","raungot","caingot","mongtoi"].filter(ok);
   const cur=proteinsIn(st.orig.t+" "+st.orig.r), out=[], seen=new Set([st.orig.t]);
   const base=st.n>=15?"chao":"bot";
   const order=[...P.filter(p=>cur.includes(p)||(p==="longdo"&&/lòng đỏ/i.test(st.orig.t))),...P.filter(p=>!(cur.includes(p)||(p==="longdo"&&/lòng đỏ/i.test(st.orig.t))))];
